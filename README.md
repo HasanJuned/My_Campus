@@ -7,6 +7,11 @@ Team Member:
 2. Hasibur Rahman Khurasani Jawad
 3. Hasan Ahmed
 
+## Goal
+
+The idea of this innovative mobile app after identifying the recurring challenges faced by students each semester, such as joining various messaging platforms, gathering faculty and class representative details, navigating scattered course information, and creating class and exam schedules. We aimed to streamline university life and resolve these issues.
+This app is designed to centralize solutions for these challenges, eliminating the need for faculty members and students to juggle multiple apps. The goal is to establish a seamless and efficient platform that enables university members to effectively manage semesters, stay connected, and stay informed about important notices and announcements.
+
 ## Video
 
 [Click_here]()
@@ -18,12 +23,6 @@ Team Member:
 ## Flow-Chart
 
 [Click_here]()
-
-## Goal
-
-The idea of this innovative mobile app after identifying the recurring challenges faced by students each semester, such as joining various messaging platforms, gathering faculty and class representative details, navigating scattered course information, and creating class and exam schedules. We aimed to streamline university life and resolve these issues.
-This app is designed to centralize solutions for these challenges, eliminating the need for faculty members and students to juggle multiple apps. The goal is to establish a seamless and efficient platform that enables university members to effectively manage semesters, stay connected, and stay informed about important notices and announcements.
-
 
 ## Installation
 
@@ -91,6 +90,4 @@ Types of users in our app:
 - Backend: Express JS
 - Database: MongoDB
 - Architecture: MVVM(frontend) & MVC(backend)
-
-## Architecture
 
