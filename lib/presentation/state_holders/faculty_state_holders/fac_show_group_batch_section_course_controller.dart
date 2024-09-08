@@ -14,9 +14,12 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
       _facultyCreatingSubGrpBatchSecDataList;
 
   bool get inProgress => _inProgress;
+
   String get message => _message;
+
   FacultyCreatingSubGrpBatchSecData get facultyCreatingSubGrpBatchSecData =>
       _facultyCreatingSubGrpBatchSecData;
+
   List<FacultyCreatingSubGrpBatchSecData>?
       get facultyCreatingSubGrpBatchSecDataList =>
           _facultyCreatingSubGrpBatchSecDataList;
@@ -27,7 +30,7 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
 
     NetworkResponse response =
         await NetworkCaller.getRequest(Urls.showFacultySubGrpBatchSec);
-    print(response.responseJson);
+    //print(response.responseJson);
     _inProgress = false;
     update();
 
@@ -37,7 +40,8 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
               .data;
 
       if (responseData is List) {
-        _facultyCreatingSubGrpBatchSecDataList = responseData.cast<FacultyCreatingSubGrpBatchSecData>();
+        _facultyCreatingSubGrpBatchSecDataList =
+            responseData.cast<FacultyCreatingSubGrpBatchSecData>();
         _message = 'Added';
       } else if (responseData is FacultyCreatingSubGrpBatchSecData) {
         _facultyCreatingSubGrpBatchSecData = responseData;
@@ -45,6 +49,32 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
       } else {
         _message = "Couldn't add!!";
         return false;
+      }
+      return true;
+    } else {
+      _message = "Couldn't add!!";
+      return false;
+    }
+  }
+
+  Future<bool> deleteGroups(String id) async {
+    _inProgress = true;
+    update();
+
+    NetworkResponse response =
+        await NetworkCaller.getRequest(Urls.facultyDeleteGroup(id));
+    //print(response.responseJson);
+    _inProgress = false;
+    update();
+
+    if (response.isSuccess) {
+      dynamic responseData =
+          FacultyCreatingSubGrpBatchSecModel.fromJson(response.responseJson!)
+              .data;
+
+      if (responseData is List) {
+        // _facultyCreatingSubGrpBatchSecDataList = responseData.cast<FacultyCreatingSubGrpBatchSecData>();
+        // _message = 'Deleted';
       }
       return true;
     } else {

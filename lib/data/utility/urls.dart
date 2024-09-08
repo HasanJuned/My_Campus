@@ -24,6 +24,7 @@ class Urls {
   static String joinSubjectGroupBatchSections(String groupId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId';
   static String chattingGroup(String groupId, String senderId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId/$senderId';
   static String showFacultySubGrpBatchSec = '$_facultyBaseUrl/showFacultySubGrpBatchSec';
+  static String facultyDeleteGroup(String id) => '$_facultyBaseUrl/deleteGroupsByTeachers/$id';
   static const String facultyAddAnnouncement = '$_facultyBaseUrl/announcement';
   static const String facultyShowAnnouncement = '$_facultyBaseUrl/showAnnouncement';
   static const String resource = '$_facultyBaseUrl/resource';
@@ -32,8 +33,7 @@ class Urls {
   static String facAddMyTodo = '$_facultyBaseUrl/facAddMyTodo';
   static String showFacMyTodo = '$_facultyBaseUrl/showFacMyTodo';
 
-  static String facultyDeleteAnnouncement(String id) =>
-      '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
+  static String facultyDeleteAnnouncement(String id) => '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
   static String facultyAddTask(String batch, section, courseTitle, task) =>
       '$_facultyBaseUrl/teacherAddTask/$batch/$section/$courseTitle/$task';
   //static String facultyAddMyToDo = '$_facultyBaseUrl/facultyMeeting';
