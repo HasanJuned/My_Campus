@@ -21,7 +21,6 @@ class FileUpload extends StatefulWidget {
 }
 
 class _FileUploadState extends State<FileUpload> {
-
   String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId;
   dynamic c;
 
@@ -42,7 +41,6 @@ class _FileUploadState extends State<FileUpload> {
               })
           .toList();
       print('c $c');
-
     });
   }
 
@@ -150,20 +148,81 @@ class _FileUploadState extends State<FileUpload> {
                                 itemBuilder: (context, index) {
                                   final data = facResourceController
                                       .resourceModel.data![index];
-                                  return ListTile(
-                                    title: Text(
-                                      data.resource.toString(),
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                    trailing: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'Sent\n${data.batch}',
-                                        style: const TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.redAccent,
-                                          letterSpacing: 0.2,
+                                  return GestureDetector(
+                                    onLongPress: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              "Delete",
+                                              style: TextStyle(
+                                                  fontSize: 24.sp,
+                                                  fontWeight: FontWeight.w900),
+                                            ),
+                                            content: Text(
+                                              "Are you sure you want to delete this resource?",
+                                              style: TextStyle(
+                                                  fontSize: 20.sp,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: Text(
+                                                  "NO",
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.green),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Get.find<
+                                                          FacResourceController>()
+                                                      .deleteResource(
+                                                          facResourceController
+                                                              .resourceModel
+                                                              .data![index]
+                                                              .sId
+                                                              .toString());
+                                                  Get.back();
+                                                  facResourceController
+                                                      .showResource();
+                                                },
+                                                child: Text(
+                                                  "YES",
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.red),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: ListTile(
+                                      title: Text(
+                                        data.resource.toString(),
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                      trailing: TextButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'Sent\n${data.batch}',
+                                          style: const TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.redAccent,
+                                            letterSpacing: 0.2,
+                                          ),
                                         ),
                                       ),
                                     ),

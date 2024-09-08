@@ -62,4 +62,23 @@ class FacResourceController extends GetxController {
       return false;
     }
   }
+
+  Future<bool> deleteResource(String id) async {
+    _inProgress = true;
+    update();
+
+    final NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteResource(id));
+    _inProgress = false;
+    update();
+
+    if (response.isSuccess) {
+      _resourceModel = ResourceModel.fromJson(response.responseJson ?? {});
+      //print('jnwdcn ${response.responseJson}');
+      return true;
+    } else {
+      update();
+      _message = "Couldn't add!!";
+      return false;
+    }
+  }
 }

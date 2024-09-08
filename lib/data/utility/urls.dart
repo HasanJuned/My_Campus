@@ -28,6 +28,7 @@ class Urls {
   static const String facultyShowAnnouncement = '$_facultyBaseUrl/showAnnouncement';
   static const String resource = '$_facultyBaseUrl/resource';
   static const String showResource = '$_facultyBaseUrl/showResources';
+  static String deleteResource(String id) => '$_facultyBaseUrl/deleteTeacherResources/$id';
   static String facAddMyTodo = '$_facultyBaseUrl/facAddMyTodo';
   static String showFacMyTodo = '$_facultyBaseUrl/showFacMyTodo';
 
