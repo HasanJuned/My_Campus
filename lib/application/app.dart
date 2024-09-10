@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/splash_screen.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_main_bottom_screen.dart';
 import '../presentation/ui/utility/app_colors.dart';
 import 'controller_binders.dart';
 

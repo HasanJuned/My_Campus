@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_recovery_email_screen.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
 import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
@@ -10,6 +9,7 @@ import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../../state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
 import '../../../widgets/customised_elevated_button.dart';
+import '../student_screens/stu_main_bottom_screen.dart';
 
 class StuSignInScreen extends StatefulWidget {
   const StuSignInScreen({super.key});

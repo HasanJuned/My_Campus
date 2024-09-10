@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_myTdo_controller.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../widgets/appbar_method.dart';
+import '../../widgets/date_select.dart';
+import '../../widgets/dropdown_button.dart';
+import '../../widgets/fac_drawer_method.dart';
+import '../../widgets/table_title.dart';
+import '../../widgets/text_fields.dart';
 
-import '../../../../state_holders/student_state_holders/stu_myTodo_controller.dart';
-import '../../../widgets/appbar_method.dart';
-import '../../../widgets/date_select.dart';
-import '../../../widgets/fac_drawer_method.dart';
-import '../../../widgets/table_title.dart';
-import '../../../widgets/text_fields.dart';
-
-
-class FacMyTodoScreen extends StatefulWidget {
-  const FacMyTodoScreen({super.key});
+class FacAnnouncementScreen extends StatefulWidget {
+  const FacAnnouncementScreen({super.key});
 
   @override
-  State<FacMyTodoScreen> createState() => _FacMyTodoScreenState();
+  State<FacAnnouncementScreen> createState() => _FacAnnouncementScreenState();
 }
 
-class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
+class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String? selectedDate;
+  String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId, assignType;
 
   TextEditingController dateInput = TextEditingController();
   final TextEditingController _taskTEController = TextEditingController();
@@ -34,7 +35,14 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
   @override
   void initState() {
     super.initState();
-    Get.find<FacMyTodoController>().facShowMyTodo();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Get.find<FacAnnouncementController>().facShowAnnouncement();
+      c = Get.find<FacShowGroupBatchSectionCourseController>()
+          .facultyCreatingSubGrpBatchSecDataList
+          ?.map((data) =>
+              {'batch': data.batch.toString(), 'sId': data.sId.toString(), 'senderId': data.member?.map((member) => member.sId.toString()).first})
+          .toList();
+    });
   }
 
   @override
@@ -50,9 +58,9 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  addFacultyMyTodoMethod,
+                  addAnnouncementMethod,
                   const TableTitle(
-                    title1: 'Date',
+                    title1: 'Batch',
                     title2: 'Todo',
                   ),
                   showTable(),
@@ -70,66 +78,33 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
       padding: EdgeInsets.only(left: 3.0.w),
       child: Stack(
         children: [
-          // Container(
-          //   width: 380.w,
-          //   height: 450.h,
-          //   decoration: BoxDecoration(
-          //     color: const Color(0xFFF8FFAC),
-          //     border: Border.all(
-          //       color: const Color(0x999B9B9B),
-          //     ),
-          //     borderRadius: BorderRadius.all(
-          //       Radius.circular(20.w),
-          //     ),
-          //   ),
-          // ),
-          // Container(
-          //   width: 95.w,
-          //   height: 450.h,
-          //   decoration: BoxDecoration(
-          //     color: Colors.white,
-          //     borderRadius: BorderRadius.only(
-          //       topLeft: Radius.circular(20.w),
-          //       bottomLeft: Radius.circular(20.w),
-          //     ),
-          //     border: const Border(
-          //       left: BorderSide(
-          //         color: Color(0x999B9B9B),
-          //       ),
-          //       top: BorderSide(
-          //         color: Color(0x999B9B9B),
-          //       ),
-          //       bottom: BorderSide(
-          //         color: Color(0x999B9B9B),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           RefreshIndicator(
             onRefresh: () async {
-              Get.find<FacMyTodoController>().facShowMyTodo();
+              Get.find<FacAnnouncementController>().facShowAnnouncement();
             },
             child: Container(
               width: 380.w,
-              height: 430.h,
+              height: 350.h,
               color: const Color(0xFFF8FFAC),
-              child: GetBuilder<FacMyTodoController>(
-                builder: (facMyTodoController) {
-                  if (facMyTodoController.inProgress) {
+              child: GetBuilder<FacAnnouncementController>(
+                builder: (facAnnouncementController) {
+                  if (facAnnouncementController.facShowAnnouncementInProgress) {
                     return const Center(
                       child: CircularProgressIndicator(
                         color: Colors.teal,
                       ),
                     );
                   }
-                  if (facMyTodoController.facTodoModel.data?.isEmpty ?? true) {
+                  if (facAnnouncementController
+                          .facShowAnnouncementModel.data?.isEmpty ??
+                      true) {
                     return const Center(
                       child: Text('Nothing to show'),
                     );
                   }
                   return ListView.separated(
-                    itemCount: facMyTodoController
-                        .facTodoModel.data?.length ??
+                    itemCount: facAnnouncementController
+                            .facShowAnnouncementModel.data?.length ??
                         0,
                     itemBuilder: (context, index) {
                       return InkWell(
@@ -165,9 +140,15 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      //Get.find<StuMyTodoController>().facDeleteAnnouncement(facAnnouncementConroller.facShowAnnouncementModel.data![index].sId!);
+                                      Get.find<FacAnnouncementController>()
+                                          .facDeleteAnnouncement(
+                                              facAnnouncementController
+                                                  .facShowAnnouncementModel
+                                                  .data![index]
+                                                  .sId!);
                                       Get.back();
-                                      //stuMyTodoController.facShowAnnouncement();
+                                      facAnnouncementController
+                                          .facShowAnnouncement();
                                     },
                                     child: Text(
                                       "YES",
@@ -184,7 +165,7 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
                         },
                         child: ListTile(
                           leading: Text(
-                            '${facMyTodoController.facTodoModel.data![index].date!}      ',
+                            '${facAnnouncementController.facShowAnnouncementModel.data![index].batch!}      ',
                             style: TextStyle(
                               color: const Color(0xFF0D6858),
                               fontWeight: FontWeight.w500,
@@ -192,8 +173,16 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
                             ),
                           ),
                           title: Text(
-                            facMyTodoController.facTodoModel
-                                .data![index].title!,
+                            facAnnouncementController.facShowAnnouncementModel
+                                .data![index].announcement!,
+                            style: TextStyle(
+                              color: const Color(0xFF0D6858),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20.sp,
+                            ),
+                          ),
+                          subtitle: Text(
+                            'At: ${facAnnouncementController.facShowAnnouncementModel.data![index].date!}',
                             style: TextStyle(
                               color: const Color(0xFF0D6858),
                               fontWeight: FontWeight.w500,
@@ -220,7 +209,7 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
     );
   }
 
-  Column get addFacultyMyTodoMethod {
+  Column get addAnnouncementMethod {
     return Column(
       children: [
         SizedBox(
@@ -233,11 +222,56 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
             children: [
               CustomTextField(
                 controller: _taskTEController,
-                hintText: 'Title',
+                hintText: 'Type Announcement',
                 height: 45.h,
                 width: 360.w,
               ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomDropdownButton(
+                width: 360.w,
+                height: 45.h,
+                dropDownWidth: 360.w,
+                items: Get.find<FacShowGroupBatchSectionCourseController>()
+                        .facultyCreatingSubGrpBatchSecDataList
+                        ?.map((data) => data.batch.toString())
+                        .toList() ??
+                    [],
+                value: selectedBatch,
+                hintText: 'Select Batch',
+                onChanged: (value) {
+                  setState(() {
+                    selectedBatch = value;
+                    if (c != null) {
+                      for (var item in c) {
+                        if (selectedBatch == item['batch']) {
+                         groupId = item['sId'];
+                         senderId = item['senderId'].toString();
+                         print(senderId);
+                        }
+                      }
+                    }
 
+                  });
+                },
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomDropdownButton(
+                width: 360.w,
+                height: 45.h,
+                dropDownWidth: 360.w,
+                items: const ['None','Assignment', 'Tutorial', 'Viva', 'Lab Report', 'Lab Final'],
+                value: assignType,
+                hintText: 'Assign Type',
+                onChanged: (value) {
+                  setState(() {
+                    assignType = value;
+                  });
+                },
+              ),
               SizedBox(
                 height: 10.h,
               ),
@@ -257,9 +291,9 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
               SizedBox(
                 width: 360.w,
                 height: 55.h,
-                child: GetBuilder<FacMyTodoController>(
-                  builder: (facMyTodoController) {
-                    if (facMyTodoController.inProgress) {
+                child: GetBuilder<FacAnnouncementController>(
+                  builder: (facAnnouncementController) {
+                    if (facAnnouncementController.facAnnouncementInProgress) {
                       return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.teal,
@@ -268,8 +302,10 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
                     }
                     return ElevatedButton(
                       onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          facAddTodo(facMyTodoController);
+                        if (_formKey.currentState!.validate() &&
+                            selectedBatch != null &&
+                            selectedDate != null) {
+                          facAddAnnouncement(facAnnouncementController);
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -295,22 +331,33 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
           ),
         ),
         const SizedBox(
-          height: 10,
+          height: 2,
         ),
       ],
     );
   }
 
-  Future<void> facAddTodo(FacMyTodoController facMyTodoController) async {
-    final result = await facMyTodoController.facAddMyTodo(_taskTEController.text.trim(), selectedDate!.toString());
+  Future<void> facAddAnnouncement(
+      FacAnnouncementController facAnnouncementController) async {
+    final result = await facAnnouncementController.facAddAnnouncement(
+        _taskTEController.text.trim(), selectedBatch, assignType, selectedDate);
+    await Get.find<GroupChattingController>().groupChat(
+      groupId!,
+      senderId!,
+      _taskTEController.text.trim(),
+      AuthController.fullName0.toString(),
+      selectedDate!,
+    );//
     if (result) {
-      Get.snackbar('Successful!', 'Your todo has been added');
+      Get.snackbar('Successful!', 'Announcement has been added');
+      selectedBatch = null;
       dateInput.clear();
       _taskTEController.clear();
+      assignType = null;
       setState(() {});
-      facMyTodoController.facShowMyTodo();
+      facAnnouncementController.facShowAnnouncement();
     } else {
-      Get.snackbar('Failed!', "Couldn't add!!",
+      Get.snackbar('Failed!', "Couldn't add announcement!!",
           colorText: Colors.redAccent);
     }
   }

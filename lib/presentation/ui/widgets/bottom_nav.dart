@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
-import '../screens/teacher_screens/teacher_homePage/sub_pages/fac_chat_screen.dart';
+import '../screens/teacher_screens/fac_chat_screen.dart';
 import 'file_upload.dart';
 
 class BottomNav extends StatelessWidget {

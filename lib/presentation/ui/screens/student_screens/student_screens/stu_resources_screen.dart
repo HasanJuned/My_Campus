@@ -7,7 +7,7 @@ import 'package:my_campus/presentation/state_holders/student_state_holders/stu_r
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../widgets/app_logo.dart';
 import '../../../widgets/dropdown_button.dart';
-import '../../app_home_screen.dart';
+import '../../stu_fac_choice_screen.dart';
 
 
 class StuResourcesScreen extends StatefulWidget {
@@ -56,7 +56,7 @@ class _StuResourcesScreenState extends State<StuResourcesScreen> {
           IconButton(
             onPressed: () {
               Get.offAll(
-                    () => const HomeScreen(),
+                    () => const StuFacChoiceScreen(),
               );
             },
             icon: const Icon(

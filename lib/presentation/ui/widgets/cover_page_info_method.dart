@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../screens/student_screens/student_screens/cover_page_builder.dart';
 import 'date_select.dart';
 import 'dropdown_button.dart';
-import '../screens/student_screens/student_homePage/cover_page_builder.dart';
 
 class CoverPageUi extends StatefulWidget {
   const CoverPageUi({super.key});

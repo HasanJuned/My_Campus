@@ -1,15 +1,15 @@
-class FacultyProfileDetailsModel {
+class FacAvailableModel {
   String? status;
-  List<FacProfileDetailsData>? data;
+  List<Data>? data;
 
-  FacultyProfileDetailsModel({this.status, this.data});
+  FacAvailableModel({this.status, this.data});
 
-  FacultyProfileDetailsModel.fromJson(Map<String, dynamic> json) {
+  FacAvailableModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
-      data = <FacProfileDetailsData>[];
+      data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(FacProfileDetailsData.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
@@ -24,35 +24,38 @@ class FacultyProfileDetailsModel {
   }
 }
 
-class FacProfileDetailsData {
+class Data {
   String? sId;
   String? email;
   String? fullName;
   String? designation;
   String? department;
-  String? shortWords;
   String? password;
   String? createdDate;
+  String? count;
+  String? shortWords;
 
-  FacProfileDetailsData(
+  Data(
       {this.sId,
         this.email,
         this.fullName,
         this.designation,
         this.department,
-        this.shortWords,
         this.password,
-        this.createdDate});
+        this.createdDate,
+        this.count,
+        this.shortWords});
 
-  FacProfileDetailsData.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     email = json['email'];
     fullName = json['fullName'];
     designation = json['designation'];
     department = json['department'];
-    shortWords = json['shortWords'];
     password = json['password'];
     createdDate = json['createdDate'];
+    count = json['count'];
+    shortWords = json['shortWords'];
   }
 
   Map<String, dynamic> toJson() {
@@ -62,9 +65,10 @@ class FacProfileDetailsData {
     data['fullName'] = fullName;
     data['designation'] = designation;
     data['department'] = department;
-    data['shortWords'] = shortWords;
     data['password'] = password;
     data['createdDate'] = createdDate;
+    data['count'] = count;
+    data['shortWords'] = shortWords;
     return data;
   }
 }

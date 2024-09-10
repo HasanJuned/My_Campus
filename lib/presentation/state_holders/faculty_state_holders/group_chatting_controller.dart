@@ -15,6 +15,8 @@ class GroupChattingController extends GetxController {
     _inProgress = true;
     update();
 
+    print('1');///
+
     NetworkResponse response = await NetworkCaller.postRequest(
       Urls.chattingGroup(groupId, senderId),
       {
@@ -25,6 +27,7 @@ class GroupChattingController extends GetxController {
     );
     _inProgress = false;
     update();
+    print('2');
 
     if (response.isSuccess) {
       _message = 'Added';

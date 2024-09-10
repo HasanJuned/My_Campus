@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
-import '../../../../state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
-import '../../../widgets/file_upload.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_announcement_screen.dart';
+import '../../../state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
+import '../../widgets/file_upload.dart';
 import 'fac_available_chat_screen.dart';
 import 'fac_home_screen.dart';
 
@@ -34,6 +34,7 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
       print(AuthController.department0);
       print(AuthController.designation0);
       print(AuthController.email0);
+      print(AuthController.shortForm);
        // Get.find<FacAnnouncementController>().facShowAnnouncement();
        // Get.find<FacResourceController>().showResource();
        // Get.find<FacShowGroupBatchSectionCourseController>().showGroups();

@@ -9,7 +9,9 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_a
 import 'package:my_campus/presentation/state_holders/student_state_holders/auth_state_holders/stu_availability_checking_controller.dart';
 import 'package:my_campus/presentation/state_holders/routine_time_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
+import '../presentation/state_holders/faculty_state_holders/auth_state_holders/fac_profile_details_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_announcement_listen_controller.dart';
+import '../presentation/state_holders/faculty_state_holders/fac_available_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_myTdo_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_resource_controller.dart';
@@ -48,6 +50,8 @@ class GetXBindings extends Bindings {
     Get.put(FacResourceController());
     Get.put(FacMyTodoController());
     Get.put(FacAnnouncementListenController());
+    Get.put(FacProfileDetailsController());
+    Get.put(FacAvailableController());
 
     Get.put(StuAvailabilityCheckingController());
     Get.put(StuSignInController());

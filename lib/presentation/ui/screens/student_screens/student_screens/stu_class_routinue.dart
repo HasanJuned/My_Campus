@@ -111,8 +111,7 @@ class _StuClassRoutinueState extends State<StuClassRoutine> {
       _isLoading = true; // Start loading
     });
 
-    final rawData7 =
-        await rootBundle.loadString('assets/routinue/saturday.csv');
+    final rawData7 = await rootBundle.loadString('assets/routinue/saturday.csv');
     final rawData = await rootBundle.loadString('assets/routinue/sunday.csv');
     final rawData2 = await rootBundle.loadString('assets/routinue/monday.csv');
     final rawData3 =

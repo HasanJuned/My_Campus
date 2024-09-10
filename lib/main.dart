@@ -7,7 +7,7 @@ import 'application/app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferences.getInstance();
-  await gSheetIntit();
+  //await gSheetIntit();
   runApp(
     const SafeArea(
       child: MyCampus(),

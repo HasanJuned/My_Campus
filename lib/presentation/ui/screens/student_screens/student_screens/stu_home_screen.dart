@@ -19,7 +19,7 @@ import '../../../widgets/stu_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
 import '../../../../state_holders/routine_time_controller.dart';
 import '../../../widgets/cover_page_info_method.dart';
-import 'home_subPages/stu_class_routinue.dart';
+import 'stu_class_routinue.dart';
 
 class StuHomeScreen extends StatefulWidget {
   const StuHomeScreen({super.key});

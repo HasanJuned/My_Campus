@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:my_campus/data/models/faculty_list_model.dart';
+import 'package:my_campus/data/models/faculty_model/faculty_list_model.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 

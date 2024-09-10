@@ -9,7 +9,7 @@ import '../../state_holders/auth_controller.dart';
 import '../../state_holders/faculty_state_holders/fac_resource_controller.dart';
 import '../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import '../../state_holders/faculty_state_holders/group_chatting_controller.dart';
-import '../screens/app_home_screen.dart';
+import '../screens/stu_fac_choice_screen.dart';
 import 'app_logo.dart';
 import 'dropdown_button.dart';
 
@@ -21,7 +21,6 @@ class FileUpload extends StatefulWidget {
 }
 
 class _FileUploadState extends State<FileUpload> {
-
   String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId;
   dynamic c;
 
@@ -42,7 +41,6 @@ class _FileUploadState extends State<FileUpload> {
               })
           .toList();
       print('c $c');
-
     });
   }
 
@@ -59,7 +57,7 @@ class _FileUploadState extends State<FileUpload> {
           IconButton(
             onPressed: () {
               Get.offAll(
-                () => const HomeScreen(),
+                () => const StuFacChoiceScreen(),
               );
             },
             icon: const Icon(
@@ -100,7 +98,6 @@ class _FileUploadState extends State<FileUpload> {
                             if (selectedBatch == item['batch']) {
                               groupId = item['sId'];
                               senderId = item['senderId'].toString();
-                              print(senderId);
                             }
                           }
                         }
@@ -143,7 +140,7 @@ class _FileUploadState extends State<FileUpload> {
                             ),
                             child: SizedBox(
                               width: 380.w,
-                              height: 520.h,
+                              height: 575.h,
                               child: ListView.separated(
                                 itemCount: facResourceController
                                         .resourceModel.data?.length ??
@@ -151,20 +148,81 @@ class _FileUploadState extends State<FileUpload> {
                                 itemBuilder: (context, index) {
                                   final data = facResourceController
                                       .resourceModel.data![index];
-                                  return ListTile(
-                                    title: Text(
-                                      data.resource.toString(),
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                    trailing: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'Sent\n${data.batch}',
-                                        style: const TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.redAccent,
-                                          letterSpacing: 0.2,
+                                  return GestureDetector(
+                                    onLongPress: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              "Delete",
+                                              style: TextStyle(
+                                                  fontSize: 24.sp,
+                                                  fontWeight: FontWeight.w900),
+                                            ),
+                                            content: Text(
+                                              "Are you sure you want to delete this resource?",
+                                              style: TextStyle(
+                                                  fontSize: 20.sp,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: Text(
+                                                  "NO",
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.green),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Get.find<
+                                                          FacResourceController>()
+                                                      .deleteResource(
+                                                          facResourceController
+                                                              .resourceModel
+                                                              .data![index]
+                                                              .sId
+                                                              .toString());
+                                                  Get.back();
+                                                  facResourceController
+                                                      .showResource();
+                                                },
+                                                child: Text(
+                                                  "YES",
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.red),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: ListTile(
+                                      title: Text(
+                                        data.resource.toString(),
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                      trailing: TextButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'Sent\n${data.batch}',
+                                          style: const TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.redAccent,
+                                            letterSpacing: 0.2,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -187,13 +245,6 @@ class _FileUploadState extends State<FileUpload> {
               ),
             ),
           ),
-        ),
-        bottomNavigationBar: ColoredBox(
-          color: const Color(0xFFCBD0F9),
-          child: GetBuilder<FacMainBottomNavController>(
-              builder: (facMainBottomNavController) {
-            return BackButton(onPressed: facMainBottomNavController.backToHome);
-          }),
         ),
       ),
     );

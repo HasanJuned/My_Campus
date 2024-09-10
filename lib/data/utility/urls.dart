@@ -15,20 +15,25 @@ class Urls {
       '$_facultyBaseUrl/RecoverResetPassword';
   static const String facultyList =
       '$_facultyBaseUrl/availableCourseAndTeacher';
+
+  static const String facultyList2 =
+      '$_facultyBaseUrl/AvailableTeachers';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
+  static const String facultyProfileUpdate = '$_facultyBaseUrl/ProfileUpdate';
   static String facultySubGrpBatchSec = '$_facultyBaseUrl/createSubjectGroupBatchSections';
   static String joinSubjectGroupBatchSections(String groupId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId';
   static String chattingGroup(String groupId, String senderId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId/$senderId';
   static String showFacultySubGrpBatchSec = '$_facultyBaseUrl/showFacultySubGrpBatchSec';
+  static String facultyDeleteGroup(String id) => '$_facultyBaseUrl/deleteGroupsByTeachers/$id';
   static const String facultyAddAnnouncement = '$_facultyBaseUrl/announcement';
   static const String facultyShowAnnouncement = '$_facultyBaseUrl/showAnnouncement';
   static const String resource = '$_facultyBaseUrl/resource';
   static const String showResource = '$_facultyBaseUrl/showResources';
+  static String deleteResource(String id) => '$_facultyBaseUrl/deleteTeacherResources/$id';
   static String facAddMyTodo = '$_facultyBaseUrl/facAddMyTodo';
   static String showFacMyTodo = '$_facultyBaseUrl/showFacMyTodo';
 
-  static String facultyDeleteAnnouncement(String id) =>
-      '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
+  static String facultyDeleteAnnouncement(String id) => '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
   static String facultyAddTask(String batch, section, courseTitle, task) =>
       '$_facultyBaseUrl/teacherAddTask/$batch/$section/$courseTitle/$task';
   //static String facultyAddMyToDo = '$_facultyBaseUrl/facultyMeeting';

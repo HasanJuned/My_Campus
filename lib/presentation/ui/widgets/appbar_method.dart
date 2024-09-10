@@ -17,7 +17,7 @@ AppBar customisedAppBar(
       },
     ),
     title: Text(
-      AuthController.studentId1.toString(),
+      AuthController.email0.toString(),
       style: TextStyle(
         fontSize: 16.h,
         fontWeight: FontWeight.w500,
@@ -55,7 +55,7 @@ AppBar customisedAppBar(
                   ),
                   TextButton(
                     onPressed: () {
-                      AuthController.clear2();
+                      AuthController.facAuthClear();
                     },
                     child: Text(
                       "YES",

@@ -7,14 +7,14 @@ import '../widgets/app_logo.dart';
 import '../widgets/customised_elevated_button.dart';
 import '../widgets/screen_background.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class StuFacChoiceScreen extends StatefulWidget {
+  const StuFacChoiceScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<StuFacChoiceScreen> createState() => _StuFacChoiceScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _StuFacChoiceScreenState extends State<StuFacChoiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

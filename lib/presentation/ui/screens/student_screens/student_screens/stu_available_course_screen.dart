@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_enrolled_course_controller.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_chat_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_chat_screen.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 
 import '../../../../state_holders/auth_controller.dart';

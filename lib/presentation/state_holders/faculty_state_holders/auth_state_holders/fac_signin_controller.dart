@@ -33,6 +33,7 @@ class FacSignInController extends GetxController {
         final String fullName = userDataMap['fullName'].toString();
         final String designation = userDataMap['designation'].toString();
         final String department = userDataMap['department'].toString();
+        final String shortWords = userDataMap['shortWords'].toString();
         final String count = userDataMap['count'].toString();
 
         await AuthController.setProfileDetails(
@@ -40,7 +41,7 @@ class FacSignInController extends GetxController {
           userEmail,
           fullName,
           designation,
-          department,
+          department, shortWords,
           count
         );
 

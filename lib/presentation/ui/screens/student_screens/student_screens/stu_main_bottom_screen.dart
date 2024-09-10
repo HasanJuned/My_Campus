@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_available_course_screen.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_home_screen.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_my_todo.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_resources_screen.dart';
+
+import 'stu_available_course_screen.dart';
+import 'stu_home_screen.dart';
+import 'stu_my_todo_screen.dart';
+import 'stu_resources_screen.dart';
 
 class StuMainBottomNavBarScreen extends StatefulWidget {
   const StuMainBottomNavBarScreen({super.key});
