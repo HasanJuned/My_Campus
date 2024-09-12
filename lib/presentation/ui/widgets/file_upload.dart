@@ -1,15 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_resource_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
+import 'package:my_campus/presentation/ui/screens/stu_fac_choice_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../state_holders/auth_controller.dart';
-import '../../state_holders/faculty_state_holders/fac_resource_controller.dart';
-import '../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
-import '../../state_holders/faculty_state_holders/group_chatting_controller.dart';
-import '../screens/stu_fac_choice_screen.dart';
+
 import 'app_logo.dart';
 import 'dropdown_button.dart';
 
@@ -17,10 +19,10 @@ class FileUpload extends StatefulWidget {
   const FileUpload({super.key});
 
   @override
-  _FileUploadState createState() => _FileUploadState();
+  FileUploadState createState() => FileUploadState();
 }
 
-class _FileUploadState extends State<FileUpload> {
+class FileUploadState extends State<FileUpload> {
   String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId;
   dynamic c;
 
@@ -36,11 +38,14 @@ class _FileUploadState extends State<FileUpload> {
           ?.map((data) => {
                 'batch': data.batch.toString(),
                 'sId': data.sId.toString(),
-                'senderId':
-                    data.member?.map((member) => member.sId.toString()).first
+                'senderId': data.member
+                    ?.map(
+                      (member) => member.sId.toString(),
+                    )
+                    .first
               })
           .toList();
-      print('c $c');
+      log('c $c');
     });
   }
 
@@ -105,19 +110,22 @@ class _FileUploadState extends State<FileUpload> {
                     },
                   ),
                   Padding(
-                    padding: EdgeInsets.all(ScreenUtil().setWidth(14)),
+                    padding: EdgeInsets.all(
+                      ScreenUtil().setWidth(14),
+                    ),
                     child: GetBuilder<FacAnnouncementController>(
-                        builder: (facAnnouncementController) {
-                      return ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF8FFAC),
-                        ),
-                        onPressed: () {
-                          _pickFiles(facAnnouncementController);
-                        },
-                        child: const Text('Upload File'),
-                      );
-                    }),
+                      builder: (facAnnouncementController) {
+                        return ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFF8FFAC),
+                          ),
+                          onPressed: () {
+                            _pickFiles(facAnnouncementController);
+                          },
+                          child: const Text('Upload File'),
+                        );
+                      },
+                    ),
                   ),
                   RefreshIndicator(
                     onRefresh: () async {
@@ -132,11 +140,14 @@ class _FileUploadState extends State<FileUpload> {
                         }
 
                         return Padding(
-                          padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
+                          padding: EdgeInsets.all(
+                            ScreenUtil().setWidth(16),
+                          ),
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                  ScreenUtil().setWidth(20)),
+                                ScreenUtil().setWidth(20),
+                              ),
                             ),
                             child: SizedBox(
                               width: 380.w,

@@ -4,7 +4,8 @@ class ProfileTextFieldWidget extends StatelessWidget {
   const ProfileTextFieldWidget({
     super.key,
     required this.width,
-    required this.hintText, required this.controller,
+    required this.hintText,
+    required this.controller,
   });
 
   final double width;

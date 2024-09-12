@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_announcement_screen.dart';
-import '../../../state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
-import '../../widgets/file_upload.dart';
+import 'package:my_campus/presentation/ui/widgets/file_upload.dart';
+
 import 'fac_available_chat_screen.dart';
 import 'fac_home_screen.dart';
-
 
 class FacMainBottomNavBarScreen extends StatefulWidget {
   const FacMainBottomNavBarScreen({super.key});
@@ -29,15 +31,15 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      print(AuthController.accessToken);
-      print(AuthController.fullName0);
-      print(AuthController.department0);
-      print(AuthController.designation0);
-      print(AuthController.email0);
-      print(AuthController.shortForm);
-       // Get.find<FacAnnouncementController>().facShowAnnouncement();
-       // Get.find<FacResourceController>().showResource();
-       // Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
+      log(AuthController.accessToken.toString());
+      log(AuthController.fullName0.toString());
+      log(AuthController.department0.toString());
+      log(AuthController.designation0.toString());
+      log(AuthController.email0.toString());
+      log(AuthController.shortForm.toString());
+      // Get.find<FacAnnouncementController>().facShowAnnouncement();
+      // Get.find<FacResourceController>().showResource();
+      // Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
       // Get.find<CategoryController>().getCategory();
       // Get.find<PopularProductController>().getPopularProducts();
       // Get.find<SpecialProductController>().getSpecialProducts();
@@ -49,10 +51,10 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<FacMainBottomNavController>(
-        builder: (facMainBottomNavController) {
-      return Scaffold(
-        body: _screens[facMainBottomNavController.currentSelectedScreen],
-        bottomNavigationBar: BottomNavigationBar(
+      builder: (facMainBottomNavController) {
+        return Scaffold(
+          body: _screens[facMainBottomNavController.currentSelectedScreen],
+          bottomNavigationBar: BottomNavigationBar(
             currentIndex: facMainBottomNavController.currentSelectedScreen,
             onTap: facMainBottomNavController.changeScreen,
             selectedItemColor: Colors.black,
@@ -74,8 +76,10 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
                   icon: Icon(Icons.today_outlined,
                       color: Colors.brown, size: 30.w),
                   label: 'Announcement'),
-            ]),
-      );
-    });
+            ],
+          ),
+        );
+      },
+    );
   }
 }

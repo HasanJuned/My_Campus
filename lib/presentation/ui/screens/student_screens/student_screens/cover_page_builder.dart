@@ -5,7 +5,6 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-
 class StuCoverPageScreen extends StatefulWidget {
   const StuCoverPageScreen({
     required this.courseDepartment,
@@ -69,7 +68,7 @@ class _StuCoverPageScreenState extends State<StuCoverPageScreen> {
       version: PdfVersion.pdf_1_5,
     );
     final image =
-        await imageFromAssetBundle('assets/images/Leading_University_Logo.png');
+        await imageFromAssetBundle('assets/images/leading_university_logo.png');
     final marginPageFormat = format.copyWith(
       marginLeft: 20.0,
       marginRight: 20.0,
@@ -314,7 +313,7 @@ class _StuCoverPageScreenState extends State<StuCoverPageScreen> {
                   )
                 ],
               ),
-            )
+            ),
           );
         },
       ),

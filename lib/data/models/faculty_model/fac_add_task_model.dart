@@ -24,7 +24,6 @@ class FacAddTaskModel {
   }
 }
 
-
 class FacAddTaskData {
   String? sId;
   String? email;
@@ -35,11 +34,11 @@ class FacAddTaskData {
 
   FacAddTaskData(
       {this.sId,
-        this.email,
-        this.batch,
-        this.section,
-        this.taskType,
-        this.timestamp});
+      this.email,
+      this.batch,
+      this.section,
+      this.taskType,
+      this.timestamp});
 
   FacAddTaskData.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];

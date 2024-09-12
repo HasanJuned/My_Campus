@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../screens/student_screens/student_screens/course_offering_list_screen.dart';
-import '../screens/teacher_screens/fac_available_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/course_offering_list_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_available_screen.dart';
+
 import 'about_us_widget.dart';
 import 'blood_downer_list.dart';
 import 'cr_list_method.dart';
@@ -27,7 +28,9 @@ Drawer customisedStudentDrawer(BuildContext context) {
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  Get.to(() => CourseOfferingList());
+                  Get.to(
+                    () => const CourseOfferingList(),
+                  );
                 },
               ),
               divider(),
@@ -41,7 +44,9 @@ Drawer customisedStudentDrawer(BuildContext context) {
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  Get.to(() => const FacAvailableScreen());
+                  Get.to(
+                    () => const FacAvailableScreen(),
+                  );
                 },
               ),
               divider(),
@@ -131,7 +136,7 @@ Drawer customisedStudentDrawer(BuildContext context) {
                                 EdgeInsets.all(ScreenUtil().setWidth(20)),
                             minScale: 0.1,
                             maxScale: 6.0,
-                            child: ListTile(
+                            child: const ListTile(
                               title: Text('Rana Sir'),
                               subtitle: Text('Phone: 0177-7777777'),
                             ),

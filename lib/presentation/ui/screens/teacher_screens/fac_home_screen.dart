@@ -2,22 +2,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_listen_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_routinue_screen.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_chat_screen.dart';
-import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_announcement_screen.dart';
+import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
+import 'package:my_campus/presentation/ui/widgets/date.dart';
+import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
+import 'package:my_campus/presentation/ui/widgets/homepage_card_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../state_holders/faculty_state_holders/fac_announcement_controller.dart';
-import '../../../state_holders/faculty_state_holders/fac_announcement_listen_controller.dart';
-import '../../../state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
-import '../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
-import '../../widgets/appbar_method.dart';
-import '../../widgets/date.dart';
-import '../../widgets/dropdown_button.dart';
-import '../../widgets/fac_drawer_method.dart';
-import '../../widgets/homepage_card_elevated_button.dart';
 
 class FacHomeScreen extends StatefulWidget {
   const FacHomeScreen({super.key});
@@ -84,8 +78,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-      customisedAppBar(scaffoldKey, context),
+      appBar: customisedAppBar(scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
@@ -270,9 +263,10 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       child: Text(
                         classAndTime!,
                         style: TextStyle(
-                            fontSize: 22.sp,
-                            fontWeight: FontWeight.w900,
-                            color: const Color(0xFF393939)),
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.w900,
+                          color: const Color(0xFF393939),
+                        ),
                       ),
                     ),
                   ),
@@ -293,9 +287,10 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       text: '    My\nClasses',
                       color: 0xFFACFFDC,
                       onTap: () {
-                        Future.delayed(const Duration(milliseconds: 500)).then((value) {
+                        Future.delayed(const Duration(milliseconds: 500))
+                            .then((value) {
                           Get.to(
-                                () => FacRoutinueScreen(
+                            () => FacRoutineScreen(
                               shortWords: AuthController.shortForm.toString(),
                             ),
                           );
@@ -362,27 +357,29 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   height: 25.w,
                 ),
                 GetBuilder<FacAnnouncementListenController>(
-                    builder: (facAnnouncementListenController) {
-                  return SizedBox(
-                    height: 200.h,
-                    width: 375.w,
-                    child: PageView.builder(
-                      itemCount:
-                          facAnnouncementListenController.announcements.length,
-                      controller: _announcementPageController,
-                      onPageChanged: (index) {
-                        setState(() {
-                          _currentAnnouncement = index;
-                        });
-                      },
-                      itemBuilder: (context, index) {
-                        return buildAnnouncementCard(
-                            facAnnouncementListenController.announcements[index]
-                                .toString());
-                      },
-                    ),
-                  );
-                }),
+                  builder: (facAnnouncementListenController) {
+                    return SizedBox(
+                      height: 200.h,
+                      width: 375.w,
+                      child: PageView.builder(
+                        itemCount: facAnnouncementListenController
+                            .announcements.length,
+                        controller: _announcementPageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentAnnouncement = index;
+                          });
+                        },
+                        itemBuilder: (context, index) {
+                          return buildAnnouncementCard(
+                              facAnnouncementListenController
+                                  .announcements[index]
+                                  .toString());
+                        },
+                      ),
+                    );
+                  },
+                ),
                 SizedBox(
                   height: 5.h,
                 ),

@@ -11,7 +11,6 @@ class CustomDropdownButton extends StatelessWidget {
   final double width;
   final double dropDownWidth;
 
-
   const CustomDropdownButton({
     super.key,
     required this.items,
@@ -33,7 +32,7 @@ class CustomDropdownButton extends StatelessWidget {
             hint: Center(
               child: Text(
                 hintText,
-                style:  TextStyle(
+                style: TextStyle(
                   fontSize: 22.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
@@ -45,7 +44,7 @@ class CustomDropdownButton extends StatelessWidget {
               (String item) {
                 return DropdownMenuItem<String>(
                   value: item,
-                  onTap: (){},
+                  onTap: () {},
                   child: SingleChildScrollView(
                     child: Center(
                       child: Text(
@@ -67,7 +66,7 @@ class CustomDropdownButton extends StatelessWidget {
             buttonStyleData: ButtonStyleData(
               height: height,
               width: width,
-              padding:  EdgeInsets.only(left: 14.w, right: 14.w),
+              padding: EdgeInsets.only(left: 14.w, right: 14.w),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.w),
                 border: Border.all(
@@ -77,7 +76,7 @@ class CustomDropdownButton extends StatelessWidget {
               ),
               elevation: 2,
             ),
-            iconStyleData:  IconStyleData(
+            iconStyleData: IconStyleData(
               icon: const Icon(
                 Icons.arrow_drop_down_rounded,
               ),
@@ -94,14 +93,17 @@ class CustomDropdownButton extends StatelessWidget {
               ),
               offset: const Offset(0, 0),
               scrollbarTheme: ScrollbarThemeData(
-                radius:  Radius.circular(40.w),
-                 thickness: MaterialStateProperty.all(6.w),
-                 thumbVisibility: MaterialStateProperty.all(true),
+                radius: Radius.circular(40.w),
+                thickness: MaterialStateProperty.all(6.w),
+                thumbVisibility: MaterialStateProperty.all(true),
               ),
             ),
             menuItemStyleData: MenuItemStyleData(
               height: 70.h,
-              padding: EdgeInsets.only(left: 14.w, right: 14.w,),
+              padding: EdgeInsets.only(
+                left: 14.w,
+                right: 14.w,
+              ),
             ),
           ),
         ),

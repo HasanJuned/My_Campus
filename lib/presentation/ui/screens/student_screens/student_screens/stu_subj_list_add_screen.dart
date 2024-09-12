@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
+import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
+import 'package:my_campus/presentation/ui/widgets/dropdown_button.dart';
 import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../widgets/dropdown_button.dart';
-import '../../../widgets/bottom_nav.dart';
+
 import 'stu_home_screen.dart';
 
 class StudentSubjectListAdd extends StatefulWidget {
@@ -209,7 +209,7 @@ class _StudentSubjectListAddState extends State<StudentSubjectListAdd> {
                               ),
                             ],
                             rows: tableData.map(
-                                  (data) {
+                              (data) {
                                 return DataRow(
                                   cells: [
                                     DataCell(
@@ -224,27 +224,28 @@ class _StudentSubjectListAddState extends State<StudentSubjectListAdd> {
                                                   style: TextStyle(
                                                       fontSize: 24.sp,
                                                       fontWeight:
-                                                      FontWeight.w900),
+                                                          FontWeight.w900),
                                                 ),
                                                 content: Text(
                                                     "Are you sure you want to delete this data?",
                                                     style: TextStyle(
                                                         fontSize: 20.sp,
                                                         fontWeight:
-                                                        FontWeight.w500)),
+                                                            FontWeight.w500)),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color:
-                                                            Colors.green)),
+                                                    child: Text(
+                                                      "NO",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.green),
+                                                    ),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
@@ -254,12 +255,14 @@ class _StudentSubjectListAddState extends State<StudentSubjectListAdd> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.red)),
+                                                    child: Text(
+                                                      "YES",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.red),
+                                                    ),
                                                   ),
                                                 ],
                                               );
@@ -298,27 +301,29 @@ class _StudentSubjectListAddState extends State<StudentSubjectListAdd> {
                                                   style: TextStyle(
                                                       fontSize: 24.sp,
                                                       fontWeight:
-                                                      FontWeight.w900),
+                                                          FontWeight.w900),
                                                 ),
                                                 content: Text(
-                                                    "Are you sure you want to delete this data?",
-                                                    style: TextStyle(
-                                                        fontSize: 20.sp,
-                                                        fontWeight:
-                                                        FontWeight.w500)),
+                                                  "Are you sure you want to delete this data?",
+                                                  style: TextStyle(
+                                                      fontSize: 20.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color:
-                                                            Colors.green)),
+                                                    child: Text(
+                                                      "NO",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.green),
+                                                    ),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
@@ -328,12 +333,14 @@ class _StudentSubjectListAddState extends State<StudentSubjectListAdd> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.red)),
+                                                    child: Text(
+                                                      "YES",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.red),
+                                                    ),
                                                   ),
                                                 ],
                                               );
@@ -349,7 +356,7 @@ class _StudentSubjectListAddState extends State<StudentSubjectListAdd> {
                                                 softWrap: true,
                                                 style: TextStyle(
                                                   color:
-                                                  const Color(0xFF393A3A),
+                                                      const Color(0xFF393A3A),
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 20.sp,
                                                 ),

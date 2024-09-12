@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_profile_details_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/profile_text_field_widget.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-
-import '../../../state_holders/faculty_state_holders/auth_state_holders/fac_profile_details_controller.dart';
 
 class FacProfileScreen extends StatefulWidget {
   const FacProfileScreen({super.key});
@@ -14,7 +13,6 @@ class FacProfileScreen extends StatefulWidget {
 }
 
 class _FacProfileScreenState extends State<FacProfileScreen> {
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _designationController = TextEditingController();
@@ -52,8 +50,10 @@ class _FacProfileScreenState extends State<FacProfileScreen> {
   Column get _facProfileUi {
     return Column(
       children: [
-        const Text('My Profile',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
+        const Text(
+          'My Profile',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+        ),
         const SizedBox(
           height: 24,
         ),
@@ -107,18 +107,20 @@ class _FacProfileScreenState extends State<FacProfileScreen> {
           return SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-                onPressed: () async {
-                  await _updateProfile(facProfileDetailsController);
-                },
-                child: const Text('Update Profile')),
+              onPressed: () async {
+                await _updateProfile(facProfileDetailsController);
+              },
+              child: const Text('Update Profile'),
+            ),
           );
         })
       ],
     );
   }
 
-  Future<void> _updateProfile(FacProfileDetailsController facProfileDetailsController) async {
-     final result = await facProfileDetailsController.facProfile(
+  Future<void> _updateProfile(
+      FacProfileDetailsController facProfileDetailsController) async {
+    final result = await facProfileDetailsController.facProfile(
       _emailController.text,
       _fullNameController.text,
       _designationController.text,
@@ -128,7 +130,8 @@ class _FacProfileScreenState extends State<FacProfileScreen> {
     );
 
     if (result) {
-      Get.snackbar('Success!', facProfileDetailsController.message, colorText: Colors.green);
+      Get.snackbar('Success!', facProfileDetailsController.message,
+          colorText: Colors.green);
 
       await AuthController.setProfileDetails(
           AuthController.accessToken.toString(),
@@ -137,11 +140,7 @@ class _FacProfileScreenState extends State<FacProfileScreen> {
           _designationController.text,
           _departmentController.text,
           _shortFormController.text,
-          '1'
-      );
-
-
-
+          '1');
     } else {
       Get.snackbar('Failed!', facProfileDetailsController.message,
           colorText: Colors.redAccent);

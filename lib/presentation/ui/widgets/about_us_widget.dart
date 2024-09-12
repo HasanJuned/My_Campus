@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AboutUsWidget extends StatelessWidget {
   const AboutUsWidget({
-    super.key, required this.name,
+    super.key,
+    required this.name,
   });
 
   final String name;
@@ -12,10 +13,9 @@ class AboutUsWidget extends StatelessWidget {
     return ListTile(
       title: Center(
           child: Text(
-            name,
-            style: const TextStyle(
-                fontSize: 19, fontWeight: FontWeight.w700),
-          )),
+        name,
+        style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700),
+      )),
       subtitle: const Column(
         children: [
           SizedBox(
@@ -23,21 +23,15 @@ class AboutUsWidget extends StatelessWidget {
           ),
           Text(
             'Batch: 57',
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
           Text(
             'Department of CSE',
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
           Text(
             'Leading University, Sylhet',
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
         ],
       ),

@@ -1,22 +1,21 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
-import 'package:my_campus/data/models/faculty_model/auth_models/fac_availability_checking_model.dart';
-import '../../../../data/models/network_response.dart';
-import '../../../../data/services/network_caller.dart';
-import '../../../../data/utility/urls.dart';
-import '../../../data/models/faculty_model/fac_available_model.dart';
+import 'package:my_campus/data/models/faculty_model/fac_available_model.dart';
+import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/data/services/network_caller.dart';
+import 'package:my_campus/data/utility/urls.dart';
 
 class FacAvailableController extends GetxController {
   bool _inProgress = false;
   String _message = '';
-  FacAvailableModel _facAvailableModel =
-  FacAvailableModel();
+  FacAvailableModel _facAvailableModel = FacAvailableModel();
 
   bool get inProgress => _inProgress;
 
   String get message => _message;
 
-  FacAvailableModel get facAvailableModel =>
-      _facAvailableModel;
+  FacAvailableModel get facAvailableModel => _facAvailableModel;
 
   Future<bool> facAvailable() async {
     _inProgress = true;
@@ -27,9 +26,9 @@ class FacAvailableController extends GetxController {
     _inProgress = false;
     update();
     if (response.isSuccess) {
-      print('success');
+      log('success');
       _facAvailableModel = FacAvailableModel.fromJson(response.responseJson!);
-      print('success');
+      log('success');
       return true;
     } else {
       _message = 'Failed!';

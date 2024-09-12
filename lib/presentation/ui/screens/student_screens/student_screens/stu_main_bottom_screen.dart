@@ -45,10 +45,10 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<StuMainBottomNavController>(
-        builder: (stuMainBottomNavController) {
-      return Scaffold(
-        body: _screens[stuMainBottomNavController.currentSelectedScreen],
-        bottomNavigationBar: BottomNavigationBar(
+      builder: (stuMainBottomNavController) {
+        return Scaffold(
+          body: _screens[stuMainBottomNavController.currentSelectedScreen],
+          bottomNavigationBar: BottomNavigationBar(
             currentIndex: stuMainBottomNavController.currentSelectedScreen,
             onTap: stuMainBottomNavController.changeScreen,
             selectedItemColor: Colors.black,
@@ -70,9 +70,10 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
                   icon: Icon(Icons.today_outlined,
                       color: Colors.brown, size: 30.w),
                   label: 'My Todo'),
-
-            ]),
-      );
-    });
+            ],
+          ),
+        );
+      },
+    );
   }
 }

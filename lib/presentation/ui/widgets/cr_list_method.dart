@@ -14,7 +14,7 @@ void crList(BuildContext context) {
           builder: (context, StateSetter setState) {
             return SingleChildScrollView(
               child: AlertDialog(
-                title:  Center(
+                title: Center(
                   child: Column(
                     children: [
                       Text(
@@ -35,7 +35,7 @@ void crList(BuildContext context) {
                 ),
                 actions: [
                   for (int i = 0; i < 20; i++)
-                     Column(
+                    Column(
                       children: [
                         ListTile(
                           leading: CircleAvatar(
@@ -53,8 +53,7 @@ void crList(BuildContext context) {
                                 letterSpacing: .6),
                           ),
                           subtitle: Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
                                 height: 6.h,

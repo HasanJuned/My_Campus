@@ -9,14 +9,14 @@ class ResourceModel {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -34,11 +34,11 @@ class Data {
 
   Data(
       {this.sId,
-        this.email,
-        this.resource,
-        this.batch,
-        this.date,
-        this.timestamp});
+      this.email,
+      this.resource,
+      this.batch,
+      this.date,
+      this.timestamp});
 
   Data.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -50,18 +50,16 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['email'] = this.email;
-    data['resource'] = this.resource;
-    data['batch'] = this.batch;
-    data['date'] = this.date;
-    data['timestamp'] = this.timestamp;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['email'] = email;
+    data['resource'] = resource;
+    data['batch'] = batch;
+    data['date'] = date;
+    data['timestamp'] = timestamp;
     return data;
   }
 }
-
-
 
 // class ResourceModel {
 //   String? status;

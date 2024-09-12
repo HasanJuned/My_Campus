@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:my_campus/data/models/faculty_model/resource_model.dart';
-
-import '../../../data/models/network_response.dart';
-import '../../../data/services/network_caller.dart';
-import '../../../data/utility/urls.dart';
+import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/data/services/network_caller.dart';
+import 'package:my_campus/data/utility/urls.dart';
 
 class FacResourceController extends GetxController {
   bool _inProgress = false;
@@ -48,7 +45,8 @@ class FacResourceController extends GetxController {
     _inProgress = true;
     update();
 
-    final NetworkResponse response = await NetworkCaller.getRequest(Urls.showResource);
+    final NetworkResponse response =
+        await NetworkCaller.getRequest(Urls.showResource);
     _inProgress = false;
     update();
 
@@ -67,13 +65,13 @@ class FacResourceController extends GetxController {
     _inProgress = true;
     update();
 
-    final NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteResource(id));
+    final NetworkResponse response =
+        await NetworkCaller.getRequest(Urls.deleteResource(id));
     _inProgress = false;
     update();
 
     if (response.isSuccess) {
       _resourceModel = ResourceModel.fromJson(response.responseJson ?? {});
-      //print('jnwdcn ${response.responseJson}');
       return true;
     } else {
       update();

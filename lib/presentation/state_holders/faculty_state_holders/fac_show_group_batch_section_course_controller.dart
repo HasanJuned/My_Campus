@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
+import 'package:my_campus/data/models/faculty_model/fac_sub_grp_batch_sec_model.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
-import '../../../data/models/faculty_model/fac_sub_grp_batch_sec_model.dart';
 
 class FacShowGroupBatchSectionCourseController extends GetxController {
   bool _inProgress = false;
@@ -30,7 +30,6 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
 
     NetworkResponse response =
         await NetworkCaller.getRequest(Urls.showFacultySubGrpBatchSec);
-    //print(response.responseJson);
     _inProgress = false;
     update();
 
@@ -63,7 +62,6 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
 
     NetworkResponse response =
         await NetworkCaller.getRequest(Urls.facultyDeleteGroup(id));
-    //print(response.responseJson);
     _inProgress = false;
     update();
 

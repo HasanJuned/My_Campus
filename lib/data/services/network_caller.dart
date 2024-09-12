@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:my_campus/application/app.dart';
+import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/ui/screens/stu_fac_choice_screen.dart';
-import '../../application/app.dart';
-import '../../presentation/state_holders/auth_controller.dart';
-import '../models/network_response.dart';
 
 class NetworkCaller {
   static Future<NetworkResponse> getRequest(String url) async {

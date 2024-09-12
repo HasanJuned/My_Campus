@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_availability_checking_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_availability_checking_screen.dart';
-import '../widgets/app_logo.dart';
-import '../widgets/customised_elevated_button.dart';
-import '../widgets/screen_background.dart';
+import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
+import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 
 class StuFacChoiceScreen extends StatefulWidget {
   const StuFacChoiceScreen({super.key});

@@ -38,12 +38,12 @@ class Data {
 
   Data(
       {this.sId,
-        this.email,
-        this.announcement,
-        this.batch,
-        this.type,
-        this.date,
-        this.timestamp});
+      this.email,
+      this.announcement,
+      this.batch,
+      this.type,
+      this.date,
+      this.timestamp});
 
   Data.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];

@@ -4,7 +4,7 @@ import 'package:my_campus/data/models/faculty_model/fac_delete_announcement_mode
 import 'package:my_campus/data/models/faculty_model/fac_show_announcement_model.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
-import '../../../data/utility/urls.dart';
+import 'package:my_campus/data/utility/urls.dart';
 
 class FacAnnouncementController extends GetxController {
   bool _facAnnouncementInProgress = false;
@@ -52,12 +52,14 @@ class FacAnnouncementController extends GetxController {
   Future<bool> facShowAnnouncement() async {
     _facShowAnnouncementInProgress = true;
     update();
-    final NetworkResponse response = await NetworkCaller.getRequest(Urls.facultyShowAnnouncement);
+    final NetworkResponse response =
+        await NetworkCaller.getRequest(Urls.facultyShowAnnouncement);
     _facShowAnnouncementInProgress = false;
     update();
 
     if (response.isSuccess) {
-      _facShowAnnouncementModel = FacShowAnnouncementModel.fromJson(response.responseJson ?? {});
+      _facShowAnnouncementModel =
+          FacShowAnnouncementModel.fromJson(response.responseJson ?? {});
       return true;
     } else {
       update();
@@ -66,13 +68,9 @@ class FacAnnouncementController extends GetxController {
   }
 
   Future<bool> facDeleteAnnouncement(String id) async {
-    /*_facAnnouncementInProgress = true;
-    update();*/
     final NetworkResponse response = await NetworkCaller.getRequest(
       Urls.facultyDeleteAnnouncement(id),
     );
-    /*_facAnnouncementInProgress = false;
-    update();*/
 
     if (response.isSuccess) {
       _facDeleteAnnouncementModel =
