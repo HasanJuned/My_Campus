@@ -32,6 +32,8 @@ class Urls {
   static String deleteResource(String id) => '$_facultyBaseUrl/deleteTeacherResources/$id';
   static String facAddMyTodo = '$_facultyBaseUrl/facAddMyTodo';
   static String showFacMyTodo = '$_facultyBaseUrl/showFacMyTodo';
+  static String getChat(String id) => '$_facultyBaseUrl/showChats/$id';
+  static String deleteChat(String groupId, String memberId, String messageId) => '$_facultyBaseUrl/delete-chat/$groupId/$memberId/$messageId';
 
   static String facultyDeleteAnnouncement(String id) => '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
   static String facultyAddTask(String batch, section, courseTitle, task) =>

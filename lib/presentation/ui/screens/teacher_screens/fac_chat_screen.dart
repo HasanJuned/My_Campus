@@ -1,153 +1,268 @@
 import 'package:flutter/material.dart';
-import 'package:grouped_list/grouped_list.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
-import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import 'package:my_campus/presentation/ui/widgets/delete_card.dart';
 
 class FacChatScreen extends StatefulWidget {
-  const FacChatScreen(
-      {super.key,
-      required this.batch,
-      required this.courseCode,
-      required this.courseTitle});
+  FacChatScreen({
+    super.key,
+    required this.batch,
+    required this.courseCode,
+    required this.courseTitle,
+    this.groupId,
+  });
 
   final String batch, courseCode, courseTitle;
+  dynamic groupId;
 
   @override
   State<FacChatScreen> createState() => _FacChatScreenState();
 }
 
 class _FacChatScreenState extends State<FacChatScreen> {
-  final TextEditingController _messageTEController = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
+  final GroupChattingController _chatController =
+      Get.put(GroupChattingController());
 
-  List<Message> messages = [];
+  @override
+  void initState() {
+    super.initState();
+    _chatController.getChat(widget.groupId);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(
-          color: Colors.black,
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.courseCode,
-              style: const TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 0.1),
-            ),
-            Text(
-              widget.courseTitle,
-              style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: 0.2),
-            ),
-          ],
-        ),
-        actions: [
-          Text(
-            '\nBatch: ${widget.batch}  ',
-            style: const TextStyle(
-                fontSize: 17, fontWeight: FontWeight.w500, letterSpacing: 0.1),
-          ),
-        ],
+      appBar: _buildAppBar(),
+      body: GetBuilder<GroupChattingController>(
+          builder: (groupChattingController) {
+        final chatData = _chatController.groupChatModel.data;
+        final messages = <Message>[];
 
-        //centerTitle: true,
-        backgroundColor: AppColors.primaryColor.withOpacity(0.7),
-        elevation: 0.5,
-      ),
-      body: ScreenBackground(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: GroupedListView<Message, DateTime>(
-                  reverse: true,
-                  order: GroupedListOrder.DESC,
-                  useStickyGroupSeparators: true,
-                  floatingHeader: true,
-                  elements: messages,
-                  groupBy: (message) => DateTime(message.date.year,
-                      message.date.month, message.date.day, message.date.hour),
-                  groupHeaderBuilder: (Message message) => SizedBox(
-                    height: 50,
-                    child: Center(
-                      child: Card(
-                        color: AppColors.primaryColor.withOpacity(0.8),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Text(
-                            DateFormat.yMMMd().format(message.date),
-                            style: const TextStyle(color: Colors.black),
+        if (chatData != null) {
+          for (var data in chatData) {
+            if (data.chat != null) {
+              for (var chat in data.chat!) {
+                messages.add(
+                  Message(
+                    text: chat.message ?? '',
+                    isSentByMe: chat.sender == AuthController.fullName0,
+                    date: DateTime.parse(
+                        chat.timestamp ?? DateTime.now().toIso8601String()),
+                    time: chat.timestamp.toString(),
+                  ),
+                );
+              }
+            }
+          }
+          messages.sort((a, b) => b.date.compareTo(a.date));
+        }
+
+        return Column(
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                reverse: true,
+                itemCount: messages.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final message = messages[index];
+
+                  DateTime messageDate = DateTime(
+                    message.date.year,
+                    message.date.month,
+                    message.date.day,
+                  );
+                  DateTime? previousMessageDate;
+                  if (index < messages.length - 1) {
+                    previousMessageDate = DateTime(
+                      messages[index + 1].date.year,
+                      messages[index + 1].date.month,
+                      messages[index + 1].date.day,
+                    );
+                  }
+                  bool showDateCard = index == messages.length - 1 ||
+                      messageDate != previousMessageDate;
+
+                  DateTime originalTime = DateTime.parse(message.time)
+                      .add(const Duration(hours: 6));
+                  String formattedTime =
+                      DateFormat('hh:mm a').format(originalTime);
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (showDateCard)
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: DateCard(date: messageDate),
+                          ),
+                        ),
+                      Align(
+                        alignment: message.isSentByMe
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 10),
+                          decoration: BoxDecoration(
+                            color: message.isSentByMe
+                                ? Colors.blueAccent
+                                : Colors.grey[300],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: InkWell(
+                            onLongPress: () {
+                              if (message.isSentByMe) {}
+                            },
+                            child: Column(
+                              crossAxisAlignment: message.isSentByMe
+                                  ? CrossAxisAlignment.end
+                                  : CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  message.text,
+                                  style: TextStyle(
+                                    color: message.isSentByMe
+                                        ? Colors.white
+                                        : Colors.black87,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  formattedTime,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: message.isSentByMe
+                                        ? Colors.white
+                                        : Colors.black87,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  itemBuilder: (context, Message message) => SizedBox(
-                    width: 250,
-                    child: Align(
-                      alignment: message.isSentByMe
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: Card(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(16),
-                          ),
-                        ),
-                        color: Colors.teal.shade100,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Text(message.text),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                    ],
+                  );
+                },
               ),
-              Row(
-                children: [
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget>[
                   Expanded(
-                    flex: 1,
                     child: TextField(
-                      controller: _messageTEController,
-                      decoration:
-                          const InputDecoration(hintText: 'Type Message'),
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        hintText: 'Enter a message',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
                     ),
                   ),
                   IconButton(
+                    icon: const Icon(Icons.send),
                     onPressed: () {
-                      final message = Message(
-                          text: _messageTEController.text,
-                          date: DateTime.now(),
-                          isSentByMe: true);
-                      setState(() {
-                        messages.add(message);
-                      });
-                      _messageTEController.clear();
+                      _sendChat();
                     },
-                    icon: const Icon(Icons.send_outlined),
                   ),
                 ],
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          ],
+        );
+      }),
     );
   }
+
+  void _sendChat() {
+      if (_controller.text.isNotEmpty) {
+      for (int i = 0;
+          i < _chatController.groupChatModel.data!.length;
+          i++) {
+        if (_chatController.groupChatModel.data?[i].name ==
+            AuthController.fullName0) {
+          _handleSubmitted(
+              _controller.text,
+              _chatController.groupChatModel.data![i].sId
+                  .toString());
+          break;
+        }
+      }
+    }
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      leading: const BackButton(
+        color: Colors.black,
+      ),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.courseCode,
+            style: const TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.1),
+          ),
+          Text(
+            widget.courseTitle,
+            style: const TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w400,
+                letterSpacing: 0.2),
+          ),
+        ],
+      ),
+      actions: [
+        Text(
+          '\nBatch: ${widget.batch}  ',
+          style: const TextStyle(
+              fontSize: 17, fontWeight: FontWeight.w500, letterSpacing: 0.1),
+        ),
+      ],
+      backgroundColor: AppColors.primaryColor.withOpacity(0.7),
+      elevation: 0.5,
+    );
+  }
+  void _handleSubmitted(String text, String senderId) {
+    final date = DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').format(DateTime.now());
+    _chatController.groupChat(
+      widget.groupId.toString(),
+      senderId.toString(),
+      text,
+      AuthController.fullName0.toString(),
+      date,
+    );
+    setState(() {});
+    _controller.clear();
+  }
 }
+
+
 
 class Message {
   final String text;
   final DateTime date;
   final bool isSentByMe;
+  final String time;
 
-  Message({required this.text, required this.date, required this.isSentByMe});
+  Message({
+    required this.text,
+    required this.date,
+    required this.isSentByMe,
+    required this.time,
+  });
 }
