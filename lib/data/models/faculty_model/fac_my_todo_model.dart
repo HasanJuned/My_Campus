@@ -10,9 +10,9 @@ class FacMyTodoModel {
     count = json['count'];
     if (json['data'] != null) {
       data = <Data>[];
-      json['data'].forEach((v) {
+      (json['data'] as Map).forEach((v) {
         data!.add(Data.fromJson(v));
-      });
+      } as void Function(dynamic key, dynamic value));
     }
   }
 

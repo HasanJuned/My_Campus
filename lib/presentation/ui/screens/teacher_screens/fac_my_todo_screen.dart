@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
-import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
-import 'package:my_campus/presentation/ui/widgets/date_select.dart';
-import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_delete_todo_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_myTdo_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import 'package:my_campus/presentation/ui/widgets/table_title.dart';
-import 'package:my_campus/presentation/ui/widgets/text_fields.dart';
+
+import '../../widgets/appbar_method.dart';
+import '../../widgets/date_select.dart';
+import '../../widgets/fac_drawer_method.dart';
+import '../../widgets/table_title.dart';
+import '../../widgets/text_fields.dart';
 
 class FacMyTodoScreen extends StatefulWidget {
   const FacMyTodoScreen({super.key});
@@ -62,7 +64,7 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
     );
   }
 
-  Widget showTable() {
+  Padding showTable() {
     return Padding(
       padding: EdgeInsets.only(left: 3.0.w),
       child: Stack(
@@ -135,13 +137,13 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 title: Text(
-                                  "Delete Data",
+                                  "Delete",
                                   style: TextStyle(
                                       fontSize: 24.sp,
                                       fontWeight: FontWeight.w900),
                                 ),
                                 content: Text(
-                                  "Are you sure you want to delete this data?",
+                                  "Are you sure you want to delete this Todo?",
                                   style: TextStyle(
                                       fontSize: 20.sp,
                                       fontWeight: FontWeight.w500),
@@ -161,9 +163,12 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      //Get.find<StuMyTodoController>().facDeleteAnnouncement(facAnnouncementConroller.facShowAnnouncementModel.data![index].sId!);
+                                      Get.find<FacDeleteTodoController>()
+                                          .facDeleteTodo(facMyTodoController
+                                              .facTodoModel.data![index].sId
+                                              .toString());
                                       Get.back();
-                                      //stuMyTodoController.facShowAnnouncement();
+                                      facMyTodoController.facShowMyTodo();
                                     },
                                     child: Text(
                                       "YES",
@@ -216,7 +221,7 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
     );
   }
 
-  Widget get addFacultyMyTodoMethod {
+  Column get addFacultyMyTodoMethod {
     return Column(
       children: [
         SizedBox(
@@ -263,9 +268,9 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
                     }
                     return ElevatedButton(
                       onPressed: () async {
-                        if (_formKey.currentState!.validate() &&
-                            selectedDate != null) {
+                        if (_formKey.currentState!.validate()) {
                           facAddTodo(facMyTodoController);
+                          facMyTodoController.facShowMyTodo();
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -299,24 +304,14 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
 
   Future<void> facAddTodo(FacMyTodoController facMyTodoController) async {
     final result = await facMyTodoController.facAddMyTodo(
-      _taskTEController.text.trim(),
-      selectedDate!.toString(),
-    );
+        _taskTEController.text.trim(), selectedDate!.toString());
     if (result) {
       Get.snackbar('Successful!', 'Your todo has been added');
       dateInput.clear();
       _taskTEController.clear();
       setState(() {});
-      facMyTodoController.facShowMyTodo();
     } else {
       Get.snackbar('Failed!', "Couldn't add!!", colorText: Colors.redAccent);
     }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _taskTEController.dispose();
-    dateInput.dispose();
   }
 }
