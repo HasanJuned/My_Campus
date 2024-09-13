@@ -103,9 +103,10 @@ class _FacChatScreenState extends State<FacChatScreen> {
                           ),
                         ),
                       Align(
-                        alignment: AuthController.fullName0 == message.backendName
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
+                        alignment:
+                            AuthController.fullName0 == message.backendName
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
                         child: Container(
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 15),
@@ -175,6 +176,8 @@ class _FacChatScreenState extends State<FacChatScreen> {
                     icon: const Icon(Icons.send),
                     onPressed: () {
                       _sendChat();
+                      _chatController.getChat(widget.groupId);
+                      setState(() {});
                     },
                   ),
                 ],
@@ -187,16 +190,12 @@ class _FacChatScreenState extends State<FacChatScreen> {
   }
 
   void _sendChat() {
-      if (_controller.text.isNotEmpty) {
-      for (int i = 0;
-          i < _chatController.groupChatModel.data!.length;
-          i++) {
+    if (_controller.text.isNotEmpty) {
+      for (int i = 0; i < _chatController.groupChatModel.data!.length; i++) {
         if (_chatController.groupChatModel.data?[i].name ==
             AuthController.fullName0) {
-          _handleSubmitted(
-              _controller.text,
-              _chatController.groupChatModel.data![i].sId
-                  .toString());
+          _handleSubmitted(_controller.text,
+              _chatController.groupChatModel.data![i].sId.toString());
           break;
         }
       }
@@ -214,16 +213,12 @@ class _FacChatScreenState extends State<FacChatScreen> {
           Text(
             widget.courseCode,
             style: const TextStyle(
-                fontSize: 19,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.1),
+                fontSize: 19, fontWeight: FontWeight.w500, letterSpacing: 0.1),
           ),
           Text(
             widget.courseTitle,
             style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w400,
-                letterSpacing: 0.2),
+                fontSize: 17, fontWeight: FontWeight.w400, letterSpacing: 0.2),
           ),
         ],
       ),
@@ -238,6 +233,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
       elevation: 0.5,
     );
   }
+
   void _handleSubmitted(String text, String senderId) {
     final date = DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').format(DateTime.now());
     _chatController.groupChat(
@@ -251,8 +247,6 @@ class _FacChatScreenState extends State<FacChatScreen> {
     _controller.clear();
   }
 }
-
-
 
 class Message {
   final String text;
