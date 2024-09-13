@@ -35,12 +35,12 @@ class Data {
 
   Data(
       {this.sId,
-        this.batch,
-        this.courseCode,
-        this.courseTitle,
-        this.email,
-        this.member,
-        this.createdDate});
+      this.batch,
+      this.courseCode,
+      this.courseTitle,
+      this.email,
+      this.member,
+      this.createdDate});
 
   Data.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -82,11 +82,11 @@ class Member {
 
   Member(
       {this.name,
-        this.designation,
-        this.department,
-        this.sId,
-        this.chat,
-        this.timestamp});
+      this.designation,
+      this.department,
+      this.sId,
+      this.chat,
+      this.timestamp});
 
   Member.fromJson(Map<String, dynamic> json) {
     name = json['name'];

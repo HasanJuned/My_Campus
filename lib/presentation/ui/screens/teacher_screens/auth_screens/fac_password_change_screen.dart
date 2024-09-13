@@ -5,10 +5,10 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_otp_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
-import '../../../widgets/customised_elevated_button.dart';
 
 class FacPasswordChangeScreen extends StatefulWidget {
   const FacPasswordChangeScreen({super.key, required this.email});
@@ -133,5 +133,12 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
       Get.snackbar('Failed!', facPasswordChangeController.message,
           colorText: Colors.redAccent);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _newPassTEController.dispose();
+    _otpTEController.dispose();
   }
 }

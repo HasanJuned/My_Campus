@@ -1,9 +1,8 @@
 import 'package:get/get.dart';
-
-import '../../../data/models/network_response.dart';
-import '../../../data/models/stu_model/stu_show_myTodo_model.dart';
-import '../../../data/services/network_caller.dart';
-import '../../../data/utility/urls.dart';
+import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/data/models/student_model/stu_show_my_todo_model.dart';
+import 'package:my_campus/data/services/network_caller.dart';
+import 'package:my_campus/data/utility/urls.dart';
 
 class StuMyTodoController extends GetxController {
   bool _inProgress = false;
@@ -25,7 +24,6 @@ class StuMyTodoController extends GetxController {
     _inProgress = false;
     update();
     if (response.isSuccess) {
-
       _stuMyShowMyTodoModel = ShowStuTodoModel.fromJson(response.responseJson!);
       return true;
     } else {

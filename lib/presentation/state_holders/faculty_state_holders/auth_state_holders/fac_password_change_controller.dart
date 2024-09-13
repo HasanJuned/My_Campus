@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:my_campus/data/models/faculty_model/auth_models/fac_password_change_model.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
-import '../../../../data/utility/urls.dart';
+import 'package:my_campus/data/utility/urls.dart';
 
 class FacPasswordChangeController extends GetxController {
   bool _facPasswordChangeInProgress = false;

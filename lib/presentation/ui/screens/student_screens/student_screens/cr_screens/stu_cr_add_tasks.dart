@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/stu_home_screen.dart';
+import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
+import 'package:my_campus/presentation/ui/widgets/date_select.dart';
+import 'package:my_campus/presentation/ui/widgets/dropdown_button.dart';
 import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../widgets/date_select.dart';
-import '../../../../widgets/dropdown_button.dart';
-import '../../../../widgets/text_fields.dart';
-import '../../../../widgets/bottom_nav.dart';
-import '../stu_home_screen.dart';
+import 'package:my_campus/presentation/ui/widgets/text_fields.dart';
 
 class StdCrAddTask extends StatefulWidget {
   const StdCrAddTask({super.key});
@@ -179,7 +178,7 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                           tableData.add({
                             'Batch': selectedBatch!,
                             'Exam&Task':
-                            "${selectedSubject!} -> ${selectedTask!}",
+                                "${selectedSubject!} -> ${selectedTask!}",
                             'Date': selectedDate!
                           });
                           selectedBatch = null;
@@ -223,7 +222,7 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                       Container(
                         width: 290.w,
                         height: 380.h,
-                        decoration:  BoxDecoration(
+                        decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20.w),
@@ -245,7 +244,7 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                       Container(
                         width: 90.w,
                         height: 380.h,
-                        decoration:  BoxDecoration(
+                        decoration: BoxDecoration(
                           color: const Color(0xFFF8FFAC),
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20.w),
@@ -311,7 +310,7 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                               ),
                             ],
                             rows: tableData.map(
-                                  (data) {
+                              (data) {
                                 return DataRow(
                                   cells: [
                                     DataCell(
@@ -326,27 +325,29 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                                   style: TextStyle(
                                                       fontSize: 24.sp,
                                                       fontWeight:
-                                                      FontWeight.w900),
+                                                          FontWeight.w900),
                                                 ),
                                                 content: Text(
-                                                    "Are you sure you want to delete this data?",
-                                                    style: TextStyle(
-                                                        fontSize: 20.sp,
-                                                        fontWeight:
-                                                        FontWeight.w500)),
+                                                  "Are you sure you want to delete this data?",
+                                                  style: TextStyle(
+                                                      fontSize: 20.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color:
-                                                            Colors.green)),
+                                                    child: Text(
+                                                      "NO",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.green),
+                                                    ),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
@@ -356,12 +357,14 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.red)),
+                                                    child: Text(
+                                                      "YES",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.red),
+                                                    ),
                                                   ),
                                                 ],
                                               );
@@ -398,14 +401,15 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                                   style: TextStyle(
                                                       fontSize: 24.sp,
                                                       fontWeight:
-                                                      FontWeight.w900),
+                                                          FontWeight.w900),
                                                 ),
                                                 content: Text(
-                                                    "Are you sure you want to delete this data?",
-                                                    style: TextStyle(
-                                                        fontSize: 20.sp,
-                                                        fontWeight:
-                                                        FontWeight.w500)),
+                                                  "Are you sure you want to delete this data?",
+                                                  style: TextStyle(
+                                                      fontSize: 20.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
@@ -416,9 +420,9 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                                         style: TextStyle(
                                                             fontSize: 18.sp,
                                                             fontWeight:
-                                                            FontWeight.w500,
+                                                                FontWeight.w500,
                                                             color:
-                                                            Colors.green)),
+                                                                Colors.green)),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
@@ -428,12 +432,14 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.red)),
+                                                    child: Text(
+                                                      "YES",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.red),
+                                                    ),
                                                   ),
                                                 ],
                                               );
@@ -470,27 +476,29 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                                   style: TextStyle(
                                                       fontSize: 24.sp,
                                                       fontWeight:
-                                                      FontWeight.w900),
+                                                          FontWeight.w900),
                                                 ),
                                                 content: Text(
-                                                    "Are you sure you want to delete this data?",
-                                                    style: TextStyle(
-                                                        fontSize: 20.sp,
-                                                        fontWeight:
-                                                        FontWeight.w500)),
+                                                  "Are you sure you want to delete this data?",
+                                                  style: TextStyle(
+                                                      fontSize: 20.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color:
-                                                            Colors.green)),
+                                                    child: Text(
+                                                      "NO",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.green),
+                                                    ),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
@@ -500,12 +508,14 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.red)),
+                                                    child: Text(
+                                                      "YES",
+                                                      style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.red),
+                                                    ),
                                                   ),
                                                 ],
                                               );
@@ -544,7 +554,9 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
             ],
           ),
         ),
-        bottomNavigationBar:  const BottomNav(home: StuHomeScreen()),
+        bottomNavigationBar: const BottomNav(
+          home: StuHomeScreen(),
+        ),
       ),
     );
   }

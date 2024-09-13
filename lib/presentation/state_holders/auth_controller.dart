@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
 
 /// don't touch this file, solved file
 
@@ -24,9 +23,16 @@ class AuthController {
       batch1,
       section1;
 
-  static Future<void> setProfileDetails(String token, String email1,
-      String fullName1, String designation1, String department1, String shortWords, String count,
-      [String? batch, String? section]) async {
+  static Future<void> setProfileDetails(
+      String token,
+      String email1,
+      String fullName1,
+      String designation1,
+      String department1,
+      String shortWords,
+      String count,
+      [String? batch,
+      String? section]) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', token);
@@ -40,7 +46,7 @@ class AuthController {
     email0 = email1;
     fullName0 = fullName1;
     designation0 = designation1;
-    department0 = designation1;
+    department0 = department1;
     shortForm = shortWords;
     countt = count;
   }
@@ -104,13 +110,15 @@ class AuthController {
   }
 
   static Future<void> facAuthClear() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
     sharedPreferences.clear();
     Get.offAll(() => const FacSignInScreen());
   }
 
   static Future<void> stuAuthClear() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
     sharedPreferences.clear();
     Get.offAll(() => const StuSignInScreen());
   }

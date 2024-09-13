@@ -9,10 +9,10 @@ class FacultyCreatingSubGrpBatchSecModel {
     dynamic jsonData = json['data'];
     if (jsonData != null) {
       if (jsonData is List) {
-        // If data is a list, loop through each item and parse it as FacultyCreatingSubGrpBatchSecData
-        data = jsonData.map((item) => FacultyCreatingSubGrpBatchSecData.fromJson(item)).toList();
+        data = jsonData
+            .map((item) => FacultyCreatingSubGrpBatchSecData.fromJson(item))
+            .toList();
       } else {
-        // If data is a map, parse it directly as FacultyCreatingSubGrpBatchSecData
         data = FacultyCreatingSubGrpBatchSecData.fromJson(jsonData);
       }
     }

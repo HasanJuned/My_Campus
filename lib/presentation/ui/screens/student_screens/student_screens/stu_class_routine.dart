@@ -10,10 +10,10 @@ class StuClassRoutine extends StatefulWidget {
   final String? section;
 
   @override
-  _StuClassRoutinueState createState() => _StuClassRoutinueState();
+  StuClassRoutineState createState() => StuClassRoutineState();
 }
 
-class _StuClassRoutinueState extends State<StuClassRoutine> {
+class StuClassRoutineState extends State<StuClassRoutine> {
   TextEditingController batchController = TextEditingController();
   TextEditingController sectionController = TextEditingController();
   List<dynamic>? jSat = [];
@@ -111,16 +111,14 @@ class _StuClassRoutinueState extends State<StuClassRoutine> {
       _isLoading = true; // Start loading
     });
 
-    final rawData7 = await rootBundle.loadString('assets/routinue/saturday.csv');
-    final rawData = await rootBundle.loadString('assets/routinue/sunday.csv');
-    final rawData2 = await rootBundle.loadString('assets/routinue/monday.csv');
-    final rawData3 =
-        await rootBundle.loadString('assets/routinue/tuesdayy.csv');
+    final rawData7 = await rootBundle.loadString('assets/routine/saturday.csv');
+    final rawData = await rootBundle.loadString('assets/routine/sunday.csv');
+    final rawData2 = await rootBundle.loadString('assets/routine/monday.csv');
+    final rawData3 = await rootBundle.loadString('assets/routine/tuesday.csv');
     final rawData4 =
-        await rootBundle.loadString('assets/routinue/wednesdayy.csv');
-    final rawData5 =
-        await rootBundle.loadString('assets/routinue/thursdayy.csv');
-    final rawData6 = await rootBundle.loadString('assets/routinue/friday.csv');
+        await rootBundle.loadString('assets/routine/wednesday.csv');
+    final rawData5 = await rootBundle.loadString('assets/routine/thursday.csv');
+    final rawData6 = await rootBundle.loadString('assets/routine/friday.csv');
 
     List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
     List<List<dynamic>> listData2 =
@@ -294,7 +292,8 @@ class _StuClassRoutinueState extends State<StuClassRoutine> {
       ),
       body: _isLoading
           ? const Center(
-              child: CircularProgressIndicator()) // Show loading indicator
+              child: CircularProgressIndicator(),
+            ) // Show loading indicator
           : Padding(
               padding: EdgeInsets.all(4.w),
               child: Center(
@@ -642,66 +641,69 @@ class _StuClassRoutinueState extends State<StuClassRoutine> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: const Text('Write Batch'),
-                                      content: SizedBox(
-                                        height: 150.h,
-                                        width: 150.w,
-                                        child: Column(
-                                          //mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            TextFormField(
-                                              controller: batchController,
-                                              decoration: const InputDecoration(
-                                                  hintText: 'Batch'),
-                                            ),
-                                            SizedBox(
-                                              height: 10.h,
-                                            ),
-                                            TextFormField(
-                                              controller: sectionController,
-                                              decoration: const InputDecoration(
-                                                  hintText: 'Section'),
-                                            ),
-                                          ],
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Write Batch'),
+                                  content: SizedBox(
+                                    height: 150.h,
+                                    width: 150.w,
+                                    child: Column(
+                                      //mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        TextFormField(
+                                          controller: batchController,
+                                          decoration: const InputDecoration(
+                                              hintText: 'Batch'),
                                         ),
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                            style: TextButton.styleFrom(
-                                                foregroundColor: Colors.black),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text('Cancel')),
-                                        TextButton(
-                                            style: TextButton.styleFrom(
-                                                foregroundColor: Colors.black),
-                                            onPressed: () {
-                                              Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      StuClassRoutine(
-                                                    batch: batchController.text,
-                                                    section: sectionController
-                                                        .text
-                                                        .toUpperCase(),
-                                                  ),
-                                                ),
-                                                result: ModalRoute.of(context),
-                                              );
-                                            },
-                                            child: const Text('Go'))
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        TextFormField(
+                                          controller: sectionController,
+                                          decoration: const InputDecoration(
+                                              hintText: 'Section'),
+                                        ),
                                       ],
-                                    );
-                                  });
-                            },
-                            child: const Text('See Other Batch')),
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.black),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.black),
+                                      onPressed: () {
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                StuClassRoutine(
+                                              batch: batchController.text,
+                                              section: sectionController.text
+                                                  .toUpperCase(),
+                                            ),
+                                          ),
+                                          result: ModalRoute.of(context),
+                                        );
+                                      },
+                                      child: const Text('Go'),
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: const Text('See Other Batch'),
+                        ),
                       )
                     ],
                   ),

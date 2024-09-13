@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
-
-import '../../../state_holders/faculty_state_holders/fac_available_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_available_controller.dart';
 
 class FacAvailableScreen extends StatefulWidget {
   const FacAvailableScreen({super.key});
@@ -28,11 +27,12 @@ class _FacAvailableScreenState extends State<FacAvailableScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GetBuilder<FacAvailableController>(
-            builder: (facAvailableController) {
-          return Column(
-            children: [_facAvailableMethod(facAvailableController)],
-          );
-        }),
+          builder: (facAvailableController) {
+            return Column(
+              children: [_facAvailableMethod(facAvailableController)],
+            );
+          },
+        ),
       ),
     );
   }

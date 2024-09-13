@@ -1,19 +1,21 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 
-class FacRoutinueScreen extends StatefulWidget {
-  FacRoutinueScreen({super.key, required this.shortWords});
+class FacRoutineScreen extends StatefulWidget {
+  const FacRoutineScreen({super.key, required this.shortWords});
 
   final String shortWords;
 
   @override
-  State<FacRoutinueScreen> createState() => _FacRoutinueScreenState();
+  State<FacRoutineScreen> createState() => _FacRoutineScreenState();
 }
 
-class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
+class _FacRoutineScreenState extends State<FacRoutineScreen> {
   List ok1 = [];
   List ok2 = [];
   List ok3 = [];
@@ -200,14 +202,13 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
     six = csvData6;
     seven = csvData7;
 
-
-    print(one);
-    print(two);
-    print(three);
-    print(four);
-    print(five);
-    print(six);
-    print(seven);
+    log(one.toString());
+    log(two);
+    log(three);
+    log(four);
+    log(five);
+    log(six);
+    log(seven);
   }
 
   @override
@@ -349,7 +350,8 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = timeSlots.join('\n');                                }
+                                  displayText = timeSlots.join('\n');
+                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -442,7 +444,8 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = timeSlots.join('\n');                                }
+                                  displayText = timeSlots.join('\n');
+                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -535,7 +538,8 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = timeSlots.join('\n');                                }
+                                  displayText = timeSlots.join('\n');
+                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -627,7 +631,8 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = timeSlots.join('\n');                                }
+                                  displayText = timeSlots.join('\n');
+                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -720,7 +725,8 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = timeSlots.join('\n');                                }
+                                  displayText = timeSlots.join('\n');
+                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -813,7 +819,8 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = timeSlots.join('\n');                                }
+                                  displayText = timeSlots.join('\n');
+                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -882,7 +889,8 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
     );
   }
 
-  Future<List<Map<String, String>>> loadCsvData(String day, String shortForm) async {
+  Future<List<Map<String, String>>> loadCsvData(
+      String day, String shortForm) async {
     final csvString = await rootBundle.loadString('assets/routinue/$day.csv');
     final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
 
@@ -900,8 +908,8 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
           .asMap()
           .entries
           .where((entry) {
-        return row[entry.key].toString().contains(shortForm);
-      })
+            return row[entry.key].toString().contains(shortForm);
+          })
           .map((entry) => headerRow[entry.key])
           .toList();
 
@@ -922,5 +930,4 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
 
     return result;
   }
-
 }

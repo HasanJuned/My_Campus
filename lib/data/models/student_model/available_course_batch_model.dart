@@ -34,11 +34,11 @@ class Data {
 
   Data(
       {this.sId,
-        this.batch,
-        this.courseCode,
-        this.courseTitle,
-        this.email,
-        this.member});
+      this.batch,
+      this.courseCode,
+      this.courseTitle,
+      this.email,
+      this.member});
 
   Data.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];

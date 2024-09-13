@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import '../../../../data/models/network_response.dart';
-import '../../../../data/models/stu_model/auth_models/stu_verify_email_model.dart';
-import '../../../../data/services/network_caller.dart';
-import '../../../../data/utility/urls.dart';
+import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/data/models/student_model/auth_models/stu_verify_email_model.dart';
+import 'package:my_campus/data/services/network_caller.dart';
+import 'package:my_campus/data/utility/urls.dart';
 
 class StuAvailabilityCheckingController extends GetxController {
   bool _stuAvailabilityCheckingInProgress = false;

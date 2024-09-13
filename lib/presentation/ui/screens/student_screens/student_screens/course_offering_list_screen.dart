@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/data/models/stu_model/available_course_batch_model.dart';
+import 'package:my_campus/data/models/student_model/available_course_batch_model.dart';
 import 'package:my_campus/data/services/network_caller.dart';
+import 'package:my_campus/data/utility/urls.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/available_course_batch_controller.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
-
-import '../../../../../data/utility/urls.dart';
 
 class CourseOfferingList extends StatefulWidget {
   const CourseOfferingList({super.key});
@@ -46,7 +45,8 @@ class _CourseOfferingListState extends State<CourseOfferingList> {
                         .availableCourseBatchModel.data?.length ??
                     0,
                 itemBuilder: (context, index) {
-                  final data = availableCourseBatchController.availableCourseBatchModel.data?[index];
+                  final data = availableCourseBatchController
+                      .availableCourseBatchModel.data?[index];
                   return SizedBox(
                     height: 135,
                     child: ListTile(
@@ -93,14 +93,15 @@ class _CourseOfferingListState extends State<CourseOfferingList> {
                         ],
                       ),
                       trailing: TextButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  AppColors.primaryColor.withOpacity(.9),
-                              foregroundColor: Colors.black),
-                          onPressed: () async {
-                            await courseJoining(data);
-                          },
-                          child: const Text('Join')),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                AppColors.primaryColor.withOpacity(.9),
+                            foregroundColor: Colors.black),
+                        onPressed: () async {
+                          await courseJoining(data);
+                        },
+                        child: const Text('Join'),
+                      ),
                     ),
                   );
                 },
@@ -117,7 +118,9 @@ class _CourseOfferingListState extends State<CourseOfferingList> {
 
   Future<void> courseJoining(Data data) async {
     final result = await NetworkCaller.postRequest(
-      Urls.joinSubjectGroupBatchSections(data.sId.toString()),
+      Urls.joinSubjectGroupBatchSections(
+        data.sId.toString(),
+      ),
       {
         "batch": data.batch,
         "courseCode": data.courseCode,

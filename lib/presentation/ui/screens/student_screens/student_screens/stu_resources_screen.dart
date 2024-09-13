@@ -2,23 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_resources_controller.dart';
+import 'package:my_campus/presentation/ui/screens/stu_fac_choice_screen.dart';
+import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/dropdown_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../widgets/app_logo.dart';
-import '../../../widgets/dropdown_button.dart';
-import '../../stu_fac_choice_screen.dart';
-
 
 class StuResourcesScreen extends StatefulWidget {
   const StuResourcesScreen({super.key});
 
   @override
-  _StuResourcesScreenState createState() => _StuResourcesScreenState();
+  StuResourcesScreenState createState() => StuResourcesScreenState();
 }
 
-class _StuResourcesScreenState extends State<StuResourcesScreen> {
-
+class StuResourcesScreenState extends State<StuResourcesScreen> {
   String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId;
   dynamic c;
 
@@ -39,7 +36,6 @@ class _StuResourcesScreenState extends State<StuResourcesScreen> {
       // })
       //     .toList();
       // print('c $c');
-
     });
   }
 
@@ -56,7 +52,7 @@ class _StuResourcesScreenState extends State<StuResourcesScreen> {
           IconButton(
             onPressed: () {
               Get.offAll(
-                    () => const StuFacChoiceScreen(),
+                () => const StuFacChoiceScreen(),
               );
             },
             icon: const Icon(
@@ -86,38 +82,44 @@ class _StuResourcesScreenState extends State<StuResourcesScreen> {
                     value: selectedBatch,
                     hintText: 'Select Batch',
                     onChanged: (value) {
-                      setState(() {
-                        selectedBatch = value;
-                        if (c != null) {
-                          for (var item in c) {
-                            if (selectedBatch == item['batch']) {
-                              groupId = item['sId'];
-                              senderId = item['senderId'].toString();
-                              print(senderId);
+                      setState(
+                        () {
+                          selectedBatch = value;
+                          if (c != null) {
+                            for (var item in c) {
+                              if (selectedBatch == item['batch']) {
+                                groupId = item['sId'];
+                                senderId = item['senderId'].toString();
+                                print(senderId);
+                              }
                             }
                           }
-                        }
-                      });
+                        },
+                      );
                     },
                   ),
                   Padding(
-                    padding: EdgeInsets.all(ScreenUtil().setWidth(14)),
+                    padding: EdgeInsets.all(
+                      ScreenUtil().setWidth(14),
+                    ),
                     child: GetBuilder<StuResourcesController>(
-                        builder: (stuResourcesController) {
-                          return ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFF8FFAC),
-                            ),
-                            onPressed: () {
-                              _pickFiles(stuResourcesController);
-                            },
-                            child: const Text('Upload File'),
-                          );
-                        }),
+                      builder: (stuResourcesController) {
+                        return ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFF8FFAC),
+                          ),
+                          onPressed: () {
+                            _pickFiles(stuResourcesController);
+                          },
+                          child: const Text('Upload File'),
+                        );
+                      },
+                    ),
                   ),
                   RefreshIndicator(
                     onRefresh: () async {
-                      Get.find<StuResourcesController>().stuShowResources('57 A+B');
+                      Get.find<StuResourcesController>()
+                          .stuShowResources('57 A+B');
                     },
                     child: GetBuilder<StuResourcesController>(
                       builder: (stuResourcesController) {
@@ -132,16 +134,19 @@ class _StuResourcesScreenState extends State<StuResourcesScreen> {
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                  ScreenUtil().setWidth(20)),
+                                ScreenUtil().setWidth(20),
+                              ),
                             ),
                             child: SizedBox(
                               width: 380.w,
                               height: 520.h,
                               child: ListView.separated(
-                                itemCount: stuResourcesController.studentResourcesModel.data?.length ??
+                                itemCount: stuResourcesController
+                                        .studentResourcesModel.data?.length ??
                                     0,
                                 itemBuilder: (context, index) {
-                                  final data = stuResourcesController.studentResourcesModel.data![index];
+                                  final data = stuResourcesController
+                                      .studentResourcesModel.data![index];
                                   return ListTile(
                                     title: Text(
                                       data.resource.toString(),
@@ -194,6 +199,10 @@ class _StuResourcesScreenState extends State<StuResourcesScreen> {
     //   DateTime.now().toString(),
     // );
     //print(result!.files.single.name.toString());
-    await Get.find<StuResourcesController>().stuAddResources(result!.files.single.name.toString(), selectedBatch!, DateTime.now().toString());
+    await Get.find<StuResourcesController>().stuAddResources(
+      result!.files.single.name.toString(),
+      selectedBatch!,
+      DateTime.now().toString(),
+    );
   }
 }

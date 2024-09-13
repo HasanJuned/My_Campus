@@ -8,7 +8,6 @@ class ShowStuTodoModel {
   ShowStuTodoModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     count = json['count'];
-    // Check if 'data' key exists and if it's a List in the JSON
     if (json['data'] != null && json['data'] is List) {
       data = (json['data'] as List).map((item) => Data.fromJson(item)).toList();
     } else {
@@ -26,7 +25,6 @@ class ShowStuTodoModel {
     return data;
   }
 }
-
 
 class Data {
   String? sId;

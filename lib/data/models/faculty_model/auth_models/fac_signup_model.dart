@@ -28,10 +28,10 @@ class FacSignupData {
 
   FacSignupData(
       {this.acknowledged,
-        this.modifiedCount,
-        this.upsertedId,
-        this.upsertedCount,
-        this.matchedCount});
+      this.modifiedCount,
+      this.upsertedId,
+      this.upsertedCount,
+      this.matchedCount});
 
   FacSignupData.fromJson(Map<String, dynamic> json) {
     acknowledged = json['acknowledged'];

@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
-
-import '../../../data/models/faculty_model/fac_my_todo_model.dart';
-import '../../../data/models/network_response.dart';
-import '../../../data/models/stu_model/stu_show_myTodo_model.dart';
-import '../../../data/services/network_caller.dart';
-import '../../../data/utility/urls.dart';
+import 'package:my_campus/data/models/faculty_model/fac_my_todo_model.dart';
+import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/data/services/network_caller.dart';
+import 'package:my_campus/data/utility/urls.dart';
 
 class FacMyTodoController extends GetxController {
   bool _inProgress = false;
@@ -22,15 +20,14 @@ class FacMyTodoController extends GetxController {
     update();
     NetworkResponse response = await NetworkCaller.postRequest(
         Urls.facAddMyTodo,
-        {"title": taskTitle.toString(), "date": date.toString()});
+        {"title": taskTitle, "date": date});
     _inProgress = false;
     update();
     if (response.isSuccess) {
-
       _facTodoModel = FacMyTodoModel.fromJson(response.responseJson!);
       return true;
     } else {
-      _message = "Faculty list couldn't be fetched!!";
+      _message = "Faculty list couldn't be added!!";
       return false;
     }
   }
@@ -38,7 +35,8 @@ class FacMyTodoController extends GetxController {
   Future<bool> facShowMyTodo() async {
     _inProgress = true;
     update();
-    NetworkResponse response = await NetworkCaller.getRequest(Urls.showFacMyTodo);
+    NetworkResponse response =
+        await NetworkCaller.getRequest(Urls.showFacMyTodo);
     //print(response.responseJson);
     _inProgress = false;
     update();

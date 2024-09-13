@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -5,13 +7,13 @@ import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
+import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
+import 'package:my_campus/presentation/ui/widgets/date_select.dart';
+import 'package:my_campus/presentation/ui/widgets/dropdown_button.dart';
+import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../widgets/appbar_method.dart';
-import '../../widgets/date_select.dart';
-import '../../widgets/dropdown_button.dart';
-import '../../widgets/fac_drawer_method.dart';
-import '../../widgets/table_title.dart';
-import '../../widgets/text_fields.dart';
+import 'package:my_campus/presentation/ui/widgets/table_title.dart';
+import 'package:my_campus/presentation/ui/widgets/text_fields.dart';
 
 class FacAnnouncementScreen extends StatefulWidget {
   const FacAnnouncementScreen({super.key});
@@ -23,7 +25,12 @@ class FacAnnouncementScreen extends StatefulWidget {
 class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId, assignType;
+  String? selectedDate,
+      selectedAnnouncement,
+      selectedBatch,
+      groupId,
+      senderId,
+      assignType;
 
   TextEditingController dateInput = TextEditingController();
   final TextEditingController _taskTEController = TextEditingController();
@@ -39,8 +46,12 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
       await Get.find<FacAnnouncementController>().facShowAnnouncement();
       c = Get.find<FacShowGroupBatchSectionCourseController>()
           .facultyCreatingSubGrpBatchSecDataList
-          ?.map((data) =>
-              {'batch': data.batch.toString(), 'sId': data.sId.toString(), 'senderId': data.member?.map((member) => member.sId.toString()).first})
+          ?.map((data) => {
+                'batch': data.batch.toString(),
+                'sId': data.sId.toString(),
+                'senderId':
+                    data.member?.map((member) => member.sId.toString()).first
+              })
           .toList();
     });
   }
@@ -246,13 +257,12 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                     if (c != null) {
                       for (var item in c) {
                         if (selectedBatch == item['batch']) {
-                         groupId = item['sId'];
-                         senderId = item['senderId'].toString();
-                         print(senderId);
+                          groupId = item['sId'];
+                          senderId = item['senderId'].toString();
+                          log(senderId.toString());
                         }
                       }
                     }
-
                   });
                 },
               ),
@@ -263,7 +273,14 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                 width: 360.w,
                 height: 45.h,
                 dropDownWidth: 360.w,
-                items: const ['None','Assignment', 'Tutorial', 'Viva', 'Lab Report', 'Lab Final'],
+                items: const [
+                  'None',
+                  'Assignment',
+                  'Tutorial',
+                  'Viva',
+                  'Lab Report',
+                  'Lab Final'
+                ],
                 value: assignType,
                 hintText: 'Assign Type',
                 onChanged: (value) {
@@ -347,7 +364,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
       '${_taskTEController.text.trim()}\n\n$assignType\n\n$selectedDate',
       AuthController.fullName0.toString(),
       selectedDate!,
-    );//
+    );
     if (result) {
       Get.snackbar('Successful!', 'Announcement has been added');
       selectedBatch = null;
@@ -360,5 +377,11 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
       Get.snackbar('Failed!', "Couldn't add announcement!!",
           colorText: Colors.redAccent);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _taskTEController.dispose();
   }
 }

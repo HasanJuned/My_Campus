@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/auth_state_holders/stu_signup_controller.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/auth_state_holders/stu_verify_otp_controller.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
-import '../../../../state_holders/student_state_holders/auth_state_holders/stu_signup_controller.dart';
-import '../../../../state_holders/student_state_holders/auth_state_holders/stu_verify_otp_controller.dart';
-import '../../../widgets/customised_elevated_button.dart';
 
 class StuSignUpScreen extends StatefulWidget {
   const StuSignUpScreen({super.key, required this.email});
@@ -22,7 +22,7 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
   final TextEditingController _otpTEController = TextEditingController();
   final TextEditingController _newPassTEController = TextEditingController();
   final TextEditingController _confirmPassTEController =
-  TextEditingController();
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -126,8 +126,7 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
     }
   }
 
-  Future<void> changePassword(
-      StuSignUpController stuSignUpController) async {
+  Future<void> changePassword(StuSignUpController stuSignUpController) async {
     final result = await stuSignUpController.stuSignUp(
       widget.email,
       _otpTEController.text.trim(),
@@ -136,11 +135,19 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
     if (result) {
       Get.snackbar('Successful!', stuSignUpController.message);
       Get.to(
-            () => const StuSignInScreen(),
+        () => const StuSignInScreen(),
       );
     } else {
       Get.snackbar('Failed!', stuSignUpController.message,
           colorText: Colors.redAccent);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _otpTEController.dispose();
+    _newPassTEController.dispose();
+    _confirmPassTEController.dispose();
   }
 }

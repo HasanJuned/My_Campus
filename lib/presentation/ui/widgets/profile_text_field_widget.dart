@@ -4,7 +4,8 @@ class ProfileTextFieldWidget extends StatelessWidget {
   const ProfileTextFieldWidget({
     super.key,
     required this.width,
-    required this.hintText, required this.controller,
+    required this.hintText,
+    required this.controller,
   });
 
   final double width;
@@ -19,11 +20,16 @@ class ProfileTextFieldWidget extends StatelessWidget {
           width: width,
           child: TextFormField(
             controller: controller,
-            decoration: InputDecoration(hintText: hintText),
+            decoration: InputDecoration(
+              label: Text(
+                hintText,
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
           ),
         ),
         const SizedBox(
-          height: 6,
+          height: 16,
         ),
       ],
     );

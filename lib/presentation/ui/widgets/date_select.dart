@@ -50,16 +50,21 @@ class CustomDatePickerState extends State<CustomDatePicker> {
               fontWeight: FontWeight.bold,
               color: Colors.grey,
             ),
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(14)),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: ScreenUtil().setWidth(14),
+            ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
+              borderRadius: BorderRadius.circular(
+                ScreenUtil().setWidth(24),
+              ),
               borderSide: const BorderSide(
                 color: Colors.grey,
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(ScreenUtil().setWidth(25)),
+              borderRadius: BorderRadius.circular(
+                ScreenUtil().setWidth(25),
+              ),
               borderSide: const BorderSide(
                 color: Color(0x999B9B9B),
               ),

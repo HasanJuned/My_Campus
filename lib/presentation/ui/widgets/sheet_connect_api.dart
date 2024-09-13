@@ -26,22 +26,25 @@ String getCurrentDayName() {
   String dayName = now.weekday == 1
       ? 'Monday'
       : now.weekday == 2
-      ? 'Tuesday'
-      : now.weekday == 3
-      ? 'Wednesday'
-      : now.weekday == 4
-      ? 'Thursday'
-      : now.weekday == 5
-      ? 'Friday'
-      : now.weekday == 6 ? 'Saturday' : 'Sunday';
+          ? 'Tuesday'
+          : now.weekday == 3
+              ? 'Wednesday'
+              : now.weekday == 4
+                  ? 'Thursday'
+                  : now.weekday == 5
+                      ? 'Friday'
+                      : now.weekday == 6
+                          ? 'Saturday'
+                          : 'Sunday';
   return dayName;
 }
+
 gSheetIntit() async {
   try {
-
     gSheetController = await gSheetInit.spreadsheet(sheetId);
     String currentDayName = getCurrentDayName();
-    gSheetCrudUserDetails = await gSheetController.worksheetByTitle(currentDayName);
+    gSheetCrudUserDetails =
+        await gSheetController.worksheetByTitle(currentDayName);
 
     if (gSheetCrudUserDetails != null) {
       if (kDebugMode) {

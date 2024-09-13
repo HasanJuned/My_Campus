@@ -6,7 +6,9 @@ class FacAddAnnouncementModel {
 
   FacAddAnnouncementModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    data = json['data'] != null ? FacAddAnnouncementData.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? FacAddAnnouncementData.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -25,7 +27,8 @@ class FacAddAnnouncementData {
   String? section;
   String? date;
 
-  FacAddAnnouncementData({this.announcement, this.batch, this.section, this.date});
+  FacAddAnnouncementData(
+      {this.announcement, this.batch, this.section, this.date});
 
   FacAddAnnouncementData.fromJson(Map<String, dynamic> json) {
     announcement = json['announcement'];

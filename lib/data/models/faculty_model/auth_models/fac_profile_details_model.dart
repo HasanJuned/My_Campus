@@ -36,13 +36,13 @@ class FacProfileDetailsData {
 
   FacProfileDetailsData(
       {this.sId,
-        this.email,
-        this.fullName,
-        this.designation,
-        this.department,
-        this.shortWords,
-        this.password,
-        this.createdDate});
+      this.email,
+      this.fullName,
+      this.designation,
+      this.department,
+      this.shortWords,
+      this.password,
+      this.createdDate});
 
   FacProfileDetailsData.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];

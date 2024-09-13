@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_available_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_my_todo_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_profile_screen.dart';
-import '../screens/teacher_screens/fac_available_screen.dart';
+
 import 'about_us_widget.dart';
 import 'blood_downer_list.dart';
 import 'cr_list_method.dart';
@@ -28,7 +29,9 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  Get.to(() => FacProfileScreen());
+                  Get.to(
+                    () => const FacProfileScreen(),
+                  );
                 },
               ),
               divider(),
@@ -42,28 +45,32 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  Get.to(() => FacMyTodoScreen());
+                  Get.to(
+                    () => const FacMyTodoScreen(),
+                  );
                 },
               ),
               divider(),
               ListTile(
                 title: Center(
                   child: Text(
-                    'Departments Faculty',
+                    "Departments' Faculty",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  Get.to(() => const FacAvailableScreen());
+                  Get.to(
+                    () => const FacAvailableScreen(),
+                  );
                 },
               ),
               divider(),
               ListTile(
                 title: Center(
                   child: Text(
-                    "Department's CR",
+                    "Departments' CR",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
@@ -94,9 +101,10 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                             child: Column(
                               children: [
                                 Text(
-                                  "Bus Schedules",
+                                  "Bus Schedule",
                                   style: TextStyle(
-                                      fontSize: 24.sp, fontWeight: FontWeight.w600),
+                                      fontSize: 24.sp,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
@@ -114,19 +122,6 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                 },
               ),
               divider(),
-              /*ListTile(
-                title: Center(
-                  child: Text(
-                    'Add Tasks',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
-                  ),
-                ),
-                hoverColor: Colors.grey,
-                onTap: () {
-                  Get.to(() => const FacAddTask());
-                },
-              ),
-              divider(),*/
               ListTile(
                 title: Center(
                   child: Text(

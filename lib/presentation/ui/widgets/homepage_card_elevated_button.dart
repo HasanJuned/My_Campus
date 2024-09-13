@@ -28,7 +28,7 @@ class CardElevatedButton extends StatelessWidget {
         onPressed: onTap,
         child: Text(
           text,
-          style:  TextStyle(
+          style: TextStyle(
             fontSize: 24.sp,
             fontWeight: FontWeight.w600,
           ),

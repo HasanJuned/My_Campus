@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/splash_screen.dart';
-import '../presentation/ui/utility/app_colors.dart';
+import 'package:my_campus/presentation/ui/utility/app_colors.dart';
+
 import 'controller_binders.dart';
 
 class MyCampus extends StatefulWidget {
@@ -11,10 +12,10 @@ class MyCampus extends StatefulWidget {
   const MyCampus({super.key});
 
   @override
-  _MyCampusState createState() => _MyCampusState();
+  MyCampusState createState() => MyCampusState();
 }
 
-class _MyCampusState extends State<MyCampus> {
+class MyCampusState extends State<MyCampus> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
