@@ -22,14 +22,12 @@ class FacAvailableController extends GetxController {
     _inProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.facultyList2,
+      Urls.availableFaculty,
     );
     _inProgress = false;
     update();
     if (response.isSuccess) {
-      print('success');
       _facAvailableModel = FacAvailableModel.fromJson(response.responseJson!);
-      print('success');
       return true;
     } else {
       _message = 'Failed!';

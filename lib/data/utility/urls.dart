@@ -16,8 +16,11 @@ class Urls {
   static const String facultyList = '$_facultyBaseUrl/availableCourseAndTeacher';
   static String facultyDeleteTodo(String id) => '$_facultyBaseUrl/deleteTeacherTodo/$id';
 
-  static const String facultyList2 =
+  static const String facultyAvailable =
       '$_facultyBaseUrl/AvailableTeachers';
+
+  static String availityCheckTeachers(String email) =>
+      '$_facultyBaseUrl/AvailityCheckTeachers/$email';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
   static const String facultyProfileUpdate = '$_facultyBaseUrl/ProfileUpdate';
   static String facultySubGrpBatchSec = '$_facultyBaseUrl/createSubjectGroupBatchSections';
