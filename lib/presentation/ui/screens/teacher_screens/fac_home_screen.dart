@@ -63,16 +63,23 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   }
 
   startTimer() async {
-    //if (Get.find<StuAnnouncementListenController>().announcements.isEmpty) return; // Ensure list is not empty before starting the timer
+    // Ensure announcements list is not empty before starting the timer
+    if (Get.find<FacAnnouncementListenController>().announcements.isEmpty) {
+      return;
+    }
 
     _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      // if (_announcementPageController.page == null ||
-      //     Get.find<StuAnnouncementListenController>().announcements.isEmpty)
-      //   return;
+      // If the page controller's page is null or announcements list is empty, return
+      if (_announcementPageController.page == null ||
+          Get.find<FacAnnouncementListenController>().announcements.isEmpty) {
+        return;
+      }
 
+      // Safely calculate the next page
       final nextPage = (_announcementPageController.page!.toInt() + 1) %
           Get.find<FacAnnouncementListenController>().announcements.length;
 
+      // Animate to the next page
       _announcementPageController.animateToPage(
         nextPage,
         duration: const Duration(milliseconds: 500),
@@ -80,6 +87,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
       );
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
