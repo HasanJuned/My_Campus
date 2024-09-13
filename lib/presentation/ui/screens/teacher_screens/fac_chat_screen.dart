@@ -49,7 +49,8 @@ class _FacChatScreenState extends State<FacChatScreen> {
                 messages.add(
                   Message(
                     text: chat.message ?? '',
-                    isSentByMe: AuthController.fullName0.toString() == chat.sender.toString(),
+                    isSentByMe: AuthController.fullName0.toString() ==
+                        chat.sender.toString(),
                     date: DateTime.parse(
                         chat.timestamp ?? DateTime.now().toIso8601String()),
                     time: chat.timestamp.toString(),
@@ -113,9 +114,10 @@ class _FacChatScreenState extends State<FacChatScreen> {
                           margin: const EdgeInsets.symmetric(
                               vertical: 5, horizontal: 10),
                           decoration: BoxDecoration(
-                            color: AuthController.fullName0 == message.backendName
-                                ? Colors.blueAccent
-                                : Colors.grey[300],
+                            color:
+                                AuthController.fullName0 == message.backendName
+                                    ? Colors.blueAccent
+                                    : Colors.grey[300],
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: InkWell(
@@ -123,14 +125,16 @@ class _FacChatScreenState extends State<FacChatScreen> {
                               if (message.isSentByMe) {}
                             },
                             child: Column(
-                              crossAxisAlignment: AuthController.fullName0 == message.backendName
+                              crossAxisAlignment: AuthController.fullName0 ==
+                                      message.backendName
                                   ? CrossAxisAlignment.end
                                   : CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   message.text,
                                   style: TextStyle(
-                                    color: AuthController.fullName0 == message.backendName
+                                    color: AuthController.fullName0 ==
+                                            message.backendName
                                         ? Colors.white
                                         : Colors.black87,
                                   ),
@@ -142,7 +146,8 @@ class _FacChatScreenState extends State<FacChatScreen> {
                                   formattedTime,
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: AuthController.fullName0 == message.backendName
+                                    color: AuthController.fullName0 ==
+                                            message.backendName
                                         ? Colors.white
                                         : Colors.black87,
                                   ),
