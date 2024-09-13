@@ -170,7 +170,7 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                             height: 18,
                           ),
                           AboutUsWidget(
-                            name: 'Hasibur Rahman Qurasani Jawad',
+                            name: 'Hasibur Rahman Qhurasani Jawad',
                           ),
                           SizedBox(
                             height: 18,

@@ -14,7 +14,7 @@ class AboutUsWidget extends StatelessWidget {
       title: Center(
           child: Text(
         name,
-        style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700),
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
       )),
       subtitle: const Column(
         children: [
