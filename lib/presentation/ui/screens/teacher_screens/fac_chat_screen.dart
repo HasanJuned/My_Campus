@@ -53,6 +53,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                     date: DateTime.parse(
                         chat.timestamp ?? DateTime.now().toIso8601String()),
                     time: chat.timestamp.toString(),
+                    backendName: chat.sender.toString(),
                   ),
                 );
               }
@@ -102,7 +103,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                           ),
                         ),
                       Align(
-                        alignment: message.isSentByMe
+                        alignment: AuthController.fullName0 == message.backendName
                             ? Alignment.centerRight
                             : Alignment.centerLeft,
                         child: Container(
@@ -258,11 +259,13 @@ class Message {
   final DateTime date;
   final bool isSentByMe;
   final String time;
+  final String backendName;
 
   Message({
     required this.text,
     required this.date,
     required this.isSentByMe,
     required this.time,
+    required this.backendName,
   });
 }
