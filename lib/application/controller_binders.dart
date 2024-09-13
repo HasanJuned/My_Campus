@@ -4,6 +4,7 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_listen_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_available_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_delete_todo_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signin_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_password_change_controller.dart';
@@ -52,6 +53,7 @@ class GetXBindings extends Bindings {
     Get.put(FacAnnouncementListenController());
     Get.put(FacProfileDetailsController());
     Get.put(FacAvailableController());
+    Get.put(FacDeleteTodoController());
 
     Get.put(StuAvailabilityCheckingController());
     Get.put(StuSignInController());

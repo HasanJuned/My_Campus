@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_delete_todo_controller.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_myTdo_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
+import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
+import 'package:my_campus/presentation/ui/widgets/date_select.dart';
+import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-
-import '../../widgets/appbar_method.dart';
-import '../../widgets/date_select.dart';
-import '../../widgets/fac_drawer_method.dart';
-import '../../widgets/table_title.dart';
-import '../../widgets/text_fields.dart';
+import 'package:my_campus/presentation/ui/widgets/table_title.dart';
+import 'package:my_campus/presentation/ui/widgets/text_fields.dart';
 
 class FacMyTodoScreen extends StatefulWidget {
   const FacMyTodoScreen({super.key});
