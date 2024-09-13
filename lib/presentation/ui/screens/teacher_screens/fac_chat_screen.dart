@@ -123,14 +123,14 @@ class _FacChatScreenState extends State<FacChatScreen> {
                               if (message.isSentByMe) {}
                             },
                             child: Column(
-                              crossAxisAlignment: message.isSentByMe
+                              crossAxisAlignment: AuthController.fullName0 == message.backendName
                                   ? CrossAxisAlignment.end
                                   : CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   message.text,
                                   style: TextStyle(
-                                    color: message.isSentByMe
+                                    color: AuthController.fullName0 == message.backendName
                                         ? Colors.white
                                         : Colors.black87,
                                   ),
@@ -142,7 +142,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                                   formattedTime,
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: message.isSentByMe
+                                    color: AuthController.fullName0 == message.backendName
                                         ? Colors.white
                                         : Colors.black87,
                                   ),
