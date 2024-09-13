@@ -49,10 +49,11 @@ class _FacChatScreenState extends State<FacChatScreen> {
                 messages.add(
                   Message(
                     text: chat.message ?? '',
-                    isSentByMe: chat.sender == AuthController.fullName0,
+                    isSentByMe: AuthController.fullName0.toString() == chat.sender.toString(),
                     date: DateTime.parse(
                         chat.timestamp ?? DateTime.now().toIso8601String()),
                     time: chat.timestamp.toString(),
+                    backendName: chat.sender.toString(),
                   ),
                 );
               }
@@ -102,16 +103,17 @@ class _FacChatScreenState extends State<FacChatScreen> {
                           ),
                         ),
                       Align(
-                        alignment: message.isSentByMe
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
+                        alignment:
+                            AuthController.fullName0 == message.backendName
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
                         child: Container(
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 15),
                           margin: const EdgeInsets.symmetric(
                               vertical: 5, horizontal: 10),
                           decoration: BoxDecoration(
-                            color: message.isSentByMe
+                            color: AuthController.fullName0 == message.backendName
                                 ? Colors.blueAccent
                                 : Colors.grey[300],
                             borderRadius: BorderRadius.circular(10),
@@ -121,14 +123,14 @@ class _FacChatScreenState extends State<FacChatScreen> {
                               if (message.isSentByMe) {}
                             },
                             child: Column(
-                              crossAxisAlignment: message.isSentByMe
+                              crossAxisAlignment: AuthController.fullName0 == message.backendName
                                   ? CrossAxisAlignment.end
                                   : CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   message.text,
                                   style: TextStyle(
-                                    color: message.isSentByMe
+                                    color: AuthController.fullName0 == message.backendName
                                         ? Colors.white
                                         : Colors.black87,
                                   ),
@@ -140,7 +142,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                                   formattedTime,
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: message.isSentByMe
+                                    color: AuthController.fullName0 == message.backendName
                                         ? Colors.white
                                         : Colors.black87,
                                   ),
@@ -174,6 +176,8 @@ class _FacChatScreenState extends State<FacChatScreen> {
                     icon: const Icon(Icons.send),
                     onPressed: () {
                       _sendChat();
+                      _chatController.getChat(widget.groupId);
+                      setState(() {});
                     },
                   ),
                 ],
@@ -186,16 +190,12 @@ class _FacChatScreenState extends State<FacChatScreen> {
   }
 
   void _sendChat() {
-      if (_controller.text.isNotEmpty) {
-      for (int i = 0;
-          i < _chatController.groupChatModel.data!.length;
-          i++) {
+    if (_controller.text.isNotEmpty) {
+      for (int i = 0; i < _chatController.groupChatModel.data!.length; i++) {
         if (_chatController.groupChatModel.data?[i].name ==
             AuthController.fullName0) {
-          _handleSubmitted(
-              _controller.text,
-              _chatController.groupChatModel.data![i].sId
-                  .toString());
+          _handleSubmitted(_controller.text,
+              _chatController.groupChatModel.data![i].sId.toString());
           break;
         }
       }
@@ -213,16 +213,12 @@ class _FacChatScreenState extends State<FacChatScreen> {
           Text(
             widget.courseCode,
             style: const TextStyle(
-                fontSize: 19,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.1),
+                fontSize: 19, fontWeight: FontWeight.w500, letterSpacing: 0.1),
           ),
           Text(
             widget.courseTitle,
             style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w400,
-                letterSpacing: 0.2),
+                fontSize: 17, fontWeight: FontWeight.w400, letterSpacing: 0.2),
           ),
         ],
       ),
@@ -237,6 +233,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
       elevation: 0.5,
     );
   }
+
   void _handleSubmitted(String text, String senderId) {
     final date = DateFormat('yyyy-MM-ddTHH:mm:ss.SSSZ').format(DateTime.now());
     _chatController.groupChat(
@@ -251,18 +248,18 @@ class _FacChatScreenState extends State<FacChatScreen> {
   }
 }
 
-
-
 class Message {
   final String text;
   final DateTime date;
   final bool isSentByMe;
   final String time;
+  final String backendName;
 
   Message({
     required this.text,
     required this.date,
     required this.isSentByMe,
     required this.time,
+    required this.backendName,
   });
 }
