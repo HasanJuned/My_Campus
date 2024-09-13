@@ -49,7 +49,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                 messages.add(
                   Message(
                     text: chat.message ?? '',
-                    isSentByMe: chat.sender == AuthController.fullName0,
+                    isSentByMe: AuthController.fullName0 == chat.sender,
                     date: DateTime.parse(
                         chat.timestamp ?? DateTime.now().toIso8601String()),
                     time: chat.timestamp.toString(),
