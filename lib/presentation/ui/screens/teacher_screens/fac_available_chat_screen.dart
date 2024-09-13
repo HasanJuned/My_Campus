@@ -315,6 +315,8 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
         courseTitle: facMainBottomNavController.batchCoursePairs[index]
                 ['courseTitle']
             .toString(),
+        groupId: facMainBottomNavController.batchCoursePairs[index]['sId'].toString(),
+
       ),
     );
   }
