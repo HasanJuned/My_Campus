@@ -46,7 +46,7 @@ class AuthController {
     email0 = email1;
     fullName0 = fullName1;
     designation0 = designation1;
-    department0 = designation1;
+    department0 = department1;
     shortForm = shortWords;
     countt = count;
   }

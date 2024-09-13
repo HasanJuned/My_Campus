@@ -12,7 +12,9 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(53)),
+        borderRadius: BorderRadius.circular(
+          ScreenUtil().setWidth(53),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),

@@ -66,7 +66,7 @@ void crList(BuildContext context) {
                                 height: 8.h,
                               ),
                               Text(
-                                'Batch Name',
+                                'Batch: 57',
                                 style: TextStyle(fontSize: 18.sp),
                               ),
                               SizedBox(

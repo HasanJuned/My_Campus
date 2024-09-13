@@ -16,7 +16,7 @@ class FacProfileDetailsController extends GetxController {
   FacProfileDetailsData get facProfileDetailsData => _facultyProfileDetailsData;
 
   Future<bool> facProfile(String email, fullName, designation, department,
-      shortForm, password) async {
+      shortForm) async {
     _facProfileDetailsInProgress = true;
     update();
     Map<String, String> bodyParams = {
@@ -25,7 +25,6 @@ class FacProfileDetailsController extends GetxController {
       'designation': designation,
       'department': department,
       'shortWords': shortForm,
-      'password': password,
     };
 
     final NetworkResponse response =

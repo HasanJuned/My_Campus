@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_myTdo_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
 import 'package:my_campus/presentation/ui/widgets/date_select.dart';
 import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
@@ -62,7 +62,7 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
     );
   }
 
-  Padding showTable() {
+  Widget showTable() {
     return Padding(
       padding: EdgeInsets.only(left: 3.0.w),
       child: Stack(
@@ -216,7 +216,7 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
     );
   }
 
-  Column get addFacultyMyTodoMethod {
+  Widget get addFacultyMyTodoMethod {
     return Column(
       children: [
         SizedBox(
@@ -263,7 +263,8 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
                     }
                     return ElevatedButton(
                       onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
+                        if (_formKey.currentState!.validate() &&
+                            selectedDate != null) {
                           facAddTodo(facMyTodoController);
                         }
                       },
@@ -310,5 +311,12 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
     } else {
       Get.snackbar('Failed!', "Couldn't add!!", colorText: Colors.redAccent);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _taskTEController.dispose();
+    dateInput.dispose();
   }
 }

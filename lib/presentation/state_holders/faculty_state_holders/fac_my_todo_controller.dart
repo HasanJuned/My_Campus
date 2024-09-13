@@ -20,14 +20,14 @@ class FacMyTodoController extends GetxController {
     update();
     NetworkResponse response = await NetworkCaller.postRequest(
         Urls.facAddMyTodo,
-        {"title": taskTitle.toString(), "date": date.toString()});
+        {"title": taskTitle, "date": date});
     _inProgress = false;
     update();
     if (response.isSuccess) {
       _facTodoModel = FacMyTodoModel.fromJson(response.responseJson!);
       return true;
     } else {
-      _message = "Faculty list couldn't be fetched!!";
+      _message = "Faculty list couldn't be added!!";
       return false;
     }
   }

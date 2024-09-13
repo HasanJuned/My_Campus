@@ -11,7 +11,7 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signup_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_email_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_myTdo_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_resource_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';

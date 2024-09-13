@@ -107,7 +107,6 @@ class _FacAvailabilityCheckScreenState
           facAvailabilityCheckingController) async {
     final result = await facAvailabilityCheckingController.facAvailabilityCheck(
       _emailTEController.text.trim(),
-      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
     );
     if (result) {
       Get.snackbar('Successful!', facAvailabilityCheckingController.message);

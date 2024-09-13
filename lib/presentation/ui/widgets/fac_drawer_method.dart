@@ -54,7 +54,7 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'Departments Faculty',
+                    "Departments' Faculty",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
@@ -70,7 +70,7 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    "Department's CR",
+                    "Departments' CR",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
@@ -101,7 +101,7 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                             child: Column(
                               children: [
                                 Text(
-                                  "Bus Schedules",
+                                  "Bus Schedule",
                                   style: TextStyle(
                                       fontSize: 24.sp,
                                       fontWeight: FontWeight.w600),
@@ -122,19 +122,6 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                 },
               ),
               divider(),
-              /*ListTile(
-                title: Center(
-                  child: Text(
-                    'Add Tasks',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
-                  ),
-                ),
-                hoverColor: Colors.grey,
-                onTap: () {
-                  Get.to(() => const FacAddTask());
-                },
-              ),
-              divider(),*/
               ListTile(
                 title: Center(
                   child: Text(
