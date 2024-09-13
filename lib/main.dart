@@ -6,10 +6,17 @@ import 'application/app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferences.getInstance();
+  /*EmailOTP.config(
+    appName: 'My Campus',
+    otpType: OTPType.numeric,
+    expiry: 60000,
+    emailTheme: EmailTheme.v6,
+    otpLength: 6,
+  );*/
 
   runApp(
     const SafeArea(
       child: MyCampus(),
     ),
   );
-} //
+}
