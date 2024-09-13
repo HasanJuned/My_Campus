@@ -113,7 +113,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                           margin: const EdgeInsets.symmetric(
                               vertical: 5, horizontal: 10),
                           decoration: BoxDecoration(
-                            color: message.isSentByMe
+                            color: AuthController.fullName0 == message.backendName
                                 ? Colors.blueAccent
                                 : Colors.grey[300],
                             borderRadius: BorderRadius.circular(10),
