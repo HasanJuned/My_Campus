@@ -72,7 +72,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                   addAnnouncementMethod,
                   const TableTitle(
                     title1: 'Batch',
-                    title2: 'Todo',
+                    title2: 'Announcement',
                   ),
                   showTable(),
                 ],

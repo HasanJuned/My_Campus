@@ -139,7 +139,7 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'About Us',
+                    'About Developer',
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
@@ -170,7 +170,7 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                             height: 18,
                           ),
                           AboutUsWidget(
-                            name: 'Hasibur Rahman Qhurasani Jawad',
+                            name: 'Hasibur Rahman Khurasani Jawad',
                           ),
                           SizedBox(
                             height: 18,
