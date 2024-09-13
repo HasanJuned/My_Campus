@@ -134,7 +134,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 4,
+                                  height: 8,
                                 ),
                                 Text(
                                   formattedTime,

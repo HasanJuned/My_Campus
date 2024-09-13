@@ -344,7 +344,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
     await Get.find<GroupChattingController>().groupChat(
       groupId!,
       senderId!,
-      _taskTEController.text.trim(),
+      '${_taskTEController.text.trim()}\n\n$assignType\n\n$selectedDate',
       AuthController.fullName0.toString(),
       selectedDate!,
     );//
