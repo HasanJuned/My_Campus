@@ -179,9 +179,9 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
     final result1 = await loadCsvData('saturday', nameShortForm);
     final result2 = await loadCsvData('sunday', nameShortForm);
     final result3 = await loadCsvData('monday', nameShortForm);
-    final result4 = await loadCsvData('tuesdayy', nameShortForm);
-    final result5 = await loadCsvData('wednesdayy', nameShortForm);
-    final result6 = await loadCsvData('thursdayy', nameShortForm);
+    final result4 = await loadCsvData('tuesday', nameShortForm);
+    final result5 = await loadCsvData('wednesday', nameShortForm);
+    final result6 = await loadCsvData('thursday', nameShortForm);
     final result7 = await loadCsvData('friday', nameShortForm);
 
     setState(() {
@@ -891,7 +891,7 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
 
   Future<List<Map<String, String>>> loadCsvData(
       String day, String shortForm) async {
-    final csvString = await rootBundle.loadString('assets/routinue/$day.csv');
+    final csvString = await rootBundle.loadString('assets/routine/$day.csv');
     final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
 
     if (csvData.isEmpty) return [];
