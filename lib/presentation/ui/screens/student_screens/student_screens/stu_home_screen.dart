@@ -115,7 +115,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, context),
+      appBar: customisedAppBar(AuthController.studentId1.toString(),scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedStudentDrawer(context),

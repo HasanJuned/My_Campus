@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_delete_todo_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
@@ -38,7 +39,7 @@ class _FacMyTodoScreenState extends State<FacMyTodoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, context),
+      appBar: customisedAppBar(AuthController.email0.toString(),scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),

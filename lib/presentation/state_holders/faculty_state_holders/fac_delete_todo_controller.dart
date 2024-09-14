@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import '../../../../data/models/network_response.dart';
 import '../../../../data/services/network_caller.dart';
 import '../../../../data/utility/urls.dart';
@@ -15,7 +16,7 @@ class FacDeleteTodoController extends GetxController {
     _inProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.facultyDeleteTodo(id),
+      Urls.facultyDeleteTodo(id),AuthController.accessToken.toString()
     );
     _inProgress = false;
     update();

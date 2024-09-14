@@ -3,6 +3,7 @@ import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/models/student_model/enrolled_course_model.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class StuEnrolledCourseController extends GetxController {
   bool _inProgress = false;
@@ -19,7 +20,7 @@ class StuEnrolledCourseController extends GetxController {
     _inProgress = true;
     update();
     NetworkResponse response =
-        await NetworkCaller.getRequest(Urls.stuEnrolledCourses(stuName));
+        await NetworkCaller.getRequest(Urls.stuEnrolledCourses(stuName),AuthController.accessToken1.toString());
     _inProgress = false;
     update();
     if (response.isSuccess) {

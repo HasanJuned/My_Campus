@@ -8,13 +8,13 @@ import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/ui/screens/stu_fac_choice_screen.dart';
 
 class NetworkCaller {
-  static Future<NetworkResponse> getRequest(String url) async {
+  static Future<NetworkResponse> getRequest(String url, String token) async {
     try {
       Response response = await get(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'token': AuthController.accessToken.toString(),
+          'token': token,
         },
       );
       log(response.statusCode.toString());
@@ -44,14 +44,14 @@ class NetworkCaller {
   }
 
   static Future<NetworkResponse> postRequest(
-      String url, Map<String, dynamic> body,
+      String url, Map<String, dynamic> body, String token,
       {bool isLogin = false}) async {
     try {
       Response response = await post(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'token': AuthController.accessToken.toString()
+          'token': token
         },
         body: jsonEncode(body),
       );

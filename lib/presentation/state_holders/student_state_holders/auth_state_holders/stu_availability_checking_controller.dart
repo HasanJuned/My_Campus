@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class StuAvailabilityCheckingController extends GetxController {
   bool _stuAvailabilityCheckingInProgress = false;
@@ -15,7 +16,7 @@ class StuAvailabilityCheckingController extends GetxController {
     _stuAvailabilityCheckingInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.availabilityCheckStudents(id),
+      Urls.availabilityCheckStudents(id),AuthController.accessToken1.toString()
     );
     _stuAvailabilityCheckingInProgress = false;
     update();

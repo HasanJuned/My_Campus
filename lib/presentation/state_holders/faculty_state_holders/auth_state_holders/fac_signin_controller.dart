@@ -16,7 +16,7 @@ class FacSignInController extends GetxController {
     _facSignInInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.facultySignIn(email, password),
+      Urls.facultySignIn(email, password), AuthController.accessToken.toString()
     );
     _facSignInInProgress = false;
     update();

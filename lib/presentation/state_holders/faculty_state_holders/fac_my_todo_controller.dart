@@ -3,6 +3,7 @@ import 'package:my_campus/data/models/faculty_model/fac_my_todo_model.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class FacMyTodoController extends GetxController {
   bool _inProgress = false;
@@ -20,7 +21,7 @@ class FacMyTodoController extends GetxController {
     update();
     NetworkResponse response = await NetworkCaller.postRequest(
         Urls.facAddMyTodo,
-        {"title": taskTitle, "date": date});
+        {"title": taskTitle, "date": date},AuthController.accessToken.toString());
     _inProgress = false;
     update();
     if (response.isSuccess) {
@@ -36,7 +37,7 @@ class FacMyTodoController extends GetxController {
     _inProgress = true;
     update();
     NetworkResponse response =
-        await NetworkCaller.getRequest(Urls.showFacMyTodo);
+        await NetworkCaller.getRequest(Urls.showFacMyTodo,AuthController.accessToken.toString());
     //print(response.responseJson);
     _inProgress = false;
     update();

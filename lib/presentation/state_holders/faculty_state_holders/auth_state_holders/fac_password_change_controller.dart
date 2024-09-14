@@ -3,6 +3,7 @@ import 'package:my_campus/data/models/faculty_model/auth_models/fac_password_cha
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class FacPasswordChangeController extends GetxController {
   bool _facPasswordChangeInProgress = false;
@@ -23,6 +24,7 @@ class FacPasswordChangeController extends GetxController {
         "OTP": otp,
         "password": password,
       },
+      AuthController.accessToken.toString()
     );
     _facPasswordChangeInProgress = false;
     update();

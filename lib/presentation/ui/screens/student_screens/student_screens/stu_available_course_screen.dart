@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_enrolled_course_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_chat_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/stu_chat_screen.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 
@@ -83,13 +83,12 @@ class _StuAvailableCourseScreenState extends State<StuAvailableCourseScreen> {
         itemCount:
             stuEnrolledCourseController.enrolledCourseModel.data?.length ?? 0,
         itemBuilder: (context, index) {
-          final data =
-              stuEnrolledCourseController.enrolledCourseModel.data?[index];
+          final data = stuEnrolledCourseController.enrolledCourseModel.data?[index];
 
           return ListTile(
             onTap: () {
               _enterBatchesGroup(
-                  data.batch, data.courseCode, data.courseTitle, index);
+                  data.batch, data.courseCode, data.courseTitle, data.sId, index);
             },
             tileColor: AppColors.primaryColor.withOpacity(.7),
             title: Text(
@@ -120,12 +119,13 @@ class _StuAvailableCourseScreenState extends State<StuAvailableCourseScreen> {
   }
 
   void _enterBatchesGroup(
-      dynamic batch, dynamic courseCode, dynamic courseTitle, int index) {
+      dynamic batch, dynamic courseCode, dynamic courseTitle, dynamic groupId, int index) {
     Get.to(
-      FacChatScreen(
+      StuChatScreen(
         batch: batch,
         courseCode: courseCode,
         courseTitle: courseTitle,
+          groupId: groupId
       ),
     );
   }

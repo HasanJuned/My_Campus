@@ -132,6 +132,7 @@ class _CourseOfferingListState extends State<CourseOfferingList> {
           "department": AuthController.department1
         }
       },
+        AuthController.accessToken1.toString()
     );
     if (result.isSuccess) {
       Get.snackbar('Successful', 'You are a member of this course',

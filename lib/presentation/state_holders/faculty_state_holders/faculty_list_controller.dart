@@ -3,6 +3,7 @@ import 'package:my_campus/data/models/faculty_model/faculty_list_model.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class FacultyListController extends GetxController {
   bool _facultyListInProgress = false;
@@ -16,7 +17,7 @@ class FacultyListController extends GetxController {
   Future<bool> facultyList() async {
     _facultyListInProgress = true;
     update();
-    NetworkResponse response = await NetworkCaller.getRequest(Urls.facultyList);
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.facultyList,AuthController.accessToken.toString());
     _facultyListInProgress = false;
     update();
     if (response.isSuccess) {

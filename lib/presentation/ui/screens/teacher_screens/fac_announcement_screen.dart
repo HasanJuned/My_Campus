@@ -59,7 +59,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, context),
+      appBar: customisedAppBar(AuthController.email0.toString(),scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),

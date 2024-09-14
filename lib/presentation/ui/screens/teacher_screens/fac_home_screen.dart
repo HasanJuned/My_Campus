@@ -85,8 +85,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(AuthController.email0);
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, context),
+      appBar: customisedAppBar(AuthController.email0.toString(),scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
@@ -295,14 +296,11 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       text: '    My\nClasses',
                       color: 0xFFACFFDC,
                       onTap: () {
-                        Future.delayed(const Duration(milliseconds: 500))
-                            .then((value) {
-                          Get.to(
-                            () => FacRoutineScreen(
-                              shortWords: AuthController.shortForm.toString(),
-                            ),
-                          );
-                        });
+                        Get.to(
+                              () => FacRoutineScreen(
+                            shortWords: AuthController.shortForm.toString(),
+                          ),
+                        );
                       },
                     ),
                     SizedBox(

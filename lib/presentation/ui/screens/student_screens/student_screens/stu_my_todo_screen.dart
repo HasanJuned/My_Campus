@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_my_todo_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
 import 'package:my_campus/presentation/ui/widgets/date_select.dart';
@@ -37,7 +38,7 @@ class _StuMyTodoScreenState extends State<StuMyTodoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, context),
+      appBar: customisedAppBar(AuthController.studentId1.toString(), scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
@@ -163,9 +164,9 @@ class _StuMyTodoScreenState extends State<StuMyTodoScreen> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      //Get.find<StuMyTodoController>().facDeleteAnnouncement(facAnnouncementConroller.facShowAnnouncementModel.data![index].sId!);
+                                      stuMyTodoController.stuDeleteMyTodo(stuMyTodoController.stuMyShowMyTodoModel.data![index].sId.toString());
                                       Get.back();
-                                      //stuMyTodoController.facShowAnnouncement();
+                                      stuMyTodoController.stuShowMyTodo();
                                     },
                                     child: Text(
                                       "YES",

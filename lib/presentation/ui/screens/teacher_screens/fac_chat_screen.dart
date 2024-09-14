@@ -30,7 +30,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
   @override
   void initState() {
     super.initState();
-    _chatController.getChat(widget.groupId);
+    _chatController.getChat(widget.groupId ?? '');
   }
 
   @override
