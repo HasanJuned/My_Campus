@@ -7,7 +7,6 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_m
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_chat_screen.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
-import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/dropdown_button.dart';
 
 class FacAvailableChatScreen extends StatefulWidget {
@@ -64,7 +63,7 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
     return AppBar(
       automaticallyImplyLeading: false,
       title: const Text('My Batch & Course'),
-      leading: const AppLogo(),
+      leading: const BackButton(),
     );
   }
 
@@ -207,7 +206,19 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
                         width: 332.w,
                         height: 51.h,
                         dropDownWidth: 290.w,
-                        items: const ['OOP', 'Data Structure', 'C Programming'],
+                        items: const [
+                          'OOP',
+                          'Data Structure',
+                          'C Programming',
+                          'Compiler Design & Construction',
+                          'Compiler Design & Construction Sessional',
+                          'Management Information System',
+                          'Computer Graphics',
+                          'Computer Graphics Sessional',
+                          'Artificial Intelligence',
+                          'Web Technologies',
+                          'Web Technologies Sessional'
+                        ],
                         value: selectedCourseTitle,
                         hintText: 'Course Title',
                         onChanged: (value) {
@@ -225,7 +236,19 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
                         width: 332.w,
                         height: 51.h,
                         dropDownWidth: 290.w,
-                        items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
+                        items: const [
+                          'CSE-1111',
+                          'EEE-1111',
+                          'CSE-3121',
+                          'CSE-3315',
+                          'CSE-3316',
+                          'CSE-4111',
+                          'CSE-4113',
+                          'CSE-4114',
+                          'CSE-4119',
+                          'CSE-4211',
+                          'CSE-4212'
+                        ],
                         value: selectedCourseCode,
                         hintText: 'Course Code',
                         onChanged: (value) {
@@ -243,6 +266,12 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
                     Center(
                       child: GetBuilder<FacCreatingSubGrpBatchSecController>(
                         builder: (facCreatingSubGrpBatchSecController) {
+                          if (facCreatingSubGrpBatchSecController
+                              .facCreatingSubGrpBatchSecInProgress) {
+                            const Center(
+                              child: LinearProgressIndicator(),
+                            );
+                          }
                           return ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               shape: CircleBorder(
@@ -255,12 +284,9 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
                               foregroundColor: const Color(0x999B9B9B),
                             ),
                             onPressed: () async {
-                              if (facCreatingSubGrpBatchSecController
-                                  .facCreatingSubGrpBatchSecInProgress) {
-                                const Center(
-                                  child: LinearProgressIndicator(),
-                                );
-                              } else {
+                              if (selectedBatch != null &&
+                                  selectedCourseCode != null &&
+                                  selectedCourseTitle != null) {
                                 final result =
                                     await facCreatingSubGrpBatchSecController
                                         .facCreatingSubGrpBatchSec(
@@ -274,7 +300,11 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
                                 );
 
                                 if (result) {
-                                  Get.snackbar('Successful!', 'Group Created');
+                                  Get.snackbar('Successful!', 'Group Created',
+                                      colorText: Colors.green);
+                                  if (mounted) {
+                                    Navigator.pop(context);
+                                  }
                                 } else {
                                   Get.snackbar(
                                       'Failed!', 'Group Already Created',
@@ -309,7 +339,7 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
   void _enterBatchesGroup(
       FacMainBottomNavController facMainBottomNavController, int index) {
     Get.to(
-      FacChatScreen(
+      () => FacChatScreen(
         batch: facMainBottomNavController.batchCoursePairs[index]['batch']
             .toString(),
         courseCode: facMainBottomNavController.batchCoursePairs[index]
@@ -318,8 +348,8 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
         courseTitle: facMainBottomNavController.batchCoursePairs[index]
                 ['courseTitle']
             .toString(),
-        groupId: facMainBottomNavController.batchCoursePairs[index]['sId'].toString(),
-
+        groupId: facMainBottomNavController.batchCoursePairs[index]['sId']
+            .toString(),
       ),
     );
   }

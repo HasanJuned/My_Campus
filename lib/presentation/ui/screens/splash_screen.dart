@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void checkUserAuthState() async {
-    final result = await AuthController.checkStudentLoginState();
+    /* final result = await AuthController.checkStudentLoginState();
     Future.delayed(const Duration(seconds: 2)).then(
       (value) async {
         if (result) {
@@ -36,9 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
           );
         }
       },
-    );
+    );*/
 
-    /*final result = await AuthController.checkLoginState();
+    final result = await AuthController.checkLoginState();
     Future.delayed(const Duration(seconds: 2)).then(
       (value) async {
         if (result) {
@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
           );
         }
       },
-    );*/
+    );
   }
 
   @override
