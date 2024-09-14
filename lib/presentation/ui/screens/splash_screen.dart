@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/ui/screens/stu_fac_choice_screen.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_availability_checking_screen.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/stu_main_bottom_screen.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_availability_checking_screen.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -50,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
           );
         } else {
           Get.offAll(
-            () => const FacSignInScreen(),
+            () => const StuFacChoiceScreen(),
           );
         }
       },
