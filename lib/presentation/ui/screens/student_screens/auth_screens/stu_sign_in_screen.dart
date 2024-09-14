@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_recovery_email_screen.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/stu_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
-import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
 import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
@@ -86,13 +84,13 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                 SizedBox(
                   height: 34.h,
                 ),
-                CustomisedTextButton(
+                /*CustomisedTextButton(
                     onTap: () {
                       Get.to(
                         () => const StuRecoveryEmailScreen(),
                       );
                     },
-                    text: 'Forgot Password')
+                    text: 'Forgot Password')*/
               ],
             ),
           ),

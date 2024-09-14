@@ -7,7 +7,6 @@ import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import 'package:my_campus/presentation/ui/widgets/text_field_with_trailing.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 
 import 'stu_sign_in_screen.dart';
@@ -22,7 +21,7 @@ class StuAvailabilityCheckScreen extends StatefulWidget {
 
 class _StuAvailabilityCheckScreenState
     extends State<StuAvailabilityCheckScreen> {
-  final TextEditingController _emailTEController = TextEditingController();
+  final TextEditingController _idTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -43,9 +42,23 @@ class _StuAvailabilityCheckScreenState
                 SizedBox(
                   height: 76.h,
                 ),
-                TextFieldWithTrailing(
-                  emailTEController: _emailTEController,
-                  hintText: "Type your student email",
+                SizedBox(
+                  width: 323.w,
+                  child: TextFormField(
+                    controller: _idTEController,
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(hintText: 'Student ID'),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please enter your ID';
+                      }
+                      if (value!.length != 10) {
+                        return 'Enter a valid ID';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: 47.h,
@@ -62,10 +75,14 @@ class _StuAvailabilityCheckScreenState
                     }
                     return CustomisedElevatedButton(
                       onTap: () async {
-                        final form = _formKey.currentState;
-                        if (form != null && form.validate()) {
-                          stuAvailabilityCheck(
-                              stuAvailabilityCheckingController);
+                        if (_formKey.currentState!.validate()) {
+                          Get.to(
+                            () => StuSignUpScreen(
+                              email: _idTEController.text.trim(),
+                            ),
+                          );
+                          /*stuAvailabilityCheck(
+                              stuAvailabilityCheckingController);*/
                         }
                       },
                       text: 'CHECK AVAILABILITY',
@@ -95,14 +112,13 @@ class _StuAvailabilityCheckScreenState
       StuAvailabilityCheckingController
           stuAvailabilityCheckingController) async {
     final result = await stuAvailabilityCheckingController.stuAvailabilityCheck(
-      _emailTEController.text.trim(),
-      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
+      _idTEController.text.trim(),
     );
     if (result) {
       Get.snackbar('Successful!', stuAvailabilityCheckingController.message);
       Get.to(
         () => StuSignUpScreen(
-          email: _emailTEController.text.trim(),
+          email: _idTEController.text.trim(),
         ),
       );
     } else {
@@ -114,6 +130,6 @@ class _StuAvailabilityCheckScreenState
   @override
   void dispose() {
     super.dispose();
-    _emailTEController.dispose();
+    _idTEController.dispose();
   }
 }

@@ -19,7 +19,7 @@ class Urls {
   static const String facultyAvailable =
       '$_facultyBaseUrl/AvailableTeachers';
 
-  static String availityCheckTeachers(String email) =>
+  static String availabilityCheckTeachers(String email) =>
       '$_facultyBaseUrl/AvailityCheckTeachers/$email';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
   static const String facultyProfileUpdate = '$_facultyBaseUrl/ProfileUpdate';
