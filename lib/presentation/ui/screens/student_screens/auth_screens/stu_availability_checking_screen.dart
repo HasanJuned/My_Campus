@@ -76,13 +76,7 @@ class _StuAvailabilityCheckScreenState
                     return CustomisedElevatedButton(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          Get.to(
-                            () => StuSignUpScreen(
-                              email: _idTEController.text.trim(),
-                            ),
-                          );
-                          /*stuAvailabilityCheck(
-                              stuAvailabilityCheckingController);*/
+                          stuAvailabilityCheck(stuAvailabilityCheckingController);
                         }
                       },
                       text: 'CHECK AVAILABILITY',

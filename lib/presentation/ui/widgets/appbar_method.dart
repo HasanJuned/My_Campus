@@ -17,7 +17,7 @@ AppBar customisedAppBar(
       },
     ),
     title: Text(
-      AuthController.email0.toString(),
+      AuthController.studentId1.toString(),
       style: TextStyle(
         fontSize: 16.h,
         fontWeight: FontWeight.w500,
