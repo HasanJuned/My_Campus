@@ -46,7 +46,7 @@ void crList(BuildContext context) {
                             ),
                           ),
                           title: Text(
-                            'Hasin Israq',
+                            'Ahmad Hasin Ishraque',
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 20.sp,
