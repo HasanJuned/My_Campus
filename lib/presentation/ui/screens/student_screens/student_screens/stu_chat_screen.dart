@@ -5,6 +5,7 @@ import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/delete_card.dart';
+import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 
 class StuChatScreen extends StatefulWidget {
   StuChatScreen({
@@ -25,7 +26,7 @@ class StuChatScreen extends StatefulWidget {
 class _StuChatScreenState extends State<StuChatScreen> {
   final TextEditingController _controller = TextEditingController();
   final GroupChattingController _chatController =
-  Get.put(GroupChattingController());
+      Get.put(GroupChattingController());
 
   @override
   void initState() {
@@ -37,160 +38,190 @@ class _StuChatScreenState extends State<StuChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: GetBuilder<GroupChattingController>(
-          builder: (groupChattingController) {
-            final chatData = _chatController.groupChatModel.data;
-            final messages = <Message>[];
+      body: ScreenBackground(
+        child: GetBuilder<GroupChattingController>(
+            builder: (groupChattingController) {
+          final chatData = _chatController.groupChatModel.data;
+          final messages = <Message>[];
 
-            if (chatData != null) {
-              for (var data in chatData) {
-                if (data.chat != null) {
-                  for (var chat in data.chat!) {
-                    messages.add(
-                      Message(
-                        text: chat.message ?? '',
-                        isSentByMe: AuthController.fullName1.toString() ==
-                            chat.sender.toString(),
-                        date: DateTime.parse(
-                            chat.timestamp ?? DateTime.now().toIso8601String()),
-                        time: chat.timestamp.toString(),
-                        backendName: chat.sender.toString(),
-                      ),
-                    );
-                  }
+          if (chatData != null) {
+            for (var data in chatData) {
+              if (data.chat != null) {
+                for (var chat in data.chat!) {
+                  messages.add(
+                    Message(
+                      text: chat.message ?? '',
+                      isSentByMe: AuthController.fullName1.toString() ==
+                          chat.sender.toString(),
+                      date: DateTime.parse(
+                          chat.timestamp ?? DateTime.now().toIso8601String()),
+                      time: chat.timestamp.toString(),
+                      backendName: chat.sender.toString(),
+                    ),
+                  );
                 }
               }
-              messages.sort((a, b) => b.date.compareTo(a.date));
             }
+            messages.sort((a, b) => b.date.compareTo(a.date));
+          }
 
-            return Column(
-              children: <Widget>[
-                Expanded(
-                  child: ListView.builder(
-                    reverse: true,
-                    itemCount: messages.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final message = messages[index];
+          return Column(
+            children: <Widget>[
+              Expanded(
+                child: ListView.builder(
+                  reverse: true,
+                  itemCount: messages.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final message = messages[index];
 
-                      DateTime messageDate = DateTime(
-                        message.date.year,
-                        message.date.month,
-                        message.date.day,
+                    DateTime messageDate = DateTime(
+                      message.date.year,
+                      message.date.month,
+                      message.date.day,
+                    );
+                    DateTime? previousMessageDate;
+                    if (index < messages.length - 1) {
+                      previousMessageDate = DateTime(
+                        messages[index + 1].date.year,
+                        messages[index + 1].date.month,
+                        messages[index + 1].date.day,
                       );
-                      DateTime? previousMessageDate;
-                      if (index < messages.length - 1) {
-                        previousMessageDate = DateTime(
-                          messages[index + 1].date.year,
-                          messages[index + 1].date.month,
-                          messages[index + 1].date.day,
-                        );
-                      }
-                      bool showDateCard = index == messages.length - 1 ||
-                          messageDate != previousMessageDate;
+                    }
+                    bool showDateCard = index == messages.length - 1 ||
+                        messageDate != previousMessageDate;
 
-                      DateTime originalTime = DateTime.parse(message.time)
-                          .add(const Duration(hours: 6));
-                      String formattedTime =
-                      DateFormat('hh:mm a').format(originalTime);
+                    DateTime originalTime = DateTime.parse(message.time)
+                        .add(const Duration(hours: 6));
+                    String formattedTime =
+                        DateFormat('hh:mm a').format(originalTime);
 
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (showDateCard)
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: DateCard(date: messageDate),
-                              ),
-                            ),
-                          Align(
-                            alignment:
-                            AuthController.fullName1 == message.backendName
-                                ? Alignment.centerRight
-                                : Alignment.centerLeft,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 10),
-                              decoration: BoxDecoration(
-                                color:
-                                AuthController.fullName1 == message.backendName
-                                    ? Colors.blueAccent
-                                    : Colors.grey[300],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: InkWell(
-                                onLongPress: () {
-                                  if (message.isSentByMe) {}
-                                },
-                                child: Column(
-                                  crossAxisAlignment: AuthController.fullName1 ==
-                                      message.backendName
-                                      ? CrossAxisAlignment.end
-                                      : CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      message.text,
-                                      style: TextStyle(
-                                        color: AuthController.fullName1 ==
-                                            message.backendName
-                                            ? Colors.white
-                                            : Colors.black87,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Text(
-                                      formattedTime,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: AuthController.fullName1 ==
-                                            message.backendName
-                                            ? Colors.white
-                                            : Colors.black87,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (showDateCard)
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: DateCard(date: messageDate),
                             ),
                           ),
-                        ],
-                      );
-                    },
-                  ),
+                        Align(
+                          alignment:
+                              AuthController.fullName1 == message.backendName
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                          child: Column(
+                            crossAxisAlignment:
+                                AuthController.fullName1 == message.backendName
+                                    ? CrossAxisAlignment.end
+                                    : CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8, left: 8, right: 8),
+                                child: Card(
+                                  color: Colors.white.withOpacity(0.0),
+                                  elevation: 0,
+                                  child: Text(
+                                    message.backendName,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: AuthController.fullName1 ==
+                                              message.backendName
+                                          ? Colors.black
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 15),
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 10),
+                                decoration: BoxDecoration(
+                                  color: AuthController.fullName1 ==
+                                          message.backendName
+                                      ? Colors.green.shade400
+                                      : Colors.green.shade100,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onLongPress: () {
+                                    if (message.isSentByMe) {}
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        AuthController.fullName1 ==
+                                                message.backendName
+                                            ? CrossAxisAlignment.end
+                                            : CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        message.text,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: AuthController.fullName1 ==
+                                                  message.backendName
+                                              ? Colors.black
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text(
+                                        formattedTime,
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          color: AuthController.fullName1 ==
+                                                  message.backendName
+                                              ? Colors.black
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          controller: _controller,
-                          decoration: InputDecoration(
-                            hintText: 'Enter a message',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
+                        controller: _controller,
+                        decoration: InputDecoration(
+                          hintText: 'Enter a message',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
                           ),
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.send),
-                        onPressed: () {
-                          _sendChat();
-                          _chatController.getChat(widget.groupId);
-                          setState(() {});
-                        },
-                      ),
-                    ],
-                  ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.send),
+                      onPressed: () {
+                        _sendChat();
+                        _chatController.getChat(widget.groupId);
+                        setState(() {});
+                      },
+                    ),
+                  ],
                 ),
-              ],
-            );
-          }),
+              ),
+            ],
+          );
+        }),
+      ),
     );
   }
 
