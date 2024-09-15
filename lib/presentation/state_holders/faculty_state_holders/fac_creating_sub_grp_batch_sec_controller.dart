@@ -3,6 +3,7 @@ import 'package:my_campus/data/models/faculty_model/fac_sub_grp_batch_sec_model.
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class FacCreatingSubGrpBatchSecController extends GetxController {
   bool _facCreatingSubGrpBatchSecInProgress = false;
@@ -43,6 +44,7 @@ class FacCreatingSubGrpBatchSecController extends GetxController {
           "department": facultyDepartment
         }
       },
+        AuthController.accessToken.toString()
     );
     _facCreatingSubGrpBatchSecInProgress = false;
     update();

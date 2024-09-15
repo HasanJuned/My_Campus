@@ -37,7 +37,7 @@ Drawer customisedStudentDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'Departments Faculty',
+                    "Departments' Faculty",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
@@ -53,7 +53,7 @@ Drawer customisedStudentDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'Departments CR',
+                    "Departments' CR",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
@@ -179,7 +179,7 @@ Drawer customisedStudentDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'About Us',
+                    'About Developer',
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),

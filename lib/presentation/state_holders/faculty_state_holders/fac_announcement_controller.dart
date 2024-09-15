@@ -5,6 +5,7 @@ import 'package:my_campus/data/models/faculty_model/fac_show_announcement_model.
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class FacAnnouncementController extends GetxController {
   bool _facAnnouncementInProgress = false;
@@ -34,7 +35,7 @@ class FacAnnouncementController extends GetxController {
         "batch": batch.toString(),
         "type": type.toString(),
         "date": date.toString(),
-      },
+      },AuthController.accessToken.toString()
     );
     _facAnnouncementInProgress = false;
     update();
@@ -53,7 +54,7 @@ class FacAnnouncementController extends GetxController {
     _facShowAnnouncementInProgress = true;
     update();
     final NetworkResponse response =
-        await NetworkCaller.getRequest(Urls.facultyShowAnnouncement);
+        await NetworkCaller.getRequest(Urls.facultyShowAnnouncement,AuthController.accessToken.toString());
     _facShowAnnouncementInProgress = false;
     update();
 
@@ -69,7 +70,7 @@ class FacAnnouncementController extends GetxController {
 
   Future<bool> facDeleteAnnouncement(String id) async {
     final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.facultyDeleteAnnouncement(id),
+      Urls.facultyDeleteAnnouncement(id),AuthController.accessToken.toString()
     );
 
     if (response.isSuccess) {

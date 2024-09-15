@@ -3,6 +3,7 @@ import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/models/student_model/auth_models/stu_verify_email_model.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class StuVerifyEmailController extends GetxController {
   bool _stuVerifyEmailInProgress = false;
@@ -17,7 +18,7 @@ class StuVerifyEmailController extends GetxController {
     _stuVerifyEmailInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.studentVerifyEmail(email),
+      Urls.studentVerifyEmail(email),AuthController.accessToken1.toString()
     );
     _stuVerifyEmailInProgress = false;
     update();

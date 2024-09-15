@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:my_campus/data/models/faculty_model/auth_models/fac_availability_checking_model.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import '../../../../data/models/network_response.dart';
 import '../../../../data/services/network_caller.dart';
 import '../../../../data/utility/urls.dart';
@@ -22,7 +23,7 @@ class FacAvailableController extends GetxController {
     _inProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.availableFaculty,
+      Urls.availableFaculty,AuthController.accessToken.toString()
     );
     _inProgress = false;
     update();

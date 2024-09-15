@@ -7,8 +7,8 @@ import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/delete_card.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 
-class FacChatScreen extends StatefulWidget {
-  FacChatScreen({
+class StuChatScreen extends StatefulWidget {
+  StuChatScreen({
     super.key,
     required this.batch,
     required this.courseCode,
@@ -20,10 +20,10 @@ class FacChatScreen extends StatefulWidget {
   dynamic groupId;
 
   @override
-  State<FacChatScreen> createState() => _FacChatScreenState();
+  State<StuChatScreen> createState() => _StuChatScreenState();
 }
 
-class _FacChatScreenState extends State<FacChatScreen> {
+class _StuChatScreenState extends State<StuChatScreen> {
   final TextEditingController _controller = TextEditingController();
   final GroupChattingController _chatController =
       Get.put(GroupChattingController());
@@ -51,7 +51,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                   messages.add(
                     Message(
                       text: chat.message ?? '',
-                      isSentByMe: AuthController.fullName0.toString() ==
+                      isSentByMe: AuthController.fullName1.toString() ==
                           chat.sender.toString(),
                       date: DateTime.parse(
                           chat.timestamp ?? DateTime.now().toIso8601String()),
@@ -107,7 +107,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                           ),
                         Align(
                           alignment:
-                              AuthController.fullName0 == message.backendName
+                              AuthController.fullName1 == message.backendName
                                   ? Alignment.centerRight
                                   : Alignment.centerLeft,
                           child: Column(
@@ -140,7 +140,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                                 margin: const EdgeInsets.symmetric(
                                     vertical: 4, horizontal: 10),
                                 decoration: BoxDecoration(
-                                  color: AuthController.fullName0 ==
+                                  color: AuthController.fullName1 ==
                                           message.backendName
                                       ? Colors.green.shade400
                                       : Colors.green.shade100,
@@ -152,7 +152,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                                   },
                                   child: Column(
                                     crossAxisAlignment:
-                                        AuthController.fullName0 ==
+                                        AuthController.fullName1 ==
                                                 message.backendName
                                             ? CrossAxisAlignment.end
                                             : CrossAxisAlignment.start,
@@ -161,7 +161,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                                         message.text,
                                         style: TextStyle(
                                           fontSize: 14,
-                                          color: AuthController.fullName0 ==
+                                          color: AuthController.fullName1 ==
                                                   message.backendName
                                               ? Colors.black
                                               : Colors.black,
@@ -174,7 +174,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                                         formattedTime,
                                         style: TextStyle(
                                           fontSize: 10,
-                                          color: AuthController.fullName0 ==
+                                          color: AuthController.fullName1 ==
                                                   message.backendName
                                               ? Colors.black
                                               : Colors.black,
@@ -229,7 +229,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
     if (_controller.text.isNotEmpty) {
       for (int i = 0; i < _chatController.groupChatModel.data!.length; i++) {
         if (_chatController.groupChatModel.data?[i].name ==
-            AuthController.fullName0) {
+            AuthController.fullName1) {
           _handleSubmitted(_controller.text,
               _chatController.groupChatModel.data![i].sId.toString());
           break;
@@ -276,7 +276,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
       widget.groupId.toString(),
       senderId.toString(),
       text,
-      AuthController.fullName0.toString(),
+      AuthController.fullName1.toString(),
       date,
     );
     setState(() {});

@@ -170,7 +170,9 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    Future.delayed(const Duration(milliseconds: 5)).then((value) {
+      _loadData();
+    });
   }
 
   Future<void> _loadData() async {

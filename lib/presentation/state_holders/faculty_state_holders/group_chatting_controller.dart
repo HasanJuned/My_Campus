@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 import '../../../data/models/faculty_model/group_chat_model.dart';
 import '../../../data/models/network_response.dart';
@@ -25,6 +26,7 @@ class GroupChattingController extends GetxController {
         "sender": sender,
         "date": date,
       },
+        AuthController.accessToken.toString()
     );
     _inProgress = false;
     update();
@@ -42,7 +44,7 @@ class GroupChattingController extends GetxController {
     _inProgress = true;
     update();
 
-    NetworkResponse response = await NetworkCaller.getRequest(Urls.getChat(id));
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.getChat(id),AuthController.accessToken.toString());
     _inProgress = false;
     update();
 
@@ -59,7 +61,7 @@ class GroupChattingController extends GetxController {
     _inProgress = true;
     update();
 
-    NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteChat(groupId, memberId, messageId));
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteChat(groupId, memberId, messageId),AuthController.accessToken.toString());
     _inProgress = false;
     update();
 

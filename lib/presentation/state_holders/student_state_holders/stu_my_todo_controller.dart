@@ -3,6 +3,7 @@ import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/models/student_model/stu_show_my_todo_model.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class StuMyTodoController extends GetxController {
   bool _inProgress = false;
@@ -20,7 +21,7 @@ class StuMyTodoController extends GetxController {
     update();
     NetworkResponse response = await NetworkCaller.postRequest(
         Urls.stuAddMyTodo,
-        {"title": taskTitle.toString(), "date": date.toString()});
+        {"title": taskTitle.toString(), "date": date.toString()},AuthController.accessToken1.toString());
     _inProgress = false;
     update();
     if (response.isSuccess) {
@@ -35,7 +36,7 @@ class StuMyTodoController extends GetxController {
   Future<bool> stuShowMyTodo() async {
     _inProgress = true;
     update();
-    NetworkResponse response = await NetworkCaller.getRequest(Urls.showStuTodo);
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.showStuTodo,AuthController.accessToken1.toString());
     _inProgress = false;
     update();
     if (response.isSuccess) {
@@ -46,4 +47,19 @@ class StuMyTodoController extends GetxController {
       return false;
     }
   }
+
+  Future<bool> stuDeleteMyTodo(String id) async {
+    _inProgress = true;
+    update();
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteStuTodo(id),AuthController.accessToken1.toString());
+    _inProgress = false;
+    update();
+    if (response.isSuccess) {
+      return true;
+    } else {
+      _message = "Delete Failed!!";
+      return false;
+    }
+  }
 }
+//

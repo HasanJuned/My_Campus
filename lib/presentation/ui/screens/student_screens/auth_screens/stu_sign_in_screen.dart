@@ -41,10 +41,11 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                   child: TextFormField(
                     controller: _idController,
                     textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(hintText: 'Student ID'),
                     validator: (String? value) {
                       if (value?.trim().isEmpty ?? true) {
-                        return 'Please enter your email';
+                        return 'Please enter your ID';
                       }
                       return null;
                     },

@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'app_logo.dart';
 
-AppBar customisedAppBar(
-    GlobalKey<ScaffoldState> scaffoldKey, BuildContext context) {
+AppBar customisedAppBar(String appBarAuth, GlobalKey<ScaffoldState> scaffoldKey, BuildContext context) {
   return AppBar(
     automaticallyImplyLeading: false,
     backgroundColor: Colors.white,
@@ -17,7 +16,7 @@ AppBar customisedAppBar(
       },
     ),
     title: Text(
-      AuthController.email0.toString(),
+      appBarAuth,
       style: TextStyle(
         fontSize: 16.h,
         fontWeight: FontWeight.w500,

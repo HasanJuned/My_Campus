@@ -3,6 +3,7 @@ import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/models/student_model/auth_models/stu_password_change_model.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class StuSignUpController extends GetxController {
   bool _stuSignupInProgress = false;
@@ -23,6 +24,7 @@ class StuSignUpController extends GetxController {
         "OTP": otp,
         "password": password,
       },
+        AuthController.accessToken1.toString()
     );
     _stuSignupInProgress = false;
     update();

@@ -16,11 +16,10 @@ class Urls {
   static const String facultyList = '$_facultyBaseUrl/availableCourseAndTeacher';
   static String facultyDeleteTodo(String id) => '$_facultyBaseUrl/deleteTeacherTodo/$id';
 
-  static const String facultyAvailable =
-      '$_facultyBaseUrl/AvailableTeachers';
+  static const String facultyAvailable = '$_facultyBaseUrl/AvailableTeachers';
 
-  static String availabilityCheckTeachers(String email) =>
-      '$_facultyBaseUrl/AvailityCheckTeachers/$email';
+  static String availabilityCheckTeachers(String email) => '$_facultyBaseUrl/AvailityCheckTeachers/$email';
+  static String availabilityCheckStudents(String id) => '$_studentBaseUrl/AvailityCheckStudents/$id';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
   static const String facultyProfileUpdate = '$_facultyBaseUrl/ProfileUpdate';
   static String facultySubGrpBatchSec = '$_facultyBaseUrl/createSubjectGroupBatchSections';
@@ -65,6 +64,7 @@ class Urls {
   static String batchAnnouncement(batch, type) => '$_studentBaseUrl/allAnnouncement/$batch/$type';
   static String stuAddMyTodo = '$_studentBaseUrl/stuAddMyTodo';
   static String showStuTodo = '$_studentBaseUrl/showStudentTodo';
+  static String deleteStuTodo(String id) => '$_studentBaseUrl/deleteStudentTodo/$id';
   static String stuAddResources = '$_studentBaseUrl/studentAddResources';
   static String showStuAddResources(batch) => '$_studentBaseUrl/showStudentResources/$batch';
 }

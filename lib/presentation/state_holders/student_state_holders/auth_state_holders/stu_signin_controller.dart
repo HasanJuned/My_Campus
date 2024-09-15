@@ -19,6 +19,7 @@ class StuSignInController extends GetxController {
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
       Urls.studentSignIn(id, password),
+        AuthController.accessToken1.toString()
     );
     _stuSignInInProgress = false;
     update();
