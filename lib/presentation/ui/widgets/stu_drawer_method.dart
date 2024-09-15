@@ -3,12 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/course_offering_list_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_available_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_routinue_screen.dart';
 
 import 'about_us_widget.dart';
 import 'blood_downer_list.dart';
 import 'cr_list_method.dart';
 
-Drawer customisedStudentDrawer(BuildContext context) {
+Drawer customisedStudentDrawer(
+    BuildContext context, TextEditingController controller) {
   return Drawer(
     width: 286.w,
     backgroundColor: const Color(0xFFE0FFF1),
@@ -46,6 +48,82 @@ Drawer customisedStudentDrawer(BuildContext context) {
                 onTap: () {
                   Get.to(
                     () => const FacAvailableScreen(),
+                  );
+                },
+              ),
+              divider(),
+              ListTile(
+                title: Center(
+                  child: Text(
+                    "Faculty Routine",
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                  ),
+                ),
+                hoverColor: Colors.grey,
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(
+                          "Class Time",
+                          style: TextStyle(
+                              fontSize: 24.sp, fontWeight: FontWeight.w900),
+                        ),
+                        content: Text("See Other Faculty Routine",
+                            style: TextStyle(
+                                fontSize: 20.sp, fontWeight: FontWeight.w500)),
+                        actions: [
+                          TextFormField(
+                            controller: controller,
+                            decoration: const InputDecoration(
+                                hintText: 'Short Form of Faculty'),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      (context),
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              FacRoutineScreen(
+                                                  shortWords:
+                                                      controller.text)));
+                                },
+                                child: Text(
+                                  "Go",
+                                  style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
                   );
                 },
               ),
