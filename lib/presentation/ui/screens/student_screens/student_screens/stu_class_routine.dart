@@ -16,13 +16,6 @@ class StuClassRoutine extends StatefulWidget {
 class StuClassRoutineState extends State<StuClassRoutine> {
   TextEditingController batchController = TextEditingController();
   TextEditingController sectionController = TextEditingController();
-  List<dynamic>? jSat = [];
-  List<dynamic>? jSun = [];
-  List<dynamic>? jMon = [];
-  List<dynamic>? jTue = [];
-  List<dynamic>? jWed = [];
-  List<dynamic>? jThu = [];
-  List<dynamic>? jFri = [];
 
   List<List<dynamic>> _filteredValues = [];
   List<List<dynamic>> _filteredValues2 = [];
@@ -107,8 +100,10 @@ class StuClassRoutineState extends State<StuClassRoutine> {
   }
 
   Future<void> _fetchData() async {
+    String? batchToFilter = widget.batch;
+    String? sectionToFilter = widget.section;
     setState(() {
-      _isLoading = true; // Start loading
+      _isLoading = true;
     });
 
     final rawData7 = await rootBundle.loadString('assets/routine/saturday.csv');
@@ -133,9 +128,6 @@ class StuClassRoutineState extends State<StuClassRoutine> {
         const CsvToListConverter().convert(rawData6);
     List<List<dynamic>> listData7 =
         const CsvToListConverter().convert(rawData7);
-
-    String? batchToFilter = widget.batch;
-    String? sectionToFilter = widget.section;
 
     _filteredValues = listData.where((row) {
       return row.isNotEmpty &&
@@ -269,26 +261,16 @@ class StuClassRoutineState extends State<StuClassRoutine> {
         eight7 = _filteredValues7[0][10];
       }
     }
-
-    jSun = [one, two, three, four, five, six, seven, eight];
-    jMon = [one2, two2, three2, four2, five2, six2, seven2, eight2];
-    jTue = [one3, two3, three3, four3, five3, six3, seven3, eight3];
-    jWed = [one4, two4, three4, four4, five4, six4, seven4, eight4];
-    jThu = [one5, two5, three5, four5, five5, six5, seven5, eight5];
-    jFri = [one6, two6, three6, four6, five6, six6, seven6, eight6];
-    jSat = [one7, two7, three7, four7, five7, six7, seven7, eight7];
-
     setState(() {
-      _isLoading = false; // End loading
+      _isLoading = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    //print(batchToFilter);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Routine'),
+        title: const Text('Class Routine'),
       ),
       body: _isLoading
           ? const Center(
