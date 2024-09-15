@@ -112,13 +112,16 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
     });
   }
 
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(AuthController.studentId1.toString(),scaffoldKey, context),
+      appBar: customisedAppBar(
+          AuthController.studentId1.toString(), scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
-        drawer: customisedStudentDrawer(context),
+        drawer: customisedStudentDrawer(context, controller),
         body: ScreenBackground(
           child: SingleChildScrollView(
             child: Column(
