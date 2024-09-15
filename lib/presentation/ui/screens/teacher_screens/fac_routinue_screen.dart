@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_campus/presentation/ui/helper/class_table_row.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 
 class FacRoutineScreen extends StatefulWidget {
@@ -16,14 +15,6 @@ class FacRoutineScreen extends StatefulWidget {
 }
 
 class _FacRoutineScreenState extends State<FacRoutineScreen> {
-  List ok1 = [];
-  List ok2 = [];
-  List ok3 = [];
-  List ok4 = [];
-  List ok5 = [];
-  List ok6 = [];
-  List ok7 = [];
-
   dynamic batch1;
   dynamic section1;
   dynamic timeSlots1;
@@ -52,17 +43,17 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
   dynamic section7;
   dynamic timeSlots7;
 
-  late List one;
-  late List one2;
-  late List one3;
-  late List one4;
-  late List one5;
-  late List one6;
-  late List one7;
-  late List one8;
-  late List one9;
-  late List one10;
-  late List one11;
+  dynamic one;
+  dynamic one2;
+  dynamic one3;
+  dynamic one4;
+  dynamic one5;
+  dynamic one6;
+  dynamic one7;
+  dynamic one8;
+  dynamic one9;
+  dynamic one10;
+  dynamic one11;
 
   dynamic two;
   dynamic two2;
@@ -175,6 +166,8 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
     });
   }
 
+  final TextEditingController _controller = TextEditingController();
+
   Future<void> _loadData() async {
     String nameShortForm = widget.shortWords;
 
@@ -204,13 +197,56 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
     six = csvData6;
     seven = csvData7;
 
-    log(one.toString());
-    log(two);
-    log(three);
-    log(four);
-    log(five);
-    log(six);
-    log(seven);
+    final times = [
+      '08:55-9:45AM',
+      '9:50-10:40AM',
+      '10:45-11:35AM',
+      '11:40-12:30PM',
+      '12:35-1:25PM',
+      '1:30-2:10PM',
+      '2:15-3:05PM',
+      '3:10-4:00PM',
+      '4:05-4:55PM'
+    ];
+
+    // Create a map for time slot indices
+    final timeIndices = {for (var v in times) v: times.indexOf(v)};
+
+    // Function to get the index for a time slot
+    int getTimeSlotIndex(String timeSlot) {
+      return timeIndices[timeSlot] ?? -1;
+    }
+
+    // Function to sort 'four' based on the 'times' list and move 'OL Class' to the end
+    void sortByTimes(List<Map<String, dynamic>> dataList) {
+      dataList.sort((a, b) {
+        final timeSlotA = a['TimeSlots'] as String;
+        final timeSlotB = b['TimeSlots'] as String;
+
+        final isOLClassA = timeSlotA.contains('OL Class');
+        final isOLClassB = timeSlotB.contains('OL Class');
+
+        if (isOLClassA && !isOLClassB) {
+          return 1; // Move OL Class entries to the end
+        } else if (!isOLClassA && isOLClassB) {
+          return -1; // Keep non-OL Class entries before OL Class entries
+        } else {
+          // For entries that are either both OL Class or both not OL Class, sort by time slot
+          final firstSlotA = timeSlotA.split(' ').first;
+          final firstSlotB = timeSlotB.split(' ').first;
+          return getTimeSlotIndex(firstSlotA)
+              .compareTo(getTimeSlotIndex(firstSlotB));
+        }
+      });
+    }
+
+    sortByTimes(one);
+    sortByTimes(two);
+    sortByTimes(three);
+    sortByTimes(four);
+    sortByTimes(five);
+    sortByTimes(six);
+    sortByTimes(seven);
   }
 
   @override
@@ -218,668 +254,66 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Routine'),
-            backgroundColor: AppColors.primaryColor,
-          ),
+          appBar: buildAppBar(context),
           body: Center(
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(5),
                 child: Column(
                   children: [
-                    Text(
-                      'Saturday (Total Class: ${one.length})',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.black54),
-                    ),
+                    buildDayUi('Saturday',one),
                     const SizedBox(
                       height: 4,
                     ),
-                    Table(
-                        border:
-                            TableBorder.all(borderRadius: BorderRadius.zero),
-                        children: [
-                          TableRow(
-                            children: List.generate(
-                                one.isEmpty ? 1 : one.length, (colIndex) {
-                              if (colIndex < one.length) {
-                                final timeSlots = one[colIndex]['TimeSlots']
-                                    .toString()
-                                    .split(' ')
-                                    .where((slot) =>
-                                        slot != 'N/A' && slot.isNotEmpty)
-                                    .toList();
-
-                                String displayText;
-                                if (timeSlots.length == 1) {
-                                  displayText = timeSlots.first;
-                                } else if (timeSlots.length == 2) {
-                                  displayText =
-                                      '${timeSlots.first}\n${timeSlots.last}';
-                                } else {
-                                  displayText = timeSlots.join('\n');
-                                }
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      displayText,
-                                      style: TextStyle(
-                                          overflow: TextOverflow.visible,
-                                          fontSize: 12.23.sp,
-                                          fontWeight: FontWeight.w600,
-                                          //letterSpacing: 1,
-                                          color: Colors.redAccent),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 0,
-                                );
-                              }
-                            }),
-                          ),
-                          TableRow(
-                            children: List.generate(
-                                one.isEmpty ? 1 : one.length, (colIndex) {
-                              if (colIndex < one.length) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      '${one[colIndex]['Batch'].toString()} (${one[colIndex]['Section'].toString()})',
-                                      style: TextStyle(
-                                        overflow: TextOverflow.visible,
-                                        fontSize: 12.23.sp,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: .1,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 30,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: Center(
-                                        child: Text(
-                                      'Off Day',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    )),
-                                  ),
-                                );
-                              }
-                            }),
-                          ),
-                        ]),
+                    buildClassTable(one, widget.shortWords),
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Sunday (Total Class: ${two.length})',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.black54),
-                    ),
+                    buildDayUi('Sunday',two),
                     const SizedBox(
                       height: 4,
                     ),
-                    Table(
-                        border:
-                            TableBorder.all(borderRadius: BorderRadius.zero),
-                        children: [
-                          TableRow(
-                            children: List.generate(
-                                two.isEmpty ? 1 : two.length, (colIndex) {
-                              if (colIndex < two.length) {
-                                final timeSlots = two[colIndex]['TimeSlots']
-                                    .toString()
-                                    .split(' ')
-                                    .toList();
-
-                                String displayText;
-                                if (timeSlots.length == 1) {
-                                  displayText = timeSlots.first;
-                                } else if (timeSlots.length == 2) {
-                                  displayText =
-                                      '${timeSlots.first}\n${timeSlots.last}';
-                                } else {
-                                  displayText = timeSlots.join('\n');
-                                }
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      displayText,
-                                      style: TextStyle(
-                                          overflow: TextOverflow.visible,
-                                          fontSize: 11.20.sp,
-                                          fontWeight: FontWeight.w600,
-                                          //letterSpacing: 1,
-                                          color: Colors.redAccent),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 0,
-                                );
-                              }
-                            }),
-                          ),
-                          TableRow(
-                            children: List.generate(
-                                two.isEmpty ? 1 : two.length, (colIndex) {
-                              if (colIndex < two.length) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      '${two[colIndex]['Batch'].toString()} (${two[colIndex]['Section'].toString()})',
-                                      style: TextStyle(
-                                        overflow: TextOverflow.visible,
-                                        fontSize: 12.23.sp,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 1,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 30,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: Center(
-                                        child: Text(
-                                      'Off Day',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    )),
-                                  ),
-                                );
-                              }
-                            }),
-                          ),
-                        ]),
+                    buildClassTable(two, widget.shortWords),
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Monday (Total Class: ${three.length})',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.black54),
-                    ),
+                    buildDayUi('Monday',three),
                     const SizedBox(
                       height: 4,
                     ),
-                    Table(
-                        border:
-                            TableBorder.all(borderRadius: BorderRadius.zero),
-                        children: [
-                          TableRow(
-                            children: List.generate(
-                                three.isEmpty ? 1 : three.length, (colIndex) {
-                              if (colIndex < three.length) {
-                                final timeSlots = three[colIndex]['TimeSlots']
-                                    .toString()
-                                    .split(' ')
-                                    .where((slot) =>
-                                        slot != 'N/A' && slot.isNotEmpty)
-                                    .toList();
-
-                                String displayText;
-                                if (timeSlots.length == 1) {
-                                  displayText = timeSlots.first;
-                                } else if (timeSlots.length == 2) {
-                                  displayText =
-                                      '${timeSlots.first}\n${timeSlots.last}';
-                                } else {
-                                  displayText = timeSlots.join('\n');
-                                }
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      displayText,
-                                      style: TextStyle(
-                                          overflow: TextOverflow.visible,
-                                          fontSize: 11.20.sp,
-                                          fontWeight: FontWeight.w600,
-                                          //letterSpacing: 1,
-                                          color: Colors.redAccent),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 0,
-                                );
-                              }
-                            }),
-                          ),
-                          TableRow(
-                            children: List.generate(
-                                three.isEmpty ? 1 : three.length, (colIndex) {
-                              if (colIndex < three.length) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      '${three[colIndex]['Batch'].toString()} (${three[colIndex]['Section'].toString()})',
-                                      style: TextStyle(
-                                        overflow: TextOverflow.visible,
-                                        fontSize: 12.23.sp,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 1,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 30,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: Center(
-                                        child: Text(
-                                      'Off Day',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    )),
-                                  ),
-                                );
-                              }
-                            }),
-                          ),
-                        ]),
+                    buildClassTable(three, widget.shortWords),
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Tuesday (Total Class: ${four.length})',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.black54),
-                    ),
+                    buildDayUi('Tuesday',four),
                     const SizedBox(
                       height: 4,
                     ),
-                    Table(
-                        border:
-                            TableBorder.all(borderRadius: BorderRadius.zero),
-                        children: [
-                          TableRow(
-                            children: List.generate(
-                                four.isEmpty ? 1 : four.length, (colIndex) {
-                              if (colIndex < four.length) {
-                                final timeSlots = four[colIndex]['TimeSlots']
-                                    .toString()
-                                    .split(' ')
-                                    .where((slot) =>
-                                        slot != 'N/A' && slot.isNotEmpty)
-                                    .toList();
-
-                                String displayText;
-                                if (timeSlots.length == 1) {
-                                  displayText = timeSlots.first;
-                                } else if (timeSlots.length == 2) {
-                                  displayText =
-                                      '${timeSlots.first}\n${timeSlots.last}';
-                                } else {
-                                  displayText = timeSlots.join('\n');
-                                }
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      displayText,
-                                      style: TextStyle(
-                                          overflow: TextOverflow.visible,
-                                          fontSize: 11.20.sp,
-                                          fontWeight: FontWeight.w600,
-                                          //letterSpacing: 1,
-                                          color: Colors.redAccent),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 0,
-                                );
-                              }
-                            }),
-                          ),
-                          TableRow(
-                            children: List.generate(four.length, (colIndex) {
-                              if (colIndex < four.length) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      '${four[colIndex]['Batch'].toString()} (${four[colIndex]['Section'].toString()})',
-                                      style: TextStyle(
-                                        overflow: TextOverflow.visible,
-                                        fontSize: 12.23.sp,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 1,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 30,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: Center(
-                                        child: Text(
-                                      'Off Day',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    )),
-                                  ),
-                                );
-                              }
-                            }),
-                          ),
-                        ]),
+                    buildClassTable(four, widget.shortWords),
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Wednesday (Total Class: ${five.length})',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.black54),
-                    ),
+                    buildDayUi('Wednesday',five),
                     const SizedBox(
                       height: 4,
                     ),
-                    Table(
-                        border:
-                            TableBorder.all(borderRadius: BorderRadius.zero),
-                        children: [
-                          TableRow(
-                            children: List.generate(
-                                five.isEmpty ? 1 : five.length, (colIndex) {
-                              if (colIndex < five.length) {
-                                final timeSlots = five[colIndex]['TimeSlots']
-                                    .toString()
-                                    .split(' ')
-                                    .where((slot) =>
-                                        slot != 'N/A' && slot.isNotEmpty)
-                                    .toList();
-
-                                String displayText;
-                                if (timeSlots.length == 1) {
-                                  displayText = timeSlots.first;
-                                } else if (timeSlots.length == 2) {
-                                  displayText =
-                                      '${timeSlots.first}\n${timeSlots.last}';
-                                } else {
-                                  displayText = timeSlots.join('\n');
-                                }
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      displayText,
-                                      style: TextStyle(
-                                          overflow: TextOverflow.visible,
-                                          fontSize: 11.20.sp,
-                                          fontWeight: FontWeight.w600,
-                                          //letterSpacing: 1,
-                                          color: Colors.redAccent),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 0,
-                                );
-                              }
-                            }),
-                          ),
-                          TableRow(
-                            children: List.generate(
-                                five.isEmpty ? 1 : five.length, (colIndex) {
-                              if (colIndex < five.length) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      '${five[colIndex]['Batch'].toString()} (${five[colIndex]['Section'].toString()})',
-                                      style: TextStyle(
-                                        overflow: TextOverflow.visible,
-                                        fontSize: 12.23.sp,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 1,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 30,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: Center(
-                                        child: Text(
-                                      'Off Day',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    )),
-                                  ),
-                                );
-                              }
-                            }),
-                          ),
-                        ]),
+                    buildClassTable(five, widget.shortWords),
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Thursday (Total Class: ${six.length})',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.black54),
-                    ),
+                    buildDayUi('Thursday',six),
                     const SizedBox(
                       height: 4,
                     ),
-                    Table(
-                        border:
-                            TableBorder.all(borderRadius: BorderRadius.zero),
-                        children: [
-                          TableRow(
-                            children: List.generate(
-                                six.isEmpty ? 1 : six.length, (colIndex) {
-                              if (colIndex < six.length) {
-                                final timeSlots = six[colIndex]['TimeSlots']
-                                    .toString()
-                                    .split(' ')
-                                    .where((slot) =>
-                                        slot != 'N/A' && slot.isNotEmpty)
-                                    .toList();
-
-                                String displayText;
-                                if (timeSlots.length == 1) {
-                                  displayText = timeSlots.first;
-                                } else if (timeSlots.length == 2) {
-                                  displayText =
-                                      '${timeSlots.first}\n${timeSlots.last}';
-                                } else {
-                                  displayText = timeSlots.join('\n');
-                                }
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      displayText,
-                                      style: TextStyle(
-                                          overflow: TextOverflow.visible,
-                                          fontSize: 11.20.sp,
-                                          fontWeight: FontWeight.w600,
-                                          //letterSpacing: 1,
-                                          color: Colors.redAccent),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 0,
-                                );
-                              }
-                            }),
-                          ),
-                          TableRow(
-                            children: List.generate(
-                                six.isEmpty ? 1 : six.length, (colIndex) {
-                              if (colIndex < six.length) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      '${six[colIndex]['Batch'].toString()} (${six[colIndex]['Section'].toString()})',
-                                      style: TextStyle(
-                                        overflow: TextOverflow.visible,
-                                        fontSize: 12.23.sp,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 1,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 30,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: Center(
-                                        child: Text(
-                                      'Off Day',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    )),
-                                  ),
-                                );
-                              }
-                            }),
-                          ),
-                        ]),
+                    buildClassTable(six, widget.shortWords),
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'Friday (Total Class: ${seven.length})',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.black54),
-                    ),
+                    buildDayUi('Friday',seven),
                     const SizedBox(
                       height: 4,
                     ),
-                    Table(
-                        border:
-                            TableBorder.all(borderRadius: BorderRadius.zero),
-                        children: [
-                          TableRow(
-                            children: List.generate(
-                                seven.isEmpty ? 1 : seven.length, (colIndex) {
-                              if (colIndex < seven.length) {
-                                final timeSlots = seven[colIndex]['TimeSlots']
-                                    .toString()
-                                    .split(' ')
-                                    .where((slot) =>
-                                        slot != 'N/A' && slot.isNotEmpty)
-                                    .toList();
-
-                                String displayText;
-                                if (timeSlots.length == 1) {
-                                  displayText = timeSlots.first;
-                                } else if (timeSlots.length == 2) {
-                                  displayText =
-                                      '${timeSlots.first}\n${timeSlots.last}';
-                                } else {
-                                  displayText = timeSlots.join('\n');
-                                }
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      displayText,
-                                      style: TextStyle(
-                                          overflow: TextOverflow.visible,
-                                          fontSize: 11.20.sp,
-                                          fontWeight: FontWeight.w600,
-                                          //letterSpacing: 1,
-                                          color: Colors.redAccent),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 0,
-                                );
-                              }
-                            }),
-                          ),
-                          TableRow(
-                            children: List.generate(
-                                seven.isEmpty ? 1 : seven.length, (colIndex) {
-                              if (colIndex < seven.length) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Center(
-                                    child: Text(
-                                      '${seven[colIndex]['Batch'].toString()} (${seven[colIndex]['Section'].toString()})',
-                                      style: TextStyle(
-                                        overflow: TextOverflow.visible,
-                                        fontSize: 12.23.sp,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 1,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox(
-                                  height: 30,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5),
-                                    child: Center(
-                                        child: Text(
-                                      'Off Day',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    )),
-                                  ),
-                                );
-                              }
-                            }),
-                          ),
-                        ]),
+                    buildClassTable(seven, widget.shortWords),
                     const SizedBox(
                       height: 20,
                     ),
@@ -891,16 +325,109 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
     );
   }
 
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+          title: const Text('Routine'),
+          backgroundColor: AppColors.primaryColor,
+          actions: [_buildSearchOtherFacultyRoutine(context)],
+        );
+  }
+
+  Text buildDayUi(String dayName, dynamic dayNumber) {
+    return Text(
+      '$dayName (Total Class: ${dayNumber.length})',
+      style: const TextStyle(
+          fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black54),
+    );
+  }
+
+  IconButton _buildSearchOtherFacultyRoutine(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(
+                "Class Time",
+                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w900),
+              ),
+              content: Text("See Other Faculty Routine",
+                  style:
+                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500)),
+              actions: [
+                TextFormField(
+                  controller: _controller,
+                  decoration:
+                      const InputDecoration(hintText: 'Short Form of Faculty'),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.red),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            (context),
+                            MaterialPageRoute(
+                                builder: (context) => FacRoutineScreen(
+                                    shortWords: _controller.text)));
+                      },
+                      child: Text(
+                        "Go",
+                        style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        );
+      },
+      icon: Icon(
+        Icons.find_in_page,
+        size: 30.h,
+      ),
+    );
+  }
+
   Future<List<Map<String, String>>> loadCsvData(
-      String day, String shortForm) async {
+    String day,
+    String shortForm,
+  ) async {
     final csvString = await rootBundle.loadString('assets/routine/$day.csv');
     final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
 
     if (csvData.isEmpty) return [];
 
-    final headerRow = csvData[1].map((e) => e.toString()).toList();
-    final dataRows = csvData.skip(2).toList();
+    final headerRow =
+        csvData[1].map((e) => e.toString()).toList(); // Header row
+    final dataRows = csvData
+        .skip(2)
+        .toList(); // Data rows, skipping the first two non-data rows
 
+    // Filter rows containing the shortForm
     final filteredRows = dataRows.where((row) {
       return row.any((cell) => cell.toString().contains(shortForm));
     }).toList();
@@ -915,10 +442,15 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
           .map((entry) => headerRow[entry.key])
           .toList();
 
+      // Creating a map to store relevant information
       final rowMap = <String, String>{
-        'Batch': row[1].toString(),
-        'Section': row[2].toString(),
-        'TimeSlots': timeSlots.join(' ')
+        'Batch': row[1].toString(), // Adjust the index if needed
+        'Section': row[2].toString(), // Adjust the index if needed
+        'TimeSlots': timeSlots.join(' '),
+        'Details': row
+            .where((cell) => cell.toString().contains(shortForm))
+            .map((cell) => cell.toString())
+            .join(', '),
       };
 
       return rowMap;
@@ -931,5 +463,11 @@ class _FacRoutineScreenState extends State<FacRoutineScreen> {
     });
 
     return result;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.clear();
   }
 }
