@@ -10,25 +10,17 @@ class FacMyTodoModel {
     count = json['count'];
     if (json['data'] != null) {
       data = <Data>[];
-      json['data'].forEach((v) {
+      (json['data']).forEach((v) {
         data!.add(Data.fromJson(v));
       });
     }
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['count'] = count;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
 class Data {
   String? sId;
+  String? email;
   String? title;
   String? date;
   String? createdDate;
@@ -37,17 +29,9 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
+    email = json['email'];
     title = json['title'];
     date = json['date'];
     createdDate = json['createdDate'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
-    data['title'] = title;
-    data['date'] = date;
-    data['createdDate'] = createdDate;
-    return data;
   }
 }

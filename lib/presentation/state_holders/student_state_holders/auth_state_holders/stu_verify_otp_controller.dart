@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/data/models/student_model/auth_models/stu_verify_otp_model.dart';
 import 'package:my_campus/data/services/network_caller.dart';
-import '../../../../data/models/stu_model/auth_models/stu_verify_otp_model.dart';
-import '../../../../data/utility/urls.dart';
+import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class StuVerifyOTPController extends GetxController {
   bool _stuVerifyOTPInProgress = false;
@@ -17,7 +18,7 @@ class StuVerifyOTPController extends GetxController {
     _stuVerifyOTPInProgress = true;
     update();
     NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.studentVerifyOTP(email, otp),
+      Urls.studentVerifyOTP(email, otp),AuthController.accessToken1.toString()
     );
     _stuVerifyOTPInProgress = false;
     update();

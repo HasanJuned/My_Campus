@@ -30,17 +30,19 @@ class FacProfileDetailsData {
   String? fullName;
   String? designation;
   String? department;
+  String? shortWords;
   String? password;
   String? createdDate;
 
   FacProfileDetailsData(
       {this.sId,
-        this.email,
-        this.fullName,
-        this.designation,
-        this.department,
-        this.password,
-        this.createdDate});
+      this.email,
+      this.fullName,
+      this.designation,
+      this.department,
+      this.shortWords,
+      this.password,
+      this.createdDate});
 
   FacProfileDetailsData.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -48,6 +50,7 @@ class FacProfileDetailsData {
     fullName = json['fullName'];
     designation = json['designation'];
     department = json['department'];
+    shortWords = json['shortWords'];
     password = json['password'];
     createdDate = json['createdDate'];
   }
@@ -59,6 +62,7 @@ class FacProfileDetailsData {
     data['fullName'] = fullName;
     data['designation'] = designation;
     data['department'] = department;
+    data['shortWords'] = shortWords;
     data['password'] = password;
     data['createdDate'] = createdDate;
     return data;

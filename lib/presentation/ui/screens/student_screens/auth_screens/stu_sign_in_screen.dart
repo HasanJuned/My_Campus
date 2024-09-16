@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_recovery_email_screen.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_main_bottom_screen.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/stu_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
-import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
-import '../../../../state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
-import '../../../widgets/customised_elevated_button.dart';
 
 class StuSignInScreen extends StatefulWidget {
   const StuSignInScreen({super.key});
@@ -33,8 +31,7 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const TitleAndSubtitle(
-                    title: 'SIGN IN', subtitle: 'Student'),
+                const TitleAndSubtitle(title: 'SIGN IN', subtitle: 'Student'),
                 const AppLogo(),
                 SizedBox(
                   height: 76.h,
@@ -44,10 +41,11 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                   child: TextFormField(
                     controller: _idController,
                     textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(hintText: 'Student ID'),
                     validator: (String? value) {
                       if (value?.trim().isEmpty ?? true) {
-                        return 'Please enter your email';
+                        return 'Please enter your ID';
                       }
                       return null;
                     },
@@ -87,13 +85,13 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                 SizedBox(
                   height: 34.h,
                 ),
-                CustomisedTextButton(
+                /*CustomisedTextButton(
                     onTap: () {
                       Get.to(
-                            () => const StuRecoveryEmailScreen(),
+                        () => const StuRecoveryEmailScreen(),
                       );
                     },
-                    text: 'Forgot Password')
+                    text: 'Forgot Password')*/
               ],
             ),
           ),
@@ -111,11 +109,18 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
     if (result) {
       Get.snackbar('Successful!', stuLoginController.message);
       Get.to(
-            () => const StuMainBottomNavBarScreen(),
+        () => const StuMainBottomNavBarScreen(),
       );
     } else {
       Get.snackbar('Failed!', stuLoginController.message,
           colorText: Colors.redAccent);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _passTEController.dispose();
+    _idController.dispose();
   }
 }

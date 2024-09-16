@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/auth_state_holders/stu_verify_email_controller.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_password_change_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import 'package:my_campus/presentation/ui/widgets/text_field_with_trailing.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
-import '../../../../state_holders/student_state_holders/auth_state_holders/stu_verify_email_controller.dart';
-import '../../../widgets/customised_elevated_button.dart';
-import '../../../widgets/text_field_with_trailing.dart';
 
 class StuRecoveryEmailScreen extends StatefulWidget {
   const StuRecoveryEmailScreen({super.key});
@@ -37,7 +37,10 @@ class _StuRecoveryEmailScreenState extends State<StuRecoveryEmailScreen> {
                 SizedBox(
                   height: 76.h,
                 ),
-                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your student email",),
+                TextFieldWithTrailing(
+                  emailTEController: _emailTEController,
+                  hintText: "Type your student email",
+                ),
                 SizedBox(
                   height: 40.h,
                 ),
@@ -77,7 +80,7 @@ class _StuRecoveryEmailScreenState extends State<StuRecoveryEmailScreen> {
     if (result) {
       Get.snackbar('Successful!', stuVerifyEmailController.message);
       Get.to(
-            () => StuPasswordChangeScreen(
+        () => StuPasswordChangeScreen(
           email: _emailTEController.text.trim(),
         ),
       );
@@ -85,5 +88,11 @@ class _StuRecoveryEmailScreenState extends State<StuRecoveryEmailScreen> {
       Get.snackbar('Failed!', stuVerifyEmailController.message,
           colorText: Colors.redAccent);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailTEController.dispose();
   }
 }

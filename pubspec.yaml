@@ -26,6 +26,7 @@ dependencies:
   csv: ^6.0.0
   pdf: ^3.11.0
   printing: any
+  email_otp: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -38,7 +39,7 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/routinue/
+    - assets/routine/
 
   # fonts:
   #   - family: Schyler

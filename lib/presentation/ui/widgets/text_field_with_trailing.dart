@@ -30,10 +30,18 @@ class TextFieldWithTrailing extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(ScreenUtil().setWidth(0)),
-                    topRight: Radius.circular(ScreenUtil().setWidth(21)),
-                    bottomLeft: Radius.circular(ScreenUtil().setWidth(0)),
-                    bottomRight: Radius.circular(ScreenUtil().setWidth(21)),
+                    topLeft: Radius.circular(
+                      ScreenUtil().setWidth(0),
+                    ),
+                    topRight: Radius.circular(
+                      ScreenUtil().setWidth(21),
+                    ),
+                    bottomLeft: Radius.circular(
+                      ScreenUtil().setWidth(0),
+                    ),
+                    bottomRight: Radius.circular(
+                      ScreenUtil().setWidth(21),
+                    ),
                   ),
                   border: Border.all(
                     color: const Color(0x999B9B9B),

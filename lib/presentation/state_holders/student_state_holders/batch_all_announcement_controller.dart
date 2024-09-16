@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:my_campus/data/models/stu_model/batch_announcement_model.dart';
-
-import '../../../data/models/network_response.dart';
-import '../../../data/services/network_caller.dart';
-import '../../../data/utility/urls.dart';
+import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/data/models/student_model/batch_announcement_model.dart';
+import 'package:my_campus/data/services/network_caller.dart';
+import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class BatchAllAnnouncementController extends GetxController {
   bool _inProgress = false;
@@ -19,7 +19,7 @@ class BatchAllAnnouncementController extends GetxController {
     _inProgress = true;
     update();
     NetworkResponse response =
-        await NetworkCaller.getRequest(Urls.batchAllAnnouncement(batch));
+        await NetworkCaller.getRequest(Urls.batchAllAnnouncement(batch),AuthController.accessToken1.toString());
     _inProgress = false;
     update();
     if (response.isSuccess) {

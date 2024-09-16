@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/cover_page_builder.dart';
+
 import 'date_select.dart';
 import 'dropdown_button.dart';
-import '../screens/student_screens/student_homePage/cover_page_builder.dart';
 
 class CoverPageUi extends StatefulWidget {
   const CoverPageUi({super.key});
@@ -12,20 +13,20 @@ class CoverPageUi extends StatefulWidget {
   State<CoverPageUi> createState() => _CoverPageUiState();
 }
 
-TextEditingController courseTitleController = TextEditingController();
-TextEditingController courseCodeController = TextEditingController();
-TextEditingController teacherNameController = TextEditingController();
-TextEditingController teacherDesignationController = TextEditingController();
-TextEditingController facultyNameController = TextEditingController();
-TextEditingController studentNameController = TextEditingController();
-TextEditingController studentDeptController = TextEditingController();
-TextEditingController studentBatchController = TextEditingController();
-TextEditingController studentSectionController = TextEditingController();
-TextEditingController studentIdController = TextEditingController();
-TextEditingController topicNameController = TextEditingController();
+TextEditingController _courseTitleController = TextEditingController();
+TextEditingController _courseCodeController = TextEditingController();
+TextEditingController _teacherNameController = TextEditingController();
+TextEditingController _teacherDesignationController = TextEditingController();
+TextEditingController _facultyNameController = TextEditingController();
+TextEditingController _studentNameController = TextEditingController();
+TextEditingController _studentDeptController = TextEditingController();
+TextEditingController _studentBatchController = TextEditingController();
+TextEditingController _studentSectionController = TextEditingController();
+TextEditingController _studentIdController = TextEditingController();
+TextEditingController _topicNameController = TextEditingController();
 
 String? selectedDate, selectedDept;
-TextEditingController dateInput = TextEditingController();
+TextEditingController _dateInput = TextEditingController();
 
 class _CoverPageUiState extends State<CoverPageUi> {
   @override
@@ -70,35 +71,41 @@ class _CoverPageUiState extends State<CoverPageUi> {
               height: 20.h,
             ),
             TextFormField(
-                controller: courseTitleController,
-                decoration: const InputDecoration(
-                    labelText: 'Course Title',
-                    labelStyle: TextStyle(color: Colors.black))),
-            SizedBox(
-              height: 20.h,
-            ),
-            TextFormField(
-                controller: courseCodeController,
-                decoration: const InputDecoration(
-                    labelText: 'Course Code',
-                    labelStyle: TextStyle(color: Colors.black))),
-            SizedBox(
-              height: 20.h,
-            ),
-            TextFormField(
-              controller: topicNameController,
+              controller: _courseTitleController,
               decoration: const InputDecoration(
-                  labelText: 'Topic',
-                  labelStyle: TextStyle(color: Colors.black)),
+                labelText: 'Course Title',
+                labelStyle: TextStyle(color: Colors.black),
+              ),
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            TextFormField(
+              controller: _courseCodeController,
+              decoration: const InputDecoration(
+                labelText: 'Course Code',
+                labelStyle: TextStyle(color: Colors.black),
+              ),
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            TextFormField(
+              controller: _topicNameController,
+              decoration: const InputDecoration(
+                labelText: 'Topic',
+                labelStyle: TextStyle(color: Colors.black),
+              ),
             ),
             SizedBox(
               height: 20.h,
             ),
             Center(
-                child: Text(
-              "Teacher's information",
-              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
-            )),
+              child: Text(
+                "Teacher's information",
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+              ),
+            ),
             Divider(
               thickness: 4.h,
             ),
@@ -106,10 +113,11 @@ class _CoverPageUiState extends State<CoverPageUi> {
               height: 20.h,
             ),
             TextFormField(
-              controller: teacherNameController,
+              controller: _teacherNameController,
               decoration: const InputDecoration(
-                  labelText: 'Name',
-                  labelStyle: TextStyle(color: Colors.black)),
+                labelText: 'Name',
+                labelStyle: TextStyle(color: Colors.black),
+              ),
             ),
             SizedBox(
               height: 20.h,
@@ -120,19 +128,21 @@ class _CoverPageUiState extends State<CoverPageUi> {
                 SizedBox(
                   width: 130.w,
                   child: TextFormField(
-                    controller: teacherDesignationController,
+                    controller: _teacherDesignationController,
                     decoration: const InputDecoration(
-                        labelText: 'Designation',
-                        labelStyle: TextStyle(color: Colors.black)),
+                      labelText: 'Designation',
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
                 SizedBox(
                   width: 130.w,
                   child: TextFormField(
-                    controller: facultyNameController,
+                    controller: _facultyNameController,
                     decoration: const InputDecoration(
-                        labelText: 'Faculty',
-                        labelStyle: TextStyle(color: Colors.black)),
+                      labelText: 'Faculty',
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
               ],
@@ -141,10 +151,11 @@ class _CoverPageUiState extends State<CoverPageUi> {
               height: 20.h,
             ),
             Center(
-                child: Text(
-              "Student's information",
-              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
-            )),
+              child: Text(
+                "Student's information",
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+              ),
+            ),
             Divider(
               thickness: 4.h,
             ),
@@ -152,10 +163,11 @@ class _CoverPageUiState extends State<CoverPageUi> {
               height: 20.h,
             ),
             TextFormField(
-              controller: studentNameController,
+              controller: _studentNameController,
               decoration: const InputDecoration(
-                  labelText: 'Name',
-                  labelStyle: TextStyle(color: Colors.black)),
+                labelText: 'Name',
+                labelStyle: TextStyle(color: Colors.black),
+              ),
             ),
             SizedBox(
               height: 20.h,
@@ -166,20 +178,22 @@ class _CoverPageUiState extends State<CoverPageUi> {
                 SizedBox(
                   width: 130.w,
                   child: TextFormField(
-                    controller: studentDeptController,
+                    controller: _studentDeptController,
                     decoration: const InputDecoration(
-                        labelText: 'Department',
-                        labelStyle: TextStyle(color: Colors.black)),
+                      labelText: 'Department',
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
                 SizedBox(
                   width: 130.w,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-                    controller: studentBatchController,
+                    controller: _studentBatchController,
                     decoration: const InputDecoration(
-                        labelText: 'Batch',
-                        labelStyle: TextStyle(color: Colors.black)),
+                      labelText: 'Batch',
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
               ],
@@ -193,20 +207,22 @@ class _CoverPageUiState extends State<CoverPageUi> {
                 SizedBox(
                   width: 130.w,
                   child: TextFormField(
-                    controller: studentSectionController,
+                    controller: _studentSectionController,
                     decoration: const InputDecoration(
-                        labelText: 'Section',
-                        labelStyle: TextStyle(color: Colors.black)),
+                      labelText: 'Section',
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
                 SizedBox(
                   width: 130.w,
                   child: TextFormField(
-                    controller: studentIdController,
+                    controller: _studentIdController,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
-                        labelText: 'ID',
-                        labelStyle: TextStyle(color: Colors.black)),
+                      labelText: 'ID',
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
               ],
@@ -221,7 +237,7 @@ class _CoverPageUiState extends State<CoverPageUi> {
               height: 20.h,
             ),
             CustomDatePicker(
-              controller: dateInput,
+              controller: _dateInput,
               width: 360.w,
               height: 45.h,
               onChanged: (value) {
@@ -238,38 +254,59 @@ class _CoverPageUiState extends State<CoverPageUi> {
       ),
       actions: [
         TextButton(
-            style: TextButton.styleFrom(foregroundColor: Colors.black),
-            onPressed: () {
-              Get.back();
-            },
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: Colors.red),
-            )),
+          style: TextButton.styleFrom(foregroundColor: Colors.black),
+          onPressed: () {
+            Get.back();
+          },
+          child: const Text(
+            'Cancel',
+            style: TextStyle(color: Colors.red),
+          ),
+        ),
         TextButton(
-            style: TextButton.styleFrom(foregroundColor: Colors.black),
-            onPressed: () {
-              Get.to(StuCoverPageScreen(
+          style: TextButton.styleFrom(foregroundColor: Colors.black),
+          onPressed: () {
+            Get.to(
+              () => StuCoverPageScreen(
                 courseDepartment: selectedDept.toString(),
-                courseTitle: courseTitleController.text,
-                courseCode: courseCodeController.text,
-                teacherName: teacherNameController.text,
-                teacherDesignation: teacherDesignationController.text,
-                facultyName: facultyNameController.text,
-                studentName: studentNameController.text,
-                studentDepartment: studentDeptController.text,
-                studentBatch: studentBatchController.text,
-                studentSection: studentSectionController.text,
-                studentId: studentIdController.text,
-                topicName: topicNameController.text,
+                courseTitle: _courseTitleController.text,
+                courseCode: _courseCodeController.text,
+                teacherName: _teacherNameController.text,
+                teacherDesignation: _teacherDesignationController.text,
+                facultyName: _facultyNameController.text,
+                studentName: _studentNameController.text,
+                studentDepartment: _studentDeptController.text,
+                studentBatch: _studentBatchController.text,
+                studentSection: _studentSectionController.text,
+                studentId: _studentIdController.text,
+                topicName: _topicNameController.text,
                 submissionDate: selectedDate.toString(),
-              ));
-            },
-            child: const Text(
-              'Generate',
-              style: TextStyle(color: Colors.green),
-            ))
+              ),
+            );
+          },
+          child: const Text(
+            'Generate',
+            style: TextStyle(color: Colors.green),
+          ),
+        )
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _dateInput.dispose();
+    _courseTitleController.dispose();
+    _courseCodeController.dispose();
+    _teacherNameController.dispose();
+    _teacherDesignationController.dispose();
+    _facultyNameController.dispose();
+    _studentNameController.dispose();
+    _studentDeptController.dispose();
+    _studentBatchController.dispose();
+    _studentSectionController.dispose();
+    _studentIdController.dispose();
+    _topicNameController.dispose();
   }
 }

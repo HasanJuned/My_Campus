@@ -2,19 +2,19 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:my_campus/presentation/ui/screens/app_home_screen.dart';
-import '../../application/app.dart';
-import '../../presentation/state_holders/auth_controller.dart';
-import '../models/network_response.dart';
+import 'package:my_campus/application/app.dart';
+import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
+import 'package:my_campus/presentation/ui/screens/stu_fac_choice_screen.dart';
 
 class NetworkCaller {
-  static Future<NetworkResponse> getRequest(String url) async {
+  static Future<NetworkResponse> getRequest(String url, String token) async {
     try {
       Response response = await get(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'token': AuthController.accessToken1.toString(),
+          'token': token,
         },
       );
       log(response.statusCode.toString());
@@ -44,14 +44,14 @@ class NetworkCaller {
   }
 
   static Future<NetworkResponse> postRequest(
-      String url, Map<String, dynamic> body,
+      String url, Map<String, dynamic> body, String token,
       {bool isLogin = false}) async {
     try {
       Response response = await post(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'token': AuthController.accessToken.toString()
+          'token': token
         },
         body: jsonEncode(body),
       );
@@ -83,11 +83,11 @@ class NetworkCaller {
   }
 
   static Future<void> gotoLogin() async {
-    await AuthController.clear();
+    await AuthController.facAuthClear();
     Navigator.pushAndRemoveUntil(
         MyCampus.globalKey.currentContext!,
         MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const StuFacChoiceScreen(),
         ),
         (route) => false);
   }

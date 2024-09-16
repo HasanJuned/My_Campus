@@ -2,7 +2,9 @@ import 'package:get/get.dart';
 import 'package:my_campus/data/models/faculty_model/auth_models/fac_verify_otp_model.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
-import '../../../../data/utility/urls.dart';
+import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
+
 
 class FacVerifyOTPController extends GetxController {
   bool _facVerifyOTPInProgress = false;
@@ -17,7 +19,7 @@ class FacVerifyOTPController extends GetxController {
     _facVerifyOTPInProgress = true;
     update();
     NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.facultyVerifyOTP(email, otp),
+      Urls.facultyVerifyOTP(email, otp),AuthController.accessToken.toString()
     );
     _facVerifyOTPInProgress = false;
     update();

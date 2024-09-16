@@ -42,8 +42,7 @@ class _ClassesExamsToDoState extends State<ClassesExamsToDo> {
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
                   ),
-                  side: BorderSide(
-                      color: Color(0x999B9B9B), width: 1),
+                  side: BorderSide(color: Color(0x999B9B9B), width: 1),
                 ),
                 color: Color(0xFFCBD0F9),
               ),

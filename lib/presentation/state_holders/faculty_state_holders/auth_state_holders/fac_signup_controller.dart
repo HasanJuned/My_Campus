@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
-import '../../../../data/models/faculty_model/auth_models/fac_password_change_model.dart';
-import '../../../../data/models/network_response.dart';
-import '../../../../data/services/network_caller.dart';
-import '../../../../data/utility/urls.dart';
+import 'package:my_campus/data/models/faculty_model/auth_models/fac_password_change_model.dart';
+import 'package:my_campus/data/models/network_response.dart';
+import 'package:my_campus/data/services/network_caller.dart';
+import 'package:my_campus/data/utility/urls.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 
 class FacSignUpController extends GetxController {
   bool _facSignupInProgress = false;
@@ -23,6 +24,7 @@ class FacSignUpController extends GetxController {
         "OTP": otp,
         "password": password,
       },
+      AuthController.accessToken.toString()
     );
     _facSignupInProgress = false;
     update();
@@ -33,7 +35,6 @@ class FacSignUpController extends GetxController {
       return true;
     } else {
       _message = 'Sign up could not be completed!!';
-
       return false;
     }
   }

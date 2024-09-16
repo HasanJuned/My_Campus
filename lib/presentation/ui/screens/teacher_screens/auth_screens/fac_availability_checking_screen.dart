@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_up_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
-import '../../../../state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
-import '../../../widgets/customised_text_button.dart';
+
 import 'fac_sign_in_screen.dart';
 
 class FacAvailabilityCheckScreen extends StatefulWidget {
@@ -106,7 +107,6 @@ class _FacAvailabilityCheckScreenState
           facAvailabilityCheckingController) async {
     final result = await facAvailabilityCheckingController.facAvailabilityCheck(
       _emailTEController.text.trim(),
-      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
     );
     if (result) {
       Get.snackbar('Successful!', facAvailabilityCheckingController.message);
@@ -120,5 +120,11 @@ class _FacAvailabilityCheckScreenState
       Get.snackbar('Failed!', facAvailabilityCheckingController.message,
           colorText: Colors.redAccent);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailTEController.dispose();
   }
 }

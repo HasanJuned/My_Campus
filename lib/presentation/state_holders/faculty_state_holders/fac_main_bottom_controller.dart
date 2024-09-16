@@ -9,7 +9,8 @@ class FacMainBottomNavController extends GetxController {
     if (index == 1) {
       await Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
 
-      final dataList = Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList;
+      final dataList = Get.find<FacShowGroupBatchSectionCourseController>()
+          .facultyCreatingSubGrpBatchSecDataList;
 
       if (dataList != null) {
         for (final data in dataList) {
@@ -17,7 +18,8 @@ class FacMainBottomNavController extends GetxController {
           final a = data.batch!;
           final b = data.courseCode!;
           final c = data.courseTitle!;
-          batchCoursePairs.add({'sId':d,'batch': a, 'courseCode': b, 'courseTitle': c});
+          batchCoursePairs
+              .add({'sId': d, 'batch': a, 'courseCode': b, 'courseTitle': c});
         }
       }
 

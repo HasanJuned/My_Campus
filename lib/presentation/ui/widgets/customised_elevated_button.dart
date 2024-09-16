@@ -15,7 +15,10 @@ class CustomisedElevatedButton extends StatelessWidget {
       height: 58.h,
       child: ElevatedButton(
         onPressed: onTap,
-        child: Text(text, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.sp),),
+        child: Text(
+          text,
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.sp),
+        ),
       ),
     );
   }

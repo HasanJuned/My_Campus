@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/course_offering_list.dart';
-import 'package:my_campus/presentation/ui/widgets/faculty_members_list_method.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/course_offering_list_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_available_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_routinue_screen.dart';
+
+import 'about_us_widget.dart';
 import 'blood_downer_list.dart';
 import 'cr_list_method.dart';
 
-Drawer customisedStudentDrawer(BuildContext context) {
+Drawer customisedStudentDrawer(
+    BuildContext context, TextEditingController controller) {
   return Drawer(
     width: 286.w,
     backgroundColor: const Color(0xFFE0FFF1),
@@ -26,28 +30,108 @@ Drawer customisedStudentDrawer(BuildContext context) {
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  Get.to(() => CourseOfferingList());
+                  Get.to(
+                    () => const CourseOfferingList(),
+                  );
                 },
               ),
               divider(),
               ListTile(
                 title: Center(
                   child: Text(
-                    'Departments Faculty',
+                    "Departments' Faculty",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  facultyMembers(context);
+                  Get.to(
+                    () => const FacAvailableScreen(),
+                  );
                 },
               ),
               divider(),
               ListTile(
                 title: Center(
                   child: Text(
-                    'Departments CR',
+                    "Faculty Routine",
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                  ),
+                ),
+                hoverColor: Colors.grey,
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(
+                          "Class Time",
+                          style: TextStyle(
+                              fontSize: 24.sp, fontWeight: FontWeight.w900),
+                        ),
+                        content: Text("See Other Faculty Routine",
+                            style: TextStyle(
+                                fontSize: 20.sp, fontWeight: FontWeight.w500)),
+                        actions: [
+                          TextFormField(
+                            controller: controller,
+                            decoration: const InputDecoration(
+                                hintText: 'Short Form of Faculty'),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      (context),
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              FacRoutineScreen(
+                                                  shortWords:
+                                                      controller.text)));
+                                },
+                                child: Text(
+                                  "Go",
+                                  style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.red),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
+              divider(),
+              ListTile(
+                title: Center(
+                  child: Text(
+                    "Departments' CR",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
@@ -88,7 +172,7 @@ Drawer customisedStudentDrawer(BuildContext context) {
                             minScale: 0.1,
                             maxScale: 6.0,
                             child: Image.asset(
-                              'assets/images/Bus Time.jpg',
+                              'assets/images/bus.jpg',
                               height: 300.h,
                               width: 500.w,
                               fit: BoxFit.fill,
@@ -130,7 +214,7 @@ Drawer customisedStudentDrawer(BuildContext context) {
                                 EdgeInsets.all(ScreenUtil().setWidth(20)),
                             minScale: 0.1,
                             maxScale: 6.0,
-                            child: ListTile(
+                            child: const ListTile(
                               title: Text('Rana Sir'),
                               subtitle: Text('Phone: 0177-7777777'),
                             ),
@@ -167,6 +251,58 @@ Drawer customisedStudentDrawer(BuildContext context) {
                 hoverColor: Colors.grey,
                 onTap: () {
                   bloodDownerList(context);
+                },
+              ),
+              divider(),
+              ListTile(
+                title: Center(
+                  child: Text(
+                    'About Developer',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                  ),
+                ),
+                hoverColor: Colors.grey,
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        title: Center(
+                          child: Text(
+                            "This App Developed by",
+                            style: TextStyle(
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.green),
+                          ),
+                        ),
+                        actions: const [
+                          AboutUsWidget(
+                            name: 'MD Mahmud Hossain Ferdous',
+                          ),
+                          SizedBox(
+                            height: 18,
+                          ),
+                          AboutUsWidget(
+                            name: 'Hasibur Rahman Qurasani Jawad',
+                          ),
+                          SizedBox(
+                            height: 18,
+                          ),
+                          AboutUsWidget(
+                            name: 'Hasan Ahmed',
+                          ),
+                          SizedBox(
+                            height: 18,
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
               ),
               divider(),

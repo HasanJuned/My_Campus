@@ -14,7 +14,7 @@ void bloodDownerList(BuildContext context) {
           builder: (context, StateSetter setState) {
             return SingleChildScrollView(
               child: AlertDialog(
-                title:  Center(
+                title: Center(
                   child: Column(
                     children: [
                       Text(
@@ -53,8 +53,7 @@ void bloodDownerList(BuildContext context) {
                                 letterSpacing: .6),
                           ),
                           subtitle: Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
                                 height: 6.h,
