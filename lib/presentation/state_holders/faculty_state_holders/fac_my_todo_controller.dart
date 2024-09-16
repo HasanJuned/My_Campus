@@ -21,7 +21,12 @@ class FacMyTodoController extends GetxController {
     update();
     NetworkResponse response = await NetworkCaller.postRequest(
         Urls.facAddMyTodo,
-        {"title": taskTitle, "date": date},AuthController.accessToken.toString());
+        {
+          "email": AuthController.email0.toString(),
+          "title": taskTitle,
+          "date": date,
+        },
+        AuthController.accessToken.toString());
     _inProgress = false;
     update();
     if (response.isSuccess) {
@@ -36,8 +41,8 @@ class FacMyTodoController extends GetxController {
   Future<bool> facShowMyTodo() async {
     _inProgress = true;
     update();
-    NetworkResponse response =
-        await NetworkCaller.getRequest(Urls.showFacMyTodo,AuthController.accessToken.toString());
+    NetworkResponse response = await NetworkCaller.getRequest(
+        Urls.showFacMyTodo, AuthController.accessToken.toString());
     //print(response.responseJson);
     _inProgress = false;
     update();
