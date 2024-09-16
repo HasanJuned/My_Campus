@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_available_controller.dart';
 
 class FacAvailableScreen extends StatefulWidget {
@@ -21,7 +20,7 @@ class _FacAvailableScreenState extends State<FacAvailableScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${AuthController.department0} Faculties'),
+        title: const Text('Faculties'),
         centerTitle: true,
       ),
       body: Padding(

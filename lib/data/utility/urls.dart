@@ -63,7 +63,7 @@ class Urls {
   static String batchAllAnnouncement(batch) => '$_studentBaseUrl/allAnnouncement2/$batch';
   static String batchAnnouncement(batch, type) => '$_studentBaseUrl/allAnnouncement/$batch/$type';
   static String stuAddMyTodo = '$_studentBaseUrl/stuAddMyTodo';
-  static String showStuTodo = '$_studentBaseUrl/showStudentTodo';
+  static String showStuTodo(String id) => '$_studentBaseUrl/showStudentTodo/$id';
   static String deleteStuTodo(String id) => '$_studentBaseUrl/deleteStudentTodo/$id';
   static String stuAddResources = '$_studentBaseUrl/studentAddResources';
   static String showStuAddResources(batch) => '$_studentBaseUrl/showStudentResources/$batch';

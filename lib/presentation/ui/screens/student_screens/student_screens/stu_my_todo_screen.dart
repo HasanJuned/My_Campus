@@ -32,7 +32,7 @@ class _StuMyTodoScreenState extends State<StuMyTodoScreen> {
   @override
   void initState() {
     super.initState();
-    Get.find<StuMyTodoController>().stuShowMyTodo();
+    Get.find<StuMyTodoController>().stuShowMyTodo(AuthController.studentId1.toString());
   }
 
   @override
@@ -105,7 +105,7 @@ class _StuMyTodoScreenState extends State<StuMyTodoScreen> {
           // ),
           RefreshIndicator(
             onRefresh: () async {
-              Get.find<StuMyTodoController>().stuShowMyTodo();
+              Get.find<StuMyTodoController>().stuShowMyTodo(AuthController.studentId1.toString());
             },
             child: Container(
               width: 380.w,
@@ -166,7 +166,7 @@ class _StuMyTodoScreenState extends State<StuMyTodoScreen> {
                                     onPressed: () {
                                       stuMyTodoController.stuDeleteMyTodo(stuMyTodoController.stuMyShowMyTodoModel.data![index].sId.toString());
                                       Get.back();
-                                      stuMyTodoController.stuShowMyTodo();
+                                      stuMyTodoController.stuShowMyTodo(AuthController.studentId1.toString());
                                     },
                                     child: Text(
                                       "YES",
@@ -307,7 +307,7 @@ class _StuMyTodoScreenState extends State<StuMyTodoScreen> {
       dateInput.clear();
       _taskTEController.clear();
       setState(() {});
-      stuMyTodoController.stuShowMyTodo();
+      stuMyTodoController.stuShowMyTodo(AuthController.studentId1.toString());
     } else {
       Get.snackbar('Failed!', "Couldn't add!!", colorText: Colors.redAccent);
     }

@@ -21,7 +21,12 @@ class StuMyTodoController extends GetxController {
     update();
     NetworkResponse response = await NetworkCaller.postRequest(
         Urls.stuAddMyTodo,
-        {"title": taskTitle.toString(), "date": date.toString()},AuthController.accessToken1.toString());
+        {
+          "studentId": AuthController.studentId1,
+          "title": taskTitle.toString(),
+          "date": date.toString()
+        },
+        AuthController.accessToken1.toString());
     _inProgress = false;
     update();
     if (response.isSuccess) {
@@ -33,10 +38,11 @@ class StuMyTodoController extends GetxController {
     }
   }
 
-  Future<bool> stuShowMyTodo() async {
+  Future<bool> stuShowMyTodo(String studentId) async {
     _inProgress = true;
     update();
-    NetworkResponse response = await NetworkCaller.getRequest(Urls.showStuTodo,AuthController.accessToken1.toString());
+    NetworkResponse response = await NetworkCaller.getRequest(
+        Urls.showStuTodo(studentId), AuthController.accessToken1.toString());
     _inProgress = false;
     update();
     if (response.isSuccess) {
@@ -51,7 +57,8 @@ class StuMyTodoController extends GetxController {
   Future<bool> stuDeleteMyTodo(String id) async {
     _inProgress = true;
     update();
-    NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteStuTodo(id),AuthController.accessToken1.toString());
+    NetworkResponse response = await NetworkCaller.getRequest(
+        Urls.deleteStuTodo(id), AuthController.accessToken1.toString());
     _inProgress = false;
     update();
     if (response.isSuccess) {

@@ -233,7 +233,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                           GestureDetector(
                             onTap: () {
                               Get.find<StuMainBottomNavController>()
-                                  .changeScreen(2);
+                                  .changeScreen(3);
                             },
                             child: ClipOval(
                               child: Container(
