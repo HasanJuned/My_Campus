@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_listen_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_my_todo_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_routinue_screen.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
@@ -44,7 +45,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     _announcementPageController =
         PageController(initialPage: _currentAnnouncement);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await Get.find<FacAnnouncementListenController>().why();
+      await Get.find<FacAnnouncementListenController>().announcement();
       startTimer();
     });
   }
@@ -85,7 +86,6 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(AuthController.email0);
     return Scaffold(
       appBar: customisedAppBar(AuthController.email0.toString(),scaffoldKey, context),
       body: Scaffold(
@@ -208,8 +208,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.find<FacMainBottomNavController>()
-                                  .changeScreen(3);
+                              Get.to(()=> const FacMyTodoScreen());
                             },
                             child: ClipOval(
                               child: Container(
@@ -220,7 +219,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      '${Get.find<FacAnnouncementController>().facShowAnnouncementModel.data?.length ?? '0'}',
+                                      '${Get.find<FacMyTodoController>().facTodoModel.data?.length ?? '0'}',
                                       style: TextStyle(
                                           fontSize: 30.sp,
                                           fontWeight: FontWeight.bold,

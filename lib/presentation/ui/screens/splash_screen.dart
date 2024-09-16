@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/ui/screens/stu_fac_choice_screen.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_screens/stu_main_bottom_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 
@@ -21,12 +21,27 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void checkUserAuthState() async {
-     final result = await AuthController.checkStudentLoginState();
+    // final result = await AuthController.checkStudentLoginState();
+    // Future.delayed(const Duration(seconds: 2)).then(
+    //       (value) async {
+    //     if (result) {
+    //       Get.offAll(
+    //             () => const StuMainBottomNavBarScreen(),
+    //       );
+    //     } else {
+    //       Get.offAll(
+    //             () => const StuFacChoiceScreen(),
+    //       );
+    //     }
+    //   },
+    // );
+
+    final result = await AuthController.checkLoginState();
     Future.delayed(const Duration(seconds: 2)).then(
       (value) async {
         if (result) {
           Get.offAll(
-            () => const StuMainBottomNavBarScreen(),
+            () => const FacMainBottomNavBarScreen(),
           );
         } else {
           Get.offAll(
@@ -35,21 +50,6 @@ class _SplashScreenState extends State<SplashScreen> {
         }
       },
     );
-
-    // final result = await AuthController.checkLoginState();
-    // Future.delayed(const Duration(seconds: 2)).then(
-    //   (value) async {
-    //     if (result) {
-    //       Get.offAll(
-    //         () => const FacMainBottomNavBarScreen(),
-    //       );
-    //     } else {
-    //       Get.offAll(
-    //         () => const StuFacChoiceScreen(),
-    //       );
-    //     }
-    //   },
-    // );
   }
 
   @override

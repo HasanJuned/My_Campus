@@ -5,7 +5,7 @@ import 'fac_announcement_controller.dart';
 class FacAnnouncementListenController extends GetxController {
   List<String?> announcements = [];
 
-  why() async {
+  announcement() async {
     await Get.find<FacAnnouncementController>().facShowAnnouncement();
     FacShowAnnouncementModel model =
         Get.find<FacAnnouncementController>().facShowAnnouncementModel;
