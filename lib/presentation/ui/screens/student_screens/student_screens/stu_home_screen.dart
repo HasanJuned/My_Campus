@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -288,9 +288,9 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       child: GetBuilder<RoutineTimeController>(
                         builder: (controller) {
                           String timeToFind = controller.currentClassTime.value;
-                          if (kDebugMode) {
-                            print("we get: $timeToFind");
-                          }
+                          // if (kDebugMode) {
+                          //   print("we get: $timeToFind");
+                          // }
                           if (timeToFind ==
                               "Classes will start as per your schedule") {
                             return Center(

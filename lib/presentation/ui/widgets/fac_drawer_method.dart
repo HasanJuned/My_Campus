@@ -7,7 +7,7 @@ import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_my_todo_sc
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_profile_screen.dart';
 
 import 'about_us_widget.dart';
-import 'blood_downer_list.dart';
+import 'blood_donor_list.dart';
 import 'cr_list_method.dart';
 
 Drawer customisedFacultyDrawer(BuildContext context) {
@@ -199,14 +199,14 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'Blood Downers',
+                    'Blood Donors',
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  bloodDownerList(context);
+                  bloodDonorList(context);
                 },
               ),
               divider(),

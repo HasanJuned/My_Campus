@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void bloodDownerList(BuildContext context) {
+void bloodDonorList(BuildContext context) {
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -46,7 +46,7 @@ void bloodDownerList(BuildContext context) {
                             ),
                           ),
                           title: Text(
-                            'Downer Name',
+                            'Donor Name',
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 20.sp,
