@@ -87,7 +87,7 @@ Types of users in our app:
 
 - Framework: Flutter
 - State Management: GetX
-- Backend: Express JS
+- Backend: Node.js
 - Database: MongoDB
 - Architecture: MVVM(frontend) & MVC(backend)
 
